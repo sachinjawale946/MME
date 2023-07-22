@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MME.Model.Request
 {
-    public class BaseRequestModel
+    public class MemberRequestModel
     {
-        public string AccessToken { get; set; }
+        public string membername { get; set; }
     }
 }

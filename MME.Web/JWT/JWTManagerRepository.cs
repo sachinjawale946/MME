@@ -25,7 +25,7 @@ namespace MME.Web.JWT
 
         public AuthenticationResponseModel Authenticate(AuthenticationRequestModel model)
         {
-            var user = _context.Users.Where(x => x.Username == model.Username)
+            var user = _context.Users.Where(x => x.Username == model.username)
                        .Select(o => new AuthenticationResponseModel
                        {
                            username = o.Username,
@@ -52,7 +52,7 @@ namespace MME.Web.JWT
             {
                 //byte[] PasswordSalt;
                 //PasswordHelper.HashPasword(user.Password, out PasswordSalt);
-                var isAuthenticated = PasswordHelper.VerifyPassword(model.Password, user.password, user.passwordsalt);
+                var isAuthenticated = PasswordHelper.VerifyPassword(model.password, user.password, user.passwordsalt);
 
                 if(isAuthenticated)
                 {
