@@ -15,16 +15,16 @@ VALUES
 ('English',1,1)
 
 INSERT INTO tblLanguages
-(Language,IsActive)
+(Language,DisplayOrder,IsActive)
 VALUES
 ('Hindi',2,1)
 
 INSERT INTO tblLanguages
-(Language,IsActive)
+(Language,DisplayOrder,IsActive)
 VALUES
 ('Marathi',3,1)
 
 INSERT INTO tblLanguages
-(Language,IsActive)
+(Language,DisplayOrder,IsActive)
 VALUES
 ('Gujrati',4,1)

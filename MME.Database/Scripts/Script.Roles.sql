@@ -9,17 +9,18 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+
 INSERT INTO tblRoles
 (Role, Description,DisplayOrder, IsActive)
 VALUES
 ('Admin','Full Access To Platform',1,1)
 
 INSERT INTO tblRoles
-(Role, Description, IsActive)
+(Role, Description, DisplayOrder, IsActive)
 VALUES
 ('Contributor','Access To Events Creation/View, Members',2,1)
 
 INSERT INTO tblRoles
-(Role, Description, IsActive)
+(Role, Description, DisplayOrder, IsActive)
 VALUES
 ('Member','Access To Events View, Members',3,1)

@@ -57,7 +57,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="Procedures" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblRoles.sql" />
@@ -65,5 +65,20 @@
     <Build Include="Tables\tblCastes.sql" />
     <Build Include="Tables\tblLanguages.sql" />
     <Build Include="Tables\tblSubCastes.sql" />
+    <Build Include="Tables\tblStates.sql" />
+    <Build Include="Tables\tblPinCodes.sql" />
+    <Build Include="Tables\tblOccupations.sql" />
+    <Build Include="Tables\tblReligions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.Users.sql" />
+    <None Include="Scripts\Script.States.sql" />
+    <None Include="Scripts\Script.Roles.sql" />
+    <None Include="Scripts\Script.Castes.sql" />
+    <None Include="Scripts\Script.Languages.sql" />
+    <None Include="Scripts\Script.SubCastes.sql" />
+    <None Include="Scripts\Script.PinCodes.sql" />
+    <None Include="Scripts\Script.Occupations.sql" />
+    <None Include="Scripts\Script.Religions.sql" />
   </ItemGroup>
 </Project>

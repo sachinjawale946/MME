@@ -38,9 +38,4 @@ VALUES
 INSERT INTO tblReligions
 (Religion,DisplayOrder,IsActive)
 VALUES
-('Buddhisht',6,1)
-
-INSERT INTO tblReligions
-(Religion,DisplayOrder,IsActive)
-VALUES
-('Other',7,1)
+('Other',6,1)

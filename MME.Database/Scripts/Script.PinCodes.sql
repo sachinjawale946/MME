@@ -17,24 +17,24 @@ VALUES
 INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
-('400024',1,1,1)
+('400024',1,2,1)
 
 INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
-('400080',2,1,1)
+('400080',2,3,1)
 
 INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
-('400604',2,1,1)
+('400604',2,4,1)
 
 INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
-('400608',2,1,1)
+('400608',2,5,1)
 
 INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
-('400612',2,1,1)
+('400612',2,6,1)
