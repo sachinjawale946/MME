@@ -31,18 +31,23 @@ var user = _context.Users.FirstOrDefault();
 
 if(user == null)
 {
-    _context.Users.Add(new MME.Model.Shared.UserModel
+    var start = 1;
+    for (int i = 0; i < 1000; i++)
     {
-        Username = "Sachin",
-        PasswordSalt = PasswordSalt,
-        Password = PasswordHash,
-        FirstName = "Sachin",
-        LastName = "Jawale",
-        Mobile = "8369498118",
-        IsActive = true,
-        BirthDate = DateTime.Now,
-        RoleId = 1,
-    });
+        _context.Users.Add(new MME.Model.Shared.UserModel
+        {
+            Username = "Sachin_" + start.ToString("0000"),
+            PasswordSalt = PasswordSalt,
+            Password = PasswordHash,
+            FirstName = "Sachin",
+            LastName = "Jawale",
+            Mobile = "8369498118",
+            IsActive = true,
+            BirthDate = DateTime.Now,
+            RoleId = 1,
+        });
+        start++;
+    }
     _context.SaveChanges();
 }
 

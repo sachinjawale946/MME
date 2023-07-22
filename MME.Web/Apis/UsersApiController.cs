@@ -42,15 +42,36 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/membersearch")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
-            return _context.Users.Where(c => c.IsActive && (c.FirstName.Contains(model.membername) || c.LastName.Contains(model.membername)))
-                    .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
-                    .Select(o => new MemberResponseModel
-                    {
-                        firstname = o.FirstName,
-                        lastname = o.LastName,
-                        middlename = o.Mobile,
-                        userid = o.UserId,
-                    }).ToList();
+            if (!string.IsNullOrEmpty(model.membername))
+            {
+                return _context.Users.Where(c => c.IsActive && (c.FirstName.Contains(model.membername) || c.LastName.Contains(model.membername)))
+                        .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
+                        .Skip((model.page - 1) * model.pagesize)
+                        .Take(model.pagesize)
+                        .Select(o => new MemberResponseModel
+                        {
+                            firstname = o.FirstName,
+                            lastname = o.LastName,
+                            mobile = o.Mobile,
+                            userid = o.UserId,
+                            username = o.Username,
+                        }).ToList();
+            }
+            else
+            {
+                return _context.Users.Where(c => c.IsActive)
+                       .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
+                       .Skip((model.page - 1) * model.pagesize)
+                       .Take(model.pagesize)
+                       .Select(o => new MemberResponseModel
+                       {
+                           firstname = o.FirstName,
+                           lastname = o.LastName,
+                           mobile = o.Mobile,
+                           userid = o.UserId,
+                           username = o.Username,
+                       }).ToList();
+            }
         }
 
     }
