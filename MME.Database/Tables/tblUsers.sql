@@ -4,7 +4,7 @@
 	[Username] NVARCHAR(50) NOT NULL,
 	[InviteCode] NVARCHAR(50),
 	[Password] VARCHAR(500) NOT NULL,
-	[PasswordSalt] VARCHAR(500) NOT NULL,
+	[PasswordSalt] varbinary(max) NOT NULL,
 	[FirstName] VARCHAR(50) NOT NULL,
 	[MiddleName] VARCHAR(50),
 	[LastName] VARCHAR(50) NOT NULL,

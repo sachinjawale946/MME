@@ -9,7 +9,6 @@ using MME.Web.JWT;
 
 namespace MME.Web.Apis
 {
-    [Route("api/1.0/[controller]")]
     [ApiController]
     public class UsersApiController : ControllerBase
     {

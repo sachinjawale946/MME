@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MME.Web.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,9 @@ builder.Services.AddAuthentication(x =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
- builder.Services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PPM4DAppDBConnection")));
+builder.Services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MMEAppDBConnection")));
+
+builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 
 
 var app = builder.Build();

@@ -8,12 +8,17 @@ namespace MME.Model.Response
 {
     public class AuthenticationResponseModel
     {
-        public Guid UserId { get; set; }
-        public string Username { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string Mobile { get; set; }
-        public string AccessToken { get; set; }
+        public Guid userid { get; set; }
+        public string username { get; set; }
+        public string firstname { get; set; }
+        public string? middlename { get; set; }
+        public string lastname { get; set; }
+        public string mobile { get; set; }
+        public string accesstoken { get; set; }
+        public string? message { get; set; }
+        public string password { get; set; }
+        public byte[] passwordsalt { get; set; }
+        public int roleid { get; set; }
+        public bool isactive { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using MME.Model.Request;
 using MME.Model.Response;
+using System.Security.Cryptography.Xml;
+using MME.Model.Helpers;
 
 namespace MME.Web.JWT
 {
@@ -23,21 +25,52 @@ namespace MME.Web.JWT
 
         public AuthenticationResponseModel Authenticate(AuthenticationRequestModel model)
         {
-            var user = _context.Users.Where(x => x.Username == model.Username && x.Password == model.Password)
+            var user = _context.Users.Where(x => x.Username == model.Username)
                        .Select(o => new AuthenticationResponseModel
                        {
-                           Username = o.Username,
-                           FirstName = o.FirstName,
-                           LastName = o.LastName,
-                           MiddleName = o.MiddleName,
-                           Mobile = o.Mobile,
-                           UserId = o.UserId,
+                           username = o.Username,
+                           firstname = o.FirstName,
+                           lastname = o.LastName,
+                           middlename = o.MiddleName,
+                           mobile = o.Mobile,
+                           userid = o.UserId,
+                           password = o.Password,
+                           passwordsalt = o.PasswordSalt,
+                           isactive = o.IsActive,
+                           roleid = o.RoleId,
                        })
                        .FirstOrDefault();
 
             if (user == null)
             {
-                return null;
+                return new AuthenticationResponseModel
+                {
+                    message = "Member with entered username does not found."
+                };
+            }
+            else
+            {
+                //byte[] PasswordSalt;
+                //PasswordHelper.HashPasword(user.Password, out PasswordSalt);
+                var isAuthenticated = PasswordHelper.VerifyPassword(model.Password, user.password, user.passwordsalt);
+
+                if(isAuthenticated)
+                {
+                    if(!user.isactive)
+                    {
+                        return new AuthenticationResponseModel
+                        {
+                            message = "Member profile is deactivated, please contact administrator."
+                        };
+                    }
+                }
+                else
+                {
+                    return new AuthenticationResponseModel
+                    {
+                        message = "Member username and password combination doest not match."
+                    };
+                }
             }
 
             // Else we generate JSON Web Token
@@ -47,13 +80,14 @@ namespace MME.Web.JWT
             {
                 Subject = new ClaimsIdentity(new Claim[]
                   {
-                        new Claim(ClaimTypes.Name, user.Username)
+                        new Claim(ClaimTypes.Name, user.username)
                   }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.AccessToken = tokenHandler.WriteToken(token);
+            user.accesstoken = tokenHandler.WriteToken(token);
+            user.message = "success";
             return user;
         }
     }
