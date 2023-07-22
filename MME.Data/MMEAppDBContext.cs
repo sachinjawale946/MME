@@ -64,6 +64,11 @@ namespace MME.Data
         .HasKey(d => d.OccupationId);
             modelBuilder.Entity<OccupationModel>().Property(x => x.OccupationId).ValueGeneratedOnAdd();
 
+            modelBuilder
+     .Entity<ErrorLogModel>()
+     .HasKey(d => d.Id);
+            modelBuilder.Entity<ErrorLogModel>().Property(x => x.Id).ValueGeneratedOnAdd();
+
         }
 
         public DbSet<UserModel> Users { get; set; }
@@ -75,5 +80,6 @@ namespace MME.Data
         public DbSet<CasteModel> Castes { get; set; }
         public DbSet<SubCasteModel> SubCastes { get; set; }
         public DbSet<OccupationModel> Occupations { get; set; }
+        public DbSet<ErrorLogModel> ErrorLogs { get; set; }
     }
 }

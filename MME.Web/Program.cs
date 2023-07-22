@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MME.Web.JWT;
+using Microsoft.AspNetCore.Mvc.Filters;
+using MME.Web.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +38,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MMEAppDBConnection")));
 
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
-
+builder.Services.AddScoped<MMEExceptionFilter>();
 
 var app = builder.Build();
 

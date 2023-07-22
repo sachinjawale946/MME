@@ -72,6 +72,7 @@
     <Build Include="Tables\tblEvents.sql" />
     <Build Include="Tables\tblEventTypes.sql" />
     <Build Include="Tables\tblEventLikeDislikes.sql" />
+    <Build Include="Tables\tblErrorLogs.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.Users.sql" />
