@@ -61,7 +61,5 @@ namespace MME.Model.Shared
         public int Occupation { get; set; }
         public int Role { get; set; }
 
-        [NotMapped]
-        public string AccessToken { get; set; }
     }
 }

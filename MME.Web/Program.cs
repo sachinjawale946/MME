@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(x =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// builder.Services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PPM4DAppDBConnection")));
+ builder.Services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PPM4DAppDBConnection")));
 
 
 var app = builder.Build();

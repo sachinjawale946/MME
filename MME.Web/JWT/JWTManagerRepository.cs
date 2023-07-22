@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using MME.Model.Request;
+using MME.Model.Response;
 
 namespace MME.Web.JWT
 {
@@ -19,9 +21,19 @@ namespace MME.Web.JWT
         }
 
 
-        public UserModel Authenticate(UserModel model)
+        public AuthenticationResponseModel Authenticate(AuthenticationRequestModel model)
         {
-            var user = _context.Users.Where(x => x.Username == model.Username && x.Password == model.Password).FirstOrDefault();
+            var user = _context.Users.Where(x => x.Username == model.Username && x.Password == model.Password)
+                       .Select(o => new AuthenticationResponseModel
+                       {
+                           Username = o.Username,
+                           FirstName = o.FirstName,
+                           LastName = o.LastName,
+                           MiddleName = o.MiddleName,
+                           Mobile = o.Mobile,
+                           UserId = o.UserId,
+                       })
+                       .FirstOrDefault();
 
             if (user == null)
             {
