@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MME.Model.Shared
 {
     [Table("tblSubCastes")]
-    public class SubCaste
+    public class SubCasteModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubCasteId { get; set; }
