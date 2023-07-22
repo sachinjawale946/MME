@@ -26,7 +26,6 @@ namespace MME.Web.Apis
         [HttpGet, Route("~/api/v1/getcasts")]
         public List<CasteResponseModel> Get()
         {
-            throw new IndexOutOfRangeException();
             return _context.Castes.Where(c => c.IsActive)
                    .OrderBy(c => c.DisplayOrder)
                    .Select(o => new CasteResponseModel

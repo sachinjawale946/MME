@@ -9,3 +9,24 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+INSERT INTO tblCastes
+(Caste,DisplayOrder,IsActive)
+VALUES 
+('General',1,1)
+
+INSERT INTO tblCastes
+(Caste,DisplayOrder,IsActive)
+VALUES 
+('OBC',2,1)
+
+INSERT INTO tblCastes
+(Caste,DisplayOrder,IsActive)
+VALUES 
+('SC',3,1)
+
+INSERT INTO tblCastes
+(Caste,DisplayOrder,IsActive)
+VALUES 
+('ST',4,1)
+
+
