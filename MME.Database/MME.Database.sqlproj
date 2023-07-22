@@ -75,15 +75,6 @@
     <Build Include="Tables\tblErrorLogs.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Scripts\Script.Users.sql" />
-    <None Include="Scripts\Script.States.sql" />
-    <None Include="Scripts\Script.Roles.sql" />
-    <None Include="Scripts\Script.Castes.sql" />
-    <None Include="Scripts\Script.Languages.sql" />
-    <None Include="Scripts\Script.SubCastes.sql" />
-    <None Include="Scripts\Script.PinCodes.sql" />
-    <None Include="Scripts\Script.Occupations.sql" />
-    <None Include="Scripts\Script.Religions.sql" />
-    <None Include="Scripts\Script.EventTypes.sql" />
+    <PostDeploy Include="Scripts\Script.States.sql" />
   </ItemGroup>
 </Project>
