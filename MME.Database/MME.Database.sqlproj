@@ -69,6 +69,9 @@
     <Build Include="Tables\tblPinCodes.sql" />
     <Build Include="Tables\tblOccupations.sql" />
     <Build Include="Tables\tblReligions.sql" />
+    <Build Include="Tables\tblEvents.sql" />
+    <Build Include="Tables\tblEventTypes.sql" />
+    <Build Include="Tables\tblEventLikeDislikes.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.Users.sql" />
@@ -80,5 +83,6 @@
     <None Include="Scripts\Script.PinCodes.sql" />
     <None Include="Scripts\Script.Occupations.sql" />
     <None Include="Scripts\Script.Religions.sql" />
+    <None Include="Scripts\Script.EventTypes.sql" />
   </ItemGroup>
 </Project>
