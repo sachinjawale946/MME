@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MME.Model.Shared
 {
     [Table("tblOccupations")]
-    public class Occupation
+    public class OccupationModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OccupationId { get; set; }
