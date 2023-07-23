@@ -52,8 +52,10 @@
 	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\JosefinSans-SemiBold.ttf" />
 	  <None Remove="Resources\Images\close.png" />
+	  <None Remove="Resources\Raw\busyanimation.json" />
 	  <None Remove="Resources\Raw\dotnetbot.json" />
 	  <None Remove="Resources\Raw\erroranimation.json" />
+	  <None Remove="Resources\Raw\logoutanimation.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,13 +72,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\BusyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ErrorPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ForgotPassword.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LandigPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Login.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SessionExpiredPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -8,6 +8,7 @@ using MME.Model.Request;
 using MME.Model.Response;
 using System.Security.Cryptography.Xml;
 using MME.Model.Helpers;
+using MME.Model.Lookups;
 
 namespace MME.Web.JWT
 {
@@ -82,12 +83,12 @@ namespace MME.Web.JWT
                   {
                         new Claim(ClaimTypes.Name, user.username)
                   }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_iconfiguration["JWT:TokenExpiryDays"].ToString())),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.accesstoken = tokenHandler.WriteToken(token);
-            user.message = "success";
+            user.message = Api_Result_Lookup.Success;
             return user;
         }
     }

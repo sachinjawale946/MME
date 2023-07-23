@@ -10,5 +10,6 @@ namespace MME.Model.Lookups
     {
         public const string BaseApi = "https://localhost:7086";
         public const string getLanguageApi = BaseApi + "/api/v1/getlanguages";
+        public const string loginApi = BaseApi + "/api/v1/authenticate-user";
     }
 }

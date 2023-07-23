@@ -58,15 +58,15 @@ namespace MME.Mobile.ViewModels
 
         private async void OnNavigate()
         {
+           
             if (Language != null && Language.languageid > 0)
             {
                 await page.Navigation.PushAsync(new Login(), true);
             }
             else
             {
-                var errorMessage = "Please select language to continue";
-                ErrorPage errorPage = new ErrorPage(errorMessage);
-                Application.Current.MainPage.ShowPopup(errorPage);
+                ErrorPage errorPage = new ErrorPage("Please select language to continue");
+                await Application.Current.MainPage.ShowPopupAsync(errorPage);
             }
         }
     }

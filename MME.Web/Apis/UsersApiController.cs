@@ -28,7 +28,7 @@ namespace MME.Web.Apis
         }
 
         [AllowAnonymous]
-        [HttpPost, Route("~/api/v1/Authenticate")]
+        [HttpPost, Route("~/api/v1/authenticate-user")]
         public AuthenticationResponseModel Post(AuthenticationRequestModel model)
         {
             var token = _jWTManagerRepository.Authenticate(model);
