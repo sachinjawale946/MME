@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.MembersPage"
              Title="Members">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Members!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <SearchBar x:Name="searchBar"
+                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+        <ListView x:Name="searchResults"
+                  ItemsSource="{Binding Members}" />
+    </StackLayout>
 </ContentPage>

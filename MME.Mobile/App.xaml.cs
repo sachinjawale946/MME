@@ -1,4 +1,5 @@
 ﻿using MME.Mobile.Views;
+using MME.Mobile.Helpers;
 
 namespace MME.Mobile
 {
@@ -8,6 +9,19 @@ namespace MME.Mobile
         {
             InitializeComponent();
             MainPage = new NavigationPage(new LandigPage());
+        }
+
+        protected override void OnStart()
+        {
+            if (string.IsNullOrEmpty(Settings.username))
+            {
+                MainPage = new NavigationPage(new Login());
+            }
+            else
+            {
+                App.Current.MainPage = new AppShell();
+                Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
+            }
         }
     }
 }

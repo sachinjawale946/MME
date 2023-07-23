@@ -58,7 +58,6 @@ namespace MME.Mobile.ViewModels
 
         private async void OnNavigate()
         {
-           
             if (Language != null && Language.languageid > 0)
             {
                 await page.Navigation.PushAsync(new Login(), true);

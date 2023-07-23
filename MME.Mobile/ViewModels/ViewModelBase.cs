@@ -12,6 +12,11 @@ namespace MME.Mobile.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ViewModelBase()
+        {
+
+        }
+
         public void OnPropertyChanged([CallerMemberName] string name = "") =>
     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 

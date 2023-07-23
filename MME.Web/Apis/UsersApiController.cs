@@ -39,12 +39,16 @@ namespace MME.Web.Apis
             return token;
         }
 
-        [HttpPost, Route("~/api/v1/membersearch")]
+        [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
+            if (model.page == 0) model.page = 1;
+            if (model.pagesize == 0) model.pagesize = 25;
+
             if (!string.IsNullOrEmpty(model.membername))
             {
-                return _context.Users.Where(c => c.IsActive && (c.FirstName.Contains(model.membername) || c.LastName.Contains(model.membername)))
+                return _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower()) 
+                        || c.LastName.ToLower().Contains(model.membername.ToLower())))
                         .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
                         .Skip((model.page - 1) * model.pagesize)
                         .Take(model.pagesize)
