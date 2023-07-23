@@ -5,6 +5,7 @@ using MME.Model.Request;
 using MME.Model.Response;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,8 @@ namespace MME.Mobile.ViewModels
         }
 
 
-        private List<MemberResponseModel> _members;
-        public List<MemberResponseModel> Members
+        private ObservableCollection<MemberResponseModel> _members;
+        public ObservableCollection<MemberResponseModel> Members
         {
             get { return _members; }
             set
@@ -48,19 +49,25 @@ namespace MME.Mobile.ViewModels
 
         private async void Search(string SearchFilter = "")
         {
-            if(!string.IsNullOrEmpty(SearchFilter.Trim())) 
-            {
-                if(SearchModel == null)SearchModel = new MemberRequestModel();
-                SearchModel.membername= SearchFilter.Trim();
-            }
+            // if (SearchModel != null && SearchModel.page == 0) Members = new List<MemberResponseModel>();
+            Members = new ObservableCollection<MemberResponseModel>();
+            if (SearchModel == null) SearchModel = new MemberRequestModel();
+            if (!string.IsNullOrEmpty(SearchFilter.Trim()))
+                SearchModel.membername = SearchFilter.Trim();
+            else
+                SearchModel.membername = string.Empty;
+
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
             var results = await _memberService.Search(SearchModel);
-            for (int i = 0; i < results.Count; i++)
+            if (results != null)
             {
-                if (Members == null) Members = new List<MemberResponseModel>();
-                if (!Members.Contains(results[i]))
-                    Members.Add(results[i]);
+                for (int i = 0; i < results.Count; i++)
+                {
+                    if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
+                    if (!Members.Contains(results[i]))
+                        Members.Add(results[i]);
+                }
             }
             //busyPage.Close();
         }

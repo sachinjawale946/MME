@@ -13,7 +13,7 @@
                 <!--<RowDefinition Height="25"/>-->
             </Grid.RowDefinitions>
             <!--<ImageButton Clicked="Close_Clicked" Source="close.png" HorizontalOptions="EndAndExpand" Aspect="AspectFill" WidthRequest="15"></ImageButton>-->
-            <skialottie:SKLottieView Grid.Row="0"
+            <skialottie:SKLottieView Grid.Row="0" Margin="0,60,0,0"
                 Source="busyanimation.json"
                 RepeatCount="-1"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"

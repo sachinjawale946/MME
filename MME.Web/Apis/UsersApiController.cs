@@ -13,7 +13,7 @@ using MME.Web.JWT;
 namespace MME.Web.Apis
 {
     [Route("api/[controller]")]
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [ServiceFilter(typeof(MMEExceptionFilter))]
     public class UsersApiController : ControllerBase
