@@ -9,6 +9,38 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--App Colors-->
+            <Color x:Key="AppPrimaryBackground">#2F0642</Color>
+            <Color x:Key="AppSecondaryBackground">#7C1F4C</Color>
+            <Color x:Key="AppRedColor">#BB2E3D</Color>
+            <Color x:Key="AppBorderColor">#17041E</Color>
+            <Color x:Key="YelloColor">#F0A171</Color>
+
+            <Style x:Key="ControlLabel" TargetType="Label" >
+                <Setter Property="TextColor" Value="#2F0642"/>
+                <Setter Property="FontFamily" Value="OpenSansRegular"/>
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
+            </Style>
+            
+            <Style x:Key="PageSubHeader" TargetType="Label" >
+                <Setter Property="TextColor" Value="#BB2E3D"/>
+                <Setter Property="FontFamily" Value="OpenSansSemiBold"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="CharacterSpacing" Value="1"/>
+            </Style>
+
+            <Style x:Key="BlackButton" TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BorderColor" Value="#FFF"/>
+                <Setter Property="TextColor" Value="#FFF"/>
+                <Setter Property="BackgroundColor" Value="#17041E"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="FontFamily" Value="OpenSansRegular"/>
+                <Setter Property="CharacterSpacing" Value="0.5"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

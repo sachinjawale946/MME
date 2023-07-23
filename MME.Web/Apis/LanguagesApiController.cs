@@ -20,6 +20,7 @@ namespace MME.Web.Apis
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet, Route("~/api/v1/getlanguages")]
         public List<LanguageResponseModel> Get()
         {

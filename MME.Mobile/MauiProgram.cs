@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Storage;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MME.Mobile
 {
@@ -9,10 +12,12 @@ namespace MME.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("JosefinSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("JosefinSans-SemiBold.ttf", "OpenSansSemiBold");
                 });
 
 #if DEBUG

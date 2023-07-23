@@ -6,9 +6,17 @@
     xmlns:local="clr-namespace:MME.Mobile"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <Shell.Resources>
+        <Style TargetType="Label"
+       Class="FlyoutItemLabelStyle">
+            <Setter Property="FontFamily" 
+            Value="OpenSansRegular" />
+        </Style>
+    </Shell.Resources>
+    
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" />-->
 
 </Shell>
