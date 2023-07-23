@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MME.Mobile.Helpers;
+
 
 namespace MME.Mobile.ViewModels
 {
@@ -55,13 +57,22 @@ namespace MME.Mobile.ViewModels
             BusyPage busyPage = new BusyPage();
             await Application.Current.MainPage.ShowPopupAsync(busyPage);
             var result = await _loginService.Login(UserModel);
-            busyPage.Close();
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
-
+                Settings.username = result.username;
+                Settings.roleid = result.roleid;
+                Settings.userid = result.userid;
+                Settings.firstname = result.firstname;
+                Settings.lastname = result.lastname;
+                Settings.mobile = result.mobile;
+                Settings.accesstoken = result.accesstoken;
+                App.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
+                busyPage.Close();
             }
             else
             {
+                busyPage.Close();
                 ErrorPage errorPage = new ErrorPage(result.message);
                 await Application.Current.MainPage.ShowPopupAsync(errorPage);
             }
