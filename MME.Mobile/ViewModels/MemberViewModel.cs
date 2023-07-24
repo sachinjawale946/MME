@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,28 @@ namespace MME.Mobile.ViewModels
             }
         }
 
+        //private bool _showNoImage;
+        //public bool ShowNoImage
+        //{
+        //    get { return _showNoImage; }
+        //    set
+        //    {
+        //        _showNoImage = value;
+        //        OnPropertyChanged(nameof(ShowNoImage));
+        //    }
+        //}
+
+        //private bool _showProfileImage;
+        //public bool ShowProfileImage
+        //{
+        //    get { return _showProfileImage; }
+        //    set
+        //    {
+        //        _showProfileImage = value;
+        //        OnPropertyChanged(nameof(ShowProfileImage));
+        //    }
+        //}
+
         private async void Search(string SearchFilter = "")
         {
             // if (SearchModel != null && SearchModel.page == 0) Members = new List<MemberResponseModel>();
@@ -65,11 +88,23 @@ namespace MME.Mobile.ViewModels
                 for (int i = 0; i < results.Count; i++)
                 {
                     if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
+                    if (results[i].profilepic == null)
+                    {
+                        results[i].showprofileimage = false;
+                        results[i].shownoimage = true;
+                    }
+                    else
+                    {
+                        results[i].showprofileimage = true;
+                        results[i].shownoimage = false;
+                    }
                     if (!Members.Contains(results[i]))
                         Members.Add(results[i]);
                 }
             }
             //busyPage.Close();
         }
+
+        
     }
 }

@@ -20,11 +20,13 @@ namespace MME.Web.Apis
     {
         readonly IJWTManagerRepository _jWTManagerRepository;
         readonly MMEAppDBContext _context;
+        readonly IConfiguration _iconfiguration;
 
-        public UsersApiController(IJWTManagerRepository jWTManagerRepository, MMEAppDBContext context)
+        public UsersApiController(IJWTManagerRepository jWTManagerRepository, MMEAppDBContext context, IConfiguration iconfiguration)
         {
             _jWTManagerRepository = jWTManagerRepository;
             _context = context;
+            _iconfiguration = iconfiguration;
         }
 
         [AllowAnonymous]
@@ -42,13 +44,17 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
+            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+            var imagesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["images"].ToString()); 
+
             if (model.page == 0) model.page = 1;
             if (model.pagesize == 0) model.pagesize = 25;
 
             if (!string.IsNullOrEmpty(model.membername))
             {
-                return _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower()) 
+                return _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
                         || c.LastName.ToLower().Contains(model.membername.ToLower())))
+                        .Include("Occupation")
                         .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
                         .Skip((model.page - 1) * model.pagesize)
                         .Take(model.pagesize)
@@ -59,6 +65,10 @@ namespace MME.Web.Apis
                             mobile = o.Mobile,
                             userid = o.UserId,
                             username = o.Username,
+                            fullname = o.FirstName + " " + o.LastName,
+                            occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
+                            gender = o.Gender,
+                            profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
                         }).ToList();
             }
             else
@@ -74,6 +84,10 @@ namespace MME.Web.Apis
                            mobile = o.Mobile,
                            userid = o.UserId,
                            username = o.Username,
+                           fullname = o.FirstName + " " + o.LastName,
+                           occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
+                           gender = o.Gender,
+                           profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
                        }).ToList();
             }
         }

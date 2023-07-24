@@ -14,5 +14,12 @@ namespace MME.Model.Response
         public string lastname { get; set; }
         public string mobile { get; set; }
         public string username { get; set; }
+        public string? fullname { get; set; }
+        public string? occupation { get; set; }
+        public string? fulladdress { get; set; }
+        public string? gender { get; set; }
+        public byte[] profilepic { get; set; }
+        public bool showprofileimage { get; set; }
+        public bool shownoimage { get; set; }
     }
 }

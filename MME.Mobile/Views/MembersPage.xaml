@@ -2,12 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.MembersPage"
+             xmlns:model="clr-namespace:MME.Model.Response;assembly=MME.Model"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Members">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout>
         <SearchBar x:Name="searchBar"
                    SearchCommand="{Binding SearchCommand}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
-        <ListView x:Name="searchResults"
-                  ItemsSource="{Binding Members}" />
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10"/>
+        <ScrollView>
+            <CollectionView x:Name="searchResults"
+                  ItemsSource="{Binding Members}" Margin="10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="0,0,0,0" x:DataType="model:MemberResponseModel">
+                            <Frame BackgroundColor="#00FBC1BC" BorderColor="{StaticResource AppBorderColor}" 
+                               Padding="4" CornerRadius="4" Margin="0,0,0,10">
+                                <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"/>
+                                        <RowDefinition Height="35"/>
+                                        <RowDefinition Height="35"/>
+                                        <RowDefinition Height="35"/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <Image Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="0,10,20,0" Source="mobileuser.png"/>
+                                    <Image Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="0,10,20,0" Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+                                    <Label Grid.Column="1" Text="Name" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="Occupation" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding occupation}" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="Gender" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="3" Text="{Binding gender}" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Grid.Column="1" Text="Address" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Grid.Column="3" Text="{Binding fulladdress}" VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
     </StackLayout>
 </ContentPage>

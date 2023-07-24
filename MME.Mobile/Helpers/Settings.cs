@@ -101,5 +101,7 @@ namespace MME.Mobile.Helpers
                 AppSettings.AddOrUpdateValue("accesstoken", value);
             }
         }
+
+       
     }
 }
