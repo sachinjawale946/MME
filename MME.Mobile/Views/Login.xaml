@@ -16,13 +16,13 @@
                 </Path.Fill>
             </Path>
         </Grid>
-        <Grid Grid.Row="2" VerticalOptions="CenterAndExpand">
+        <Grid Grid.Row="2" VerticalOptions="CenterAndExpand" Margin="0,20,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Label VerticalOptions="End" Grid.Row="0" Margin="10,0,0,0" Text="Username" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
