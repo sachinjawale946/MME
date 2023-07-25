@@ -18,7 +18,38 @@ namespace MME.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Route("/home")]
+        public IActionResult Home()
+        {
+            return View("Index");
+        }
+
+		[Route("/about")]
+		public IActionResult About()
+		{
+			return View();
+		}
+
+		[Route("/events")]
+		public IActionResult Events()
+		{
+			return View();
+		}
+
+		[Route("/members")]
+		public IActionResult Members()
+		{
+			return View();
+		}
+
+		[Route("/contact")]
+		public IActionResult Contact()
+		{
+			return View();
+		}
+
+
+		public IActionResult Privacy()
         {
             return View();
         }
