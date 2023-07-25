@@ -51,13 +51,13 @@ namespace MME.Mobile.ViewModels
             {
                 var _message = "Username and Password both are manadatory fields";
                 ErrorPage errorPage = new ErrorPage(_message);
-                await Application.Current.MainPage.ShowPopupAsync(errorPage);
+                Application.Current.MainPage.ShowPopup(errorPage);
                 return;
             }
             BusyPage busyPage = new BusyPage();
-            await Application.Current.MainPage.ShowPopupAsync(busyPage);
+            Thread.Sleep(2000);
+            Application.Current.MainPage.ShowPopup(busyPage);
             var result = await _loginService.Login(UserModel);
-            busyPage.Close();
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
                 Settings.username = result.username;
@@ -70,11 +70,13 @@ namespace MME.Mobile.ViewModels
                 Settings.gender = result.gender;
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
+                busyPage.Close();
             }
             else
             {
+                busyPage.Close();
                 ErrorPage errorPage = new ErrorPage(result.message);
-                await Application.Current.MainPage.ShowPopupAsync(errorPage);
+                Application.Current.MainPage.ShowPopup(errorPage);
             }
         }
     }

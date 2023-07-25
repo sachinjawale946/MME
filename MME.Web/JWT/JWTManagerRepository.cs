@@ -72,7 +72,7 @@ namespace MME.Web.JWT
                 {
                     return new AuthenticationResponseModel
                     {
-                        message = "Member username and password combination doest not match."
+                        message = "Username and password combination doesn't match."
                     };
                 }
             }
