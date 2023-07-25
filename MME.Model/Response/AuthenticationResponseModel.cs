@@ -20,5 +20,6 @@ namespace MME.Model.Response
         public byte[] passwordsalt { get; set; }
         public int roleid { get; set; }
         public bool isactive { get; set; }
+        public byte[] profilepic { get; set; }
     }
 }

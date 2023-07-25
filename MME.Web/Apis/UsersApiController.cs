@@ -41,11 +41,23 @@ namespace MME.Web.Apis
             return token;
         }
 
+        [HttpGet, Route("~/api/v1/members-getprofilepicture/{userid}")]
+        public byte[] ProfilePicture(Guid userid)
+        {
+            if (userid != Guid.Empty)
+            {
+                var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+                var profilePic = _context.Users.Where(u => u.UserId == userid).FirstOrDefault().ProfilePic;
+                if (!string.IsNullOrEmpty(profilePic))
+                    return System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profilePic));
+            }
+            return new byte[] { };
+        }
+
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
             var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
-            var imagesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["images"].ToString()); 
 
             if (model.page == 0) model.page = 1;
             if (model.pagesize == 0) model.pagesize = Convert.ToInt16(_iconfiguration["memberpagesize"].ToString());

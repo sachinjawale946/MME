@@ -26,6 +26,8 @@ namespace MME.Web.JWT
 
         public AuthenticationResponseModel Authenticate(AuthenticationRequestModel model)
         {
+            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+
             var user = _context.Users.Where(x => x.Username == model.username)
                        .Select(o => new AuthenticationResponseModel
                        {
@@ -39,6 +41,7 @@ namespace MME.Web.JWT
                            passwordsalt = o.PasswordSalt,
                            isactive = o.IsActive,
                            roleid = o.RoleId,
+                           profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
                        })
                        .FirstOrDefault();
 

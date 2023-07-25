@@ -19,6 +19,35 @@ namespace MME.Mobile.Services
         readonly string _HeaderType = "application/json";
         readonly string _MediaType = "application/json";
 
+        public async Task<byte[]?> GetProfileImage(Guid UserId)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(string.Format(Api_Lookup.memberProfilePicApi, UserId));
+                HttpResponseMessage response = client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<byte[]>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    //SessionExpiredPage sessionExpiredPage = new SessionExpiredPage();
+                    //Application.Current.MainPage.ShowPopup(sessionExpiredPage);
+                }
+                return await Task.FromResult(new byte[] { });
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Some error occured, while processing your request. Please try again later.";
+                //ErrorPage errorPage = new ErrorPage(errorMessage);
+                //Application.Current.MainPage.ShowPopup(errorPage);
+                return await Task.FromResult(new byte[] { });
+            }
+        }
+
         public async Task<List<MemberResponseModel>> Search(MemberRequestModel model)
         {
             try
