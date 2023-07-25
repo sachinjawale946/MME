@@ -8,15 +8,46 @@ using Microsoft.IdentityModel.Tokens;
 using MME.Web.JWT;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MME.Web.Filters;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Authentication with JWT
 builder.Services.AddAuthentication(x =>
 {
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
+    //x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    //x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = "MultiAuthSchemes";
+    x.DefaultChallengeScheme = "MultiAuthSchemes";
+})
+    .AddCookie(options =>
+{
+    options.LoginPath = "/Account/Unauthorized/";
+    options.AccessDeniedPath = "/Account/Forbidden/";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+})
+       .AddJwtBearer(o =>
+       {
+           var Key = Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT:Key"));
+           o.SaveToken = true;
+           o.TokenValidationParameters = new TokenValidationParameters
+           {
+               ValidateIssuer = false,
+               ValidateAudience = false,
+               ValidateLifetime = true,
+               ValidateIssuerSigningKey = true,
+               ValidIssuer = builder.Configuration.GetValue<string>("JWT:Issuer"),
+               ValidAudience = builder.Configuration.GetValue<string>("JWT:Audience"),
+               IssuerSigningKey = new SymmetricSecurityKey(Key)
+           };
+       })
+    .AddJwtBearer("MMEJwtScheme", o =>
 {
     var Key = Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT:Key"));
     o.SaveToken = true;
@@ -30,6 +61,32 @@ builder.Services.AddAuthentication(x =>
         ValidAudience = builder.Configuration.GetValue<string>("JWT:Audience"),
         IssuerSigningKey = new SymmetricSecurityKey(Key)
     };
+}).AddPolicyScheme("MultiAuthSchemes", JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.ForwardDefaultSelector = context =>
+    {
+        string authorization = context.Request.Headers[HeaderNames.Authorization];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+        {
+            var token = authorization.Substring("Bearer ".Length).Trim();
+            var jwtHandler = new JwtSecurityTokenHandler();
+            return (jwtHandler.CanReadToken(token) && jwtHandler.ReadJwtToken(token).Issuer.Equals(builder.Configuration.GetValue<string>("JWT:Issuer")))
+                ? JwtBearerDefaults.AuthenticationScheme : "MMEJwtScheme";
+        }
+        return CookieAuthenticationDefaults.AuthenticationScheme;
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    var onlySecondJwtSchemePolicyBuilder = new AuthorizationPolicyBuilder("MMEJwtScheme");
+    options.AddPolicy("MMEJwtScheme", onlySecondJwtSchemePolicyBuilder
+        .RequireAuthenticatedUser()
+        .Build());
+    var onlyCookieSchemePolicyBuilder = new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme);
+    options.AddPolicy("MMECookieScheme", onlyCookieSchemePolicyBuilder
+        .RequireAuthenticatedUser()
+        .Build());
 });
 
 // Add services to the container.

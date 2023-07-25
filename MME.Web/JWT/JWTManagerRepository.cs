@@ -56,8 +56,6 @@ namespace MME.Web.JWT
             }
             else
             {
-                //byte[] PasswordSalt;
-                //PasswordHelper.HashPasword(user.Password, out PasswordSalt);
                 var isAuthenticated = PasswordHelper.VerifyPassword(model.password, user.password, user.passwordsalt);
 
                 if(isAuthenticated)
@@ -86,8 +84,10 @@ namespace MME.Web.JWT
             {
                 Subject = new ClaimsIdentity(new Claim[]
                   {
-                        new Claim(ClaimTypes.Name, user.username)
+                      new Claim(ClaimTypes.Name, user.username)
                   }),
+                Issuer = _iconfiguration["JWT:Issuer"],
+                Audience = _iconfiguration["JWT:Audience"],
                 Expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_iconfiguration["JWT:TokenExpiryDays"])),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };

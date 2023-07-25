@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MME.Data;
 using MME.Model.Request;
 using MME.Model.Response;
@@ -13,7 +14,6 @@ using MME.Web.JWT;
 namespace MME.Web.Apis
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     [ServiceFilter(typeof(MMEExceptionFilter))]
     public class UsersApiController : ControllerBase
@@ -41,19 +41,21 @@ namespace MME.Web.Apis
             return token;
         }
 
+        [Authorize(Policy = "MMEJwtScheme")]
         [HttpGet, Route("~/api/v1/members-getprofilepicture/{userid}")]
         public byte[] ProfilePicture(Guid userid)
         {
             if (userid != Guid.Empty)
             {
                 var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
-                var profilePic = _context.Users.Where(u => u.UserId == userid).FirstOrDefault().ProfilePic;
-                if (!string.IsNullOrEmpty(profilePic))
-                    return System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profilePic));
+                var profile = _context.Users.Where(u => u.UserId == userid).FirstOrDefault();
+                if (profile != null && !string.IsNullOrEmpty(profile.ProfilePic))
+                    return System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic));
             }
             return new byte[] { };
         }
 
+        [Authorize(Policy = "MMEJwtScheme")]
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {

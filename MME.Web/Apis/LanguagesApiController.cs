@@ -8,7 +8,7 @@ using MME.Web.Filters;
 namespace MME.Web.Apis
 {
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "MMEJwtScheme")]
     [ApiController]
     [ServiceFilter(typeof(MMEExceptionFilter))]
     public class LanguagesApiController : ControllerBase

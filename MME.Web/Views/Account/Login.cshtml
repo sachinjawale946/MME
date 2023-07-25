@@ -17,6 +17,12 @@
                     <div class="screen__content">
                         @using (Html.BeginForm("Login", "Account", FormMethod.Post,new { @class="login" }))
                         {
+                            @Html.AntiForgeryToken()
+                            @if (ViewData.ModelState.ErrorCount > 0)
+                            {
+                                @Html.ValidationMessage("Login", new { style = "text-align:center;display:block;width:100%;color:white;margin-bottom:10px;font-size:small;background-color:red;padding:10px;" })
+                                <br />
+                            }
                             <div class="login__field">
                                 <i class="login__icon fas fa-user"></i>
                                 @Html.TextBoxFor(m => m.username,new { @class="login__input", placeholder="Username", autocomplete="off"  })
@@ -53,12 +59,12 @@
     }
 
 
-    .container {
+    /*.container {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-    }
+    }*/
 
     .screen {
         background: linear-gradient(90deg, #5D54A4, #7C78B8);

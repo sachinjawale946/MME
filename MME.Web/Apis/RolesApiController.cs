@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace MME.Web.Apis
 {
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "MMEJwtScheme")]
     [ApiController]
     [ServiceFilter(typeof(MMEExceptionFilter))]
     public class RolesApiController : ControllerBase
