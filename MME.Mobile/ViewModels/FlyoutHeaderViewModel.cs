@@ -58,7 +58,7 @@ namespace MME.Mobile.ViewModels
         {
             if (ProfileImage == null || ProfileImage.Length > 0)
             {
-                ProfileImage = _memberService.GetProfileImage(Settings.userid).Result;
+                ProfileImage = await _memberService.GetProfileImage(Settings.userid);
                 if (ProfileImage == null || ProfileImage.Length > 0)
                 {
                     showprofileimage = true;
