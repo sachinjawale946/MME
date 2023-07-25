@@ -11,7 +11,7 @@ namespace MME.Web.Controllers
             return View();
         }
 
-        [HttpPatch, Route("/login")]
+        [HttpPost, Route("/account/login")]
         public IActionResult Login(AuthenticationRequestModel model)
         {
             return View();

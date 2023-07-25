@@ -616,3 +616,7 @@ body {
 #footer div .connect #pinterest:hover {
 	background-position: -25px -107px;
 }
+
+.required {
+	color: red;
+}

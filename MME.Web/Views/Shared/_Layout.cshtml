@@ -17,7 +17,7 @@
 			</div>
 			<ul>
 				<li class="selected">
-					<a href="/home">home</a>
+					<a href="/home">home</a> 
 				</li>
 				<li>
 					<a href="/about">about</a>
@@ -29,7 +29,7 @@
 					<a href="/members">members</a>
 				</li>
 				<li>
-					<a href="/contact">contact</a>
+					<a href="/login">login</a>
 				</li>
 			</ul>
 		</div>
@@ -60,7 +60,9 @@
 	</div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
