@@ -620,3 +620,18 @@ body {
 .required {
 	color: red;
 }
+
+.page-title-box {
+	padding: 5px 40px;
+	/*margin: 0px -40px 0px -40px;*/
+	background-color: lightgray;
+	box-shadow: shadow;
+	display: flex;
+}
+
+.breadcrumb {
+	/*float:right;*/
+	margin-bottom: 0;
+	padding: 0;
+	background-color: transparent;
+}

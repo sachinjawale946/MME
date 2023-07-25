@@ -10,5 +10,11 @@ namespace MME.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet, Route("/dashboard")]
+        public IActionResult Dashboard()
+        {
+            return View("WelcomeCenter");
+        }
     }
 }

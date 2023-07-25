@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MME.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+	<div id="header">
+		<div class="section">
+			<div class="logo">
+				<a href="/dashboard">MME</a>
+			</div>
+			<ul>
+				<li class="selected">
+					<a href="/dashboard">home</a>
+				</li>
+				<li>
+					<a href="/events-all">events</a>
+				</li>
+				@*<li>
+					<a href="/members-all">members</a>
+				</li>*@
+				@*<li>
+					<a href="/members">members</a>
+				</li>
+				<li>
+					<a href="/login">login</a>
+				</li>*@
+			</ul>
+		</div>
+	</div>
+
+	<div class="container" style="min-height:500px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div id="footer">
+		<div>
+			<div class="connect">
+				<a href="http://freewebsitetemplates.com/go/twitter/" id="twitter">twitter</a>
+				<a href="http://freewebsitetemplates.com/go/facebook/" id="facebook">facebook</a>
+				<a href="http://freewebsitetemplates.com/go/googleplus/" id="googleplus">googleplus</a>
+				<a href="http://pinterest.com/fwtemplates/" id="pinterest">pinterest</a>
+			</div>
+			<p>
+				&copy; copyright 2023 | all rights reserved.
+			</p>
+		</div>
+	</div>
+
+    
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
