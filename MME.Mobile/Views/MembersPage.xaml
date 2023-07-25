@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.MembersPage"
              xmlns:model="clr-namespace:MME.Model.Response;assembly=MME.Model"
+             xmlns:convertes="clr-namespace:MME.Mobile.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Members">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <convertes:ImageByGenderConverter x:Key="ImageByGenderConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -42,8 +44,10 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,20,0" Source="mobileuser.png"/>
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,20,0" Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,20,0" 
+                                           Source="{Binding gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,20,0" 
+                                           Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
                                     <Label Grid.Column="1" Text="Name" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                                     <Label Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <Label Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>

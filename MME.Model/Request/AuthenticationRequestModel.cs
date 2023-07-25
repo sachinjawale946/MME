@@ -8,6 +8,12 @@ namespace MME.Model.Request
 {
     public class AuthenticationRequestModel
     {
+        public AuthenticationRequestModel()
+        {
+            username = string.Empty;
+            password = string.Empty;
+        }
+
         public string username { get; set; }
         public string password { get; set; }
     }

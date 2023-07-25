@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MME.Mobile.Helpers;
 
 namespace MME.Mobile.ViewModels
 {
@@ -53,9 +54,21 @@ namespace MME.Mobile.ViewModels
             }
         }
 
+        private string _gender;
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged(nameof(Gender));
+            }
+        }
+
 
         public async void ShowProfilePic()
         {
+            Gender = Settings.gender;
             if (ProfileImage == null || ProfileImage.Length > 0)
             {
                 ProfileImage = await _memberService.GetProfileImage(Settings.userid);

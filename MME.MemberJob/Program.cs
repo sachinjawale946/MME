@@ -29,23 +29,43 @@ var PasswordHash = HashPasword("123", out PasswordSalt);
 
 var user = _context.Users.FirstOrDefault();
 
-if(user == null)
+if (user == null)
 {
     var start = 1;
     for (int i = 0; i < 1000; i++)
     {
-        _context.Users.Add(new MME.Model.Shared.UserModel
+        if (i % 2 == 0)
         {
-            Username = "Sachin_" + start.ToString("0000"),
-            PasswordSalt = PasswordSalt,
-            Password = PasswordHash,
-            FirstName = "Sachin",
-            LastName = "Jawale",
-            Mobile = "8369498118",
-            IsActive = true,
-            BirthDate = DateTime.Now,
-            RoleId = 1,
-        });
+            _context.Users.Add(new MME.Model.Shared.UserModel
+            {
+                Username = "Sachin_" + start.ToString("0000"),
+                PasswordSalt = PasswordSalt,
+                Password = PasswordHash,
+                FirstName = "Sachin",
+                LastName = "Jawale",
+                Mobile = start.ToString("0000000000"),
+                IsActive = true,
+                BirthDate = DateTime.Now.AddYears(-37),
+                RoleId = 1,
+                Gender = "Male"
+            });
+        }
+        else
+        {
+            _context.Users.Add(new MME.Model.Shared.UserModel
+            {
+                Username = "Ashvini_" + start.ToString("0000"),
+                PasswordSalt = PasswordSalt,
+                Password = PasswordHash,
+                FirstName = "Ashvini",
+                LastName = "Jawale",
+                Mobile = start.ToString("0000000000"),
+                IsActive = true,
+                BirthDate = DateTime.Now.AddYears(-30),
+                RoleId = 1,
+                Gender = "Female"
+            });
+        }
         start++;
     }
     _context.SaveChanges();

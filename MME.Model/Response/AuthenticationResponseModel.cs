@@ -13,6 +13,7 @@ namespace MME.Model.Response
         public string firstname { get; set; }
         public string? middlename { get; set; }
         public string lastname { get; set; }
+        public string gender { get; set; }
         public string mobile { get; set; }
         public string accesstoken { get; set; }
         public string? message { get; set; }

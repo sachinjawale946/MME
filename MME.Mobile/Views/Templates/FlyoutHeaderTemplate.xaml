@@ -2,10 +2,12 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:convertes="clr-namespace:MME.Mobile.Converters"
              x:Class="MME.Mobile.Views.Templates.FlyoutHeaderTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <convertes:ImageByGenderConverter x:Key="ImageByGenderConverter"/>
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid BackgroundColor="WhiteSmoke">
@@ -15,8 +17,9 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding shownoimage}" Aspect="Fill" Margin="10,10,20,0" Source="mobileuser.png"/>
-        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,20,0" 
+        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding shownoimage}" Aspect="Fill" Margin="10,10,10,0" 
+               Source="{Binding Gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
+        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,10,0" 
                Source="{Binding ProfileImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
         <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="0,20,0,0" Color="LightGray"/>
         <StackLayout Grid.Row="2" BackgroundColor="{StaticResource AppBorderColor}" HeightRequest="40">

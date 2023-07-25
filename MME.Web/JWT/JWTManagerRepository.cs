@@ -9,6 +9,7 @@ using MME.Model.Response;
 using System.Security.Cryptography.Xml;
 using MME.Model.Helpers;
 using MME.Model.Lookups;
+using System.Reflection;
 
 namespace MME.Web.JWT
 {
@@ -41,6 +42,7 @@ namespace MME.Web.JWT
                            passwordsalt = o.PasswordSalt,
                            isactive = o.IsActive,
                            roleid = o.RoleId,
+                           gender = o.Gender,
                            profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
                        })
                        .FirstOrDefault();

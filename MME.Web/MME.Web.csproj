@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MME.Data\MME.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\profilepics_thumbs\" />
-  </ItemGroup>
-
 </Project>

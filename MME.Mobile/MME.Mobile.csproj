@@ -40,7 +40,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-		<MauiImage Update="Resources\Images\mobileuser.png">
+		<MauiImage Update="Resources\Images\male.png">
 		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</MauiImage>
@@ -56,7 +56,8 @@
 	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\JosefinSans-SemiBold.ttf" />
 	  <None Remove="Resources\Images\close.png" />
-	  <None Remove="Resources\Images\mobileuser.png" />
+	  <None Remove="Resources\Images\female.jpg" />
+	  <None Remove="Resources\Images\male.png" />
 	  <None Remove="Resources\Raw\busyanimation.json" />
 	  <None Remove="Resources\Raw\dotnetbot.json" />
 	  <None Remove="Resources\Raw\erroranimation.json" />
@@ -108,10 +109,6 @@
 	  <MauiXaml Update="Views\Templates\FlyoutHeaderTemplate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Converters\" />
 	</ItemGroup>
 
 </Project>

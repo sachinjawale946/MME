@@ -23,7 +23,7 @@ namespace MME.Model.Shared
         public DateTime BirthDate { get; set; }
         public string Mobile { get; set; }
         public string? Email { get; set; }
-        public string? Gender { get; set; }
+        public string Gender { get; set; }
         public string? MaritalStatus { get; set; }
         public string? ProfilePic { get; set; }
         public string? Society { get; set; }

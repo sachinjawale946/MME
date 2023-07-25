@@ -47,7 +47,7 @@ namespace MME.Mobile.ViewModels
 
         private async void OnLoginNavigate()
         {
-            if(UserModel == null || string.IsNullOrEmpty(UserModel.username) || string.IsNullOrEmpty(UserModel.password))
+            if(UserModel == null || string.IsNullOrEmpty(UserModel.username.Trim()) || string.IsNullOrEmpty(UserModel.password.Trim()))
             {
                 var _message = "Username and Password both are manadatory fields";
                 ErrorPage errorPage = new ErrorPage(_message);
@@ -67,9 +67,9 @@ namespace MME.Mobile.ViewModels
                 Settings.lastname = result.lastname;
                 Settings.mobile = result.mobile;
                 Settings.accesstoken = result.accesstoken;
+                Settings.gender = result.gender;
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
-                
             }
             else
             {
