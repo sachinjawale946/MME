@@ -42,8 +42,8 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Image Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="0,10,20,0" Source="mobileuser.png"/>
-                                    <Image Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="0,10,20,0" Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,20,0" Source="mobileuser.png"/>
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,20,0" Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
                                     <Label Grid.Column="1" Text="Name" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                                     <Label Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <Label Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>

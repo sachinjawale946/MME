@@ -57,6 +57,7 @@ namespace MME.Mobile.ViewModels
             BusyPage busyPage = new BusyPage();
             await Application.Current.MainPage.ShowPopupAsync(busyPage);
             var result = await _loginService.Login(UserModel);
+            busyPage.Close();
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
                 Settings.username = result.username;
@@ -68,11 +69,10 @@ namespace MME.Mobile.ViewModels
                 Settings.accesstoken = result.accesstoken;
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
-                busyPage.Close();
+                
             }
             else
             {
-                busyPage.Close();
                 ErrorPage errorPage = new ErrorPage(result.message);
                 await Application.Current.MainPage.ShowPopupAsync(errorPage);
             }

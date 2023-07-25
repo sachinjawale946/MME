@@ -13,7 +13,7 @@ using MME.Web.JWT;
 namespace MME.Web.Apis
 {
     [Route("api/[controller]")]
-    // [Authorize]
+    [Authorize]
     [ApiController]
     [ServiceFilter(typeof(MMEExceptionFilter))]
     public class UsersApiController : ControllerBase
@@ -48,7 +48,7 @@ namespace MME.Web.Apis
             var imagesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["images"].ToString()); 
 
             if (model.page == 0) model.page = 1;
-            if (model.pagesize == 0) model.pagesize = 25;
+            if (model.pagesize == 0) model.pagesize = Convert.ToInt16(_iconfiguration["memberpagesize"].ToString());
 
             if (!string.IsNullOrEmpty(model.membername))
             {

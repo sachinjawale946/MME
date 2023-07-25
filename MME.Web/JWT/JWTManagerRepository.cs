@@ -83,7 +83,7 @@ namespace MME.Web.JWT
                   {
                         new Claim(ClaimTypes.Name, user.username)
                   }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_iconfiguration["JWT:TokenExpiryDays"])),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
