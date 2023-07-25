@@ -7,6 +7,7 @@
 	[Location] VARCHAR(200),
 	[EventTypeId] INT NOT NULL,
 	[ActivationDate] DATETIME NOT NULL,
+	[EventDate] DATETIME NOT NULL,
 	[CreatedDate] DATETIME NOT NULL,
 	[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
 	[LastUpdatedDate] DATETIME,

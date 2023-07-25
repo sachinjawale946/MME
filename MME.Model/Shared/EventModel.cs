@@ -19,13 +19,13 @@ namespace MME.Model.Shared
         public string? Location { get; set; }
         [ForeignKey("EventType")]
         public int EventTypeId { get; set; }
+        public DateTime EventDate { get; set; }
         public DateTime ActivationDate { get; set; }
         public DateTime CreatedDate { get; set;}
         public Guid CreatedBy { get; set;}
         public DateTime? LastUpdatedDate { get; set; }
         public Guid? LastUpdatedBy { get; set; }
         public bool IsActive { get; set; }
-
         public virtual EventTypeModel? EventType { get; set; }
     }
 }

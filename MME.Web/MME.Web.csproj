@@ -16,4 +16,9 @@
     <ProjectReference Include="..\MME.Data\MME.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\events\" />
+    <Folder Include="wwwroot\events_thumbs\" />
+  </ItemGroup>
+
 </Project>
