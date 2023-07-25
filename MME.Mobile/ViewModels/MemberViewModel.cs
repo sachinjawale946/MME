@@ -18,10 +18,12 @@ namespace MME.Mobile.ViewModels
     {
         IMemberService _memberService = new MemberService();
         public Command SearchCommand { get; }
+        public Command LoadMoreMembersCommand { get; set; }
 
         public MemberViewModel()
         {
             SearchCommand = new Command<string>(Search);
+            LoadMoreMembersCommand = new Command(SearchMore);
             Search();
         }
 
@@ -48,37 +50,43 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        //private bool _showNoImage;
-        //public bool ShowNoImage
-        //{
-        //    get { return _showNoImage; }
-        //    set
-        //    {
-        //        _showNoImage = value;
-        //        OnPropertyChanged(nameof(ShowNoImage));
-        //    }
-        //}
-
-        //private bool _showProfileImage;
-        //public bool ShowProfileImage
-        //{
-        //    get { return _showProfileImage; }
-        //    set
-        //    {
-        //        _showProfileImage = value;
-        //        OnPropertyChanged(nameof(ShowProfileImage));
-        //    }
-        //}
+        private async void SearchMore()
+        {
+            Search(SearchModel.membername);
+        }
 
         private async void Search(string SearchFilter = "")
         {
-            // if (SearchModel != null && SearchModel.page == 0) Members = new List<MemberResponseModel>();
             Members = new ObservableCollection<MemberResponseModel>();
             if (SearchModel == null) SearchModel = new MemberRequestModel();
             if (!string.IsNullOrEmpty(SearchFilter.Trim()))
-                SearchModel.membername = SearchFilter.Trim();
+            {
+                // both search terms not null
+                if (!string.IsNullOrEmpty(SearchFilter.Trim()) && !string.IsNullOrEmpty(SearchModel.membername))
+                {
+                    // search term changed
+                    if (SearchFilter.Trim() != SearchModel.membername.Trim())
+                    {
+                        Members.Clear();
+                        SearchModel.page = 0;
+                    }
+                    else
+                    {
+                        // same search term but next page
+                    }
+                }
+                else
+                {
+                    // search term not changed
+                    SearchModel.membername = SearchFilter.Trim();
+                }
+            }
             else
+            {
                 SearchModel.membername = string.Empty;
+            }
+
+            SearchModel.page = SearchModel.page + 1;
 
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
