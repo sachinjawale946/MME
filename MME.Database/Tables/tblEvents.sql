@@ -4,6 +4,7 @@
 	[Event] NVARCHAR(1000) NOT NULL,
 	[Description] NVARCHAR(MAX) NOT NULL,
 	[Banner] VARCHAR(100),
+	[Location] VARCHAR(200),
 	[EventTypeId] INT NOT NULL,
 	[ActivationDate] DATETIME NOT NULL,
 	[CreatedDate] DATETIME NOT NULL,

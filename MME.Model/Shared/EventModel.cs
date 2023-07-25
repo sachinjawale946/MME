@@ -16,6 +16,7 @@ namespace MME.Model.Shared
         public string Event { get; set; }
         public string Description { get; set; }
         public string? Banner { get; set; }
+        public string? Location { get; set; }
         [ForeignKey("EventType")]
         public int EventTypeId { get; set; }
         public DateTime ActivationDate { get; set; }
