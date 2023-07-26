@@ -77,6 +77,7 @@ namespace MME.Web.Apis
             var response = new EventResponseModel
             {
                 eventid = item.EventId,
+                event_type_id = item.EventTypeId,
                 description = item.Description,
                 header = item.Event,
                 location = (string.IsNullOrEmpty(item.Location)) ? string.Empty : item.Location,

@@ -20,6 +20,18 @@ namespace MME.Model.Response
         public bool shownoimage { get; set; }
         public bool showbannerimage { get; set; }
         
+        private int _event_type_id;
+        public int event_type_id
+        {
+            get { return _event_type_id; }
+            set
+            {
+                _event_type_id = value;
+                OnPropertyChanged(nameof(event_type_id));
+            }
+        }
+
+
         private int _likes;
         public int likes
         {

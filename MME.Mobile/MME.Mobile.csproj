@@ -55,12 +55,16 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\JosefinSans-SemiBold.ttf" />
+	  <None Remove="Resources\Images\attend.png" />
 	  <None Remove="Resources\Images\close.png" />
+	  <None Remove="Resources\Images\contribue.png" />
 	  <None Remove="Resources\Images\dislike.png" />
+	  <None Remove="Resources\Images\donate.png" />
 	  <None Remove="Resources\Images\event.png" />
 	  <None Remove="Resources\Images\female.jpg" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\male.jpg" />
+	  <None Remove="Resources\Images\participate.png" />
 	  <None Remove="Resources\Images\spam.png" />
 	  <None Remove="Resources\Raw\busyanimation.json" />
 	  <None Remove="Resources\Raw\dotnetbot.json" />
