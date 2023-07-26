@@ -136,5 +136,33 @@ namespace MME.Mobile.ViewModels
                 }
             }
         }
+
+        public void SpamAction(EventResponseModel spam)
+        {
+            if (Events != null && Events.Count > 0 && spam != null)
+            {
+                if (Events.Where(e => e.eventid == spam.eventid).FirstOrDefault() != null)
+                {
+                    if (Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback == null)
+                    {
+                        Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
+                        {
+                            ReportAbuse = true,
+                        };
+                    }
+                    else
+                    {
+                        if(Convert.ToBoolean(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse))
+                        {
+                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse = null;
+                        }
+                        else
+                        {
+                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -45,4 +45,18 @@ public partial class EventsPage : ContentPage
             }
         }
     }
+
+    private void spam_Clicked(object sender, EventArgs e)
+    {
+        ImageButton likeButton = sender as ImageButton;
+        if (likeButton != null)
+        {
+            var stackLayout = (likeButton.CommandParameter) as StackLayout;
+            var commandParameter = stackLayout.BindingContext as EventResponseModel;
+            if (commandParameter != null && viewModel != null)
+            {
+                viewModel.SpamAction(commandParameter);
+            }
+        }
+    }
 }
