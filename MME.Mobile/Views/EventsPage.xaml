@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
             <convertes:ImageByGenderConverter x:Key="ImageByGenderConverter"/>
+            <convertes:FeedbackConverter x:Key="FeedbackConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -68,7 +69,9 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <ImageButton Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="like.png" x:Name="like" Clicked="like_Clicked" HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
+                                            <ImageButton Opacity="{Binding EventFeedback.liked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}" 
+                                                         Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="like.png" x:Name="like" Clicked="like_Clicked"
+                                                         HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
                                             <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding likes}" VerticalOptions="Center" Margin="5,0"/>
                                         </Grid>
                                         <Grid Margin="50,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Column="1">
@@ -76,7 +79,9 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <ImageButton HorizontalOptions="EndAndExpand" Margin="10,0" Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="dislike.png" x:Name="dislike" Clicked="dislike_Clicked" CommandParameter="{x:Reference EventStackPanel}"/>
+                                            <ImageButton Opacity="{Binding EventFeedback.disliked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
+                                                         HorizontalOptions="EndAndExpand" Margin="10,0" Aspect="AspectFill" WidthRequest="25" HeightRequest="25" 
+                                                         Source="dislike.png" x:Name="dislike" Clicked="dislike_Clicked" CommandParameter="{x:Reference EventStackPanel}"/>
                                             <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding dislikes}" VerticalOptions="Center" Margin="5,0"/>
                                         </Grid>
                                         <Grid Margin="50,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Column="2">
@@ -84,7 +89,9 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <ImageButton Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="spam.png" x:Name="spam" Clicked="spam_Clicked" HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
+                                            <ImageButton Opacity="{Binding EventFeedback.reportabuse, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
+                                                         Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="spam.png" x:Name="spam" Clicked="spam_Clicked"
+                                                         HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
                                             <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding spams}" VerticalOptions="Center" Margin="5,0"/>
                                         </Grid>
                                     </Grid>

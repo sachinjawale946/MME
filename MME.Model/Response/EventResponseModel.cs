@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MME.Model.Response
 {
-    public class EventResponseModel : INotifyPropertyChanged
+    public class EventResponseModel : ModelBase
     {
         public Guid eventid { get; set; }
         public string header { get; set; }
@@ -97,10 +97,15 @@ namespace MME.Model.Response
             }
         }
 
-        public EventFeedbackResponseModel? EventFeedback { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>
-   PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private EventFeedbackResponseModel? _eventFeedback;
+        public EventFeedbackResponseModel? EventFeedback
+        {
+            get { return _eventFeedback; }
+            set
+            {
+                _eventFeedback = value;
+                OnPropertyChanged(nameof(EventFeedback));
+            }
+        }
     }
 }
