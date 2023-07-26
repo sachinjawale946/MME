@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MME.Model.Response
 {
-    public class EventResponseModel
+    public class EventResponseModel : INotifyPropertyChanged
     {
         public Guid eventid { get; set; }
         public string header { get; set; }
@@ -16,13 +19,88 @@ namespace MME.Model.Response
         public DateTime eventdate { get; set; }
         public bool shownoimage { get; set; }
         public bool showbannerimage { get; set; }
-        public int likes { get; set; }
-        public int dislikes { get; set; }
-        public int spams { get; set; }
-        public int participations { get; set; }
-        public decimal donations { get; set; }
-        public int suggestions { get; set; }
-        public int feedbacks { get; set; }
+        
+        private int _likes;
+        public int likes
+        {
+            get { return _likes; }
+            set
+            {
+                _likes = value;
+                OnPropertyChanged(nameof(likes));
+            }
+        }
+
+        private int _dislikes;
+        public int dislikes
+        {
+            get { return _dislikes; }
+            set
+            {
+                _dislikes = value;
+                OnPropertyChanged(nameof(dislikes));
+            }
+        }
+
+        private int _spams;
+        public int spams
+        {
+            get { return _spams; }
+            set
+            {
+                _spams = value;
+                OnPropertyChanged(nameof(spams));
+            }
+        }
+
+        private int _participations;
+        public int participations
+        {
+            get { return _participations; }
+            set
+            {
+                _participations = value;
+                OnPropertyChanged(nameof(participations));
+            }
+        }
+
+        private decimal _donations;
+        public decimal donations
+        {
+            get { return _donations; }
+            set
+            {
+                _donations = value;
+                OnPropertyChanged(nameof(donations));
+            }
+        }
+
+        private int _suggestions;
+        public int suggestions
+        {
+            get { return _suggestions; }
+            set
+            {
+                _suggestions = value;
+                OnPropertyChanged(nameof(suggestions));
+            }
+        }
+
+        private int _feedbacks;
+        public int feedbacks
+        {
+            get { return _feedbacks; }
+            set
+            {
+                _feedbacks = value;
+                OnPropertyChanged(nameof(feedbacks));
+            }
+        }
+
         public EventFeedbackResponseModel? EventFeedback { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string name = "") =>
+   PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

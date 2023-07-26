@@ -18,6 +18,8 @@ public partial class EventsPage : ContentPage
         base.OnAppearing();
     }
 
+    private double _scale = 0;
+
     private void like_Clicked(object sender, EventArgs e)
     {
         ImageButton likeButton = sender as ImageButton;
@@ -29,7 +31,15 @@ public partial class EventsPage : ContentPage
             {
                 viewModel.LikeAction(commandParameter);
             }
+            Animate(likeButton);
         }
+    }
+
+    private async void Animate(ImageButton button)
+    {
+        _scale = button.Scale;
+        await button.ScaleTo(_scale * 1.2, 1000);
+        await button.ScaleTo(_scale, 1000);
     }
 
     private void dislike_Clicked(object sender, EventArgs e)
@@ -43,6 +53,7 @@ public partial class EventsPage : ContentPage
             {
                 viewModel.DisLikeAction(commandParameter);
             }
+            Animate(likeButton);
         }
     }
 
@@ -57,6 +68,7 @@ public partial class EventsPage : ContentPage
             {
                 viewModel.SpamAction(commandParameter);
             }
+            Animate(likeButton);
         }
     }
 }

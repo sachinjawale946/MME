@@ -45,9 +45,9 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFill" Margin="10,10,20,0" 
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="5" IsVisible="{Binding shownoimage}" Aspect="AspectFill" Margin="10,10,20,0" 
                                            Source="event.png"/>
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,20,0" 
+                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="5" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,20,0" 
                                            Source="{Binding banner, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
                                     <Label Style="{StaticResource PageSubHeader}" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding header}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
                                     <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding description}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
