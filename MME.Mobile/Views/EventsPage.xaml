@@ -26,7 +26,7 @@
                   ItemsSource="{Binding Events}" Margin="10" VerticalScrollBarVisibility="Always">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Margin="0,0,0,0" x:DataType="model:EventResponseModel">
+                        <StackLayout x:Name="EventStackPanel" Margin="0,0,0,0" x:DataType="model:EventResponseModel">
                             <Frame BackgroundColor="#00FBC1BC" BorderColor="{StaticResource AppBorderColor}" 
                                Padding="4" CornerRadius="4" Margin="0,0,0,10">
                                 <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,10">
@@ -41,6 +41,7 @@
                                         <RowDefinition Height="35"/>
                                         <RowDefinition Height="35"/>
                                         <RowDefinition Height="35"/>
+                                        <RowDefinition Height="40"/>
                                     </Grid.RowDefinitions>
 
 
@@ -56,6 +57,15 @@
                                     <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="1" Text="Location" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                                     <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="3" Text="{Binding location}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
+                                    <Grid HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ImageButton Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="like.png" x:Name="like" Clicked="like_Clicked" HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
+                                        <ImageButton HorizontalOptions="EndAndExpand" Grid.Column="2" Margin="10,0" Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="dislike.png" x:Name="dislike" Clicked="dislike_Clicked" CommandParameter="{x:Reference EventStackPanel}"/>
+                                    </Grid>
                                 </Grid>
                             </Frame>
                         </StackLayout>

@@ -16,5 +16,6 @@ namespace MME.Model.Response
         public DateTime eventdate { get; set; }
         public bool shownoimage { get; set; }
         public bool showbannerimage { get; set; }
+        public EventFeedbackResponseModel? EventFeedback { get; set; }
     }
 }

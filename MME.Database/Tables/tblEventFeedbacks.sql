@@ -3,6 +3,7 @@
 	[Id] UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL, 
     [Liked] BIT,
     [DisLiked] BIT,
+    [ReportAbuse] BIT,
     [Participation] BIT,
     [Donation] Decimal,
     [Suggestion] NVARCHAR(1000),

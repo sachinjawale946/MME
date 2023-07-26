@@ -1,12 +1,8 @@
-﻿using MME.Mobile.Services;
+﻿using Microsoft.Maui.Controls.Shapes;
+using MME.Mobile.Services;
 using MME.Model.Request;
 using MME.Model.Response;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MME.Mobile.ViewModels
 {
@@ -55,8 +51,8 @@ namespace MME.Mobile.ViewModels
         {
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
-            if(Events == null) Events = new ObservableCollection<EventResponseModel>();
-            if(SearchModel == null) SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
+            if (Events == null) Events = new ObservableCollection<EventResponseModel>();
+            if (SearchModel == null) SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
             var results = await _memberService.Search(SearchModel);
             if (results != null && results.Count > 0)
             {
@@ -95,5 +91,50 @@ namespace MME.Mobile.ViewModels
             Search();
         }
 
+        public void LikeAction(EventResponseModel like)
+        {
+            if (Events != null && Events.Count > 0 && like != null)
+            {
+                if(Events.Where(e => e.eventid == like.eventid).FirstOrDefault() != null)
+                {
+                    if(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback == null)
+                    {
+                        Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
+                        {
+                            Liked = true,
+                            DisLiked = null,
+                        };
+                    }
+                    else
+                    {
+                        Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.Liked = (Convert.ToBoolean(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.Liked) == true) ? false : true;
+                        Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.DisLiked = null;
+                    }
+                }
+            }
+        }
+
+        public void DisLikeAction(EventResponseModel dislike)
+        {
+            if (Events != null && Events.Count > 0 && dislike != null)
+            {
+                if (Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault() != null)
+                {
+                    if (Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback == null)
+                    {
+                        Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
+                        {
+                            Liked = null,
+                            DisLiked = true,
+                        };
+                    }
+                    else
+                    {
+                        Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.DisLiked = (Convert.ToBoolean(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.Liked) == true) ? false : true;
+                        Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.Liked = null;
+                    }
+                }
+            }
+        }
     }
 }
