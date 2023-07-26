@@ -41,5 +41,36 @@ namespace MME.Mobile.Services
                 return await Task.FromResult(new List<EventResponseModel>());
             }
         }
+    
+        public async Task<EventFeedbackResponseModel> SaveFeedback(EventFeedbackResponseModel model)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(Api_Lookup.eventFeedbackApi);
+                var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
+                HttpResponseMessage response = client.PostAsync(uri, data).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<EventFeedbackResponseModel>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    //SessionExpiredPage sessionExpiredPage = new SessionExpiredPage();
+                    //Application.Current.MainPage.ShowPopup(sessionExpiredPage);
+                }
+                return await Task.FromResult(new EventFeedbackResponseModel());
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = "Some error occured, while processing your request. Please try again later.";
+                //ErrorPage errorPage = new ErrorPage(errorMessage);
+                //Application.Current.MainPage.ShowPopup(errorPage);
+                return await Task.FromResult(new EventFeedbackResponseModel());
+            }
+        }
+    
     }
 }

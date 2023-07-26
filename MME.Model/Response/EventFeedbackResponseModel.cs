@@ -8,13 +8,15 @@ namespace MME.Model.Response
 {
     public class EventFeedbackResponseModel
     {
-        public Guid Id { get; set; }
-        public bool? Liked { get; set; }
-        public bool? DisLiked { get; set; }
-        public bool? ReportAbuse { get; set; }
-        public bool? Participation { get; }
-        public decimal? Donation { get; set; }
-        public string? Suggestion { get; set; }
-        public string? Feedback { get; set; }
+        public Guid id { get; set; }
+        public bool? liked { get; set; }
+        public bool? disliked { get; set; }
+        public bool? reportabuse { get; set; }
+        public bool? participation { get; }
+        public decimal? donation { get; set; }
+        public string? suggestion { get; set; }
+        public string? feedback { get; set; }
+        public Guid eventid { get; set; }
+        public Guid userid { get; set; }
     }
 }

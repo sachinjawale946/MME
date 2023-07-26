@@ -6,5 +6,6 @@ namespace MME.Mobile.Services
     internal interface IEventService
     {
         Task<List<EventResponseModel>> Search(EventRequestModel model);
+        Task<EventFeedbackResponseModel> SaveFeedback(EventFeedbackResponseModel model);
     }
 }

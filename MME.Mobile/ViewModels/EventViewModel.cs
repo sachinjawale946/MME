@@ -1,14 +1,16 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
+using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Model.Request;
 using MME.Model.Response;
+using System;
 using System.Collections.ObjectModel;
 
 namespace MME.Mobile.ViewModels
 {
     internal class EventViewModel : ViewModelBase
     {
-        IEventService _memberService = new EventService();
+        readonly IEventService _eventService = new EventService();
         public Command SearchCommand { get; }
         public Command LoadMoreEventCommand { get; set; }
 
@@ -53,7 +55,7 @@ namespace MME.Mobile.ViewModels
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
             if (Events == null) Events = new ObservableCollection<EventResponseModel>();
             if (SearchModel == null) SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
-            var results = await _memberService.Search(SearchModel);
+            var results = await _eventService.Search(SearchModel);
             if (results != null && results.Count > 0)
             {
                 for (int i = 0; i < results.Count; i++)
@@ -95,20 +97,31 @@ namespace MME.Mobile.ViewModels
         {
             if (Events != null && Events.Count > 0 && like != null)
             {
-                if(Events.Where(e => e.eventid == like.eventid).FirstOrDefault() != null)
+                if (Events.Where(e => e.eventid == like.eventid).FirstOrDefault() != null)
                 {
-                    if(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback == null)
+                    if (Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback == null)
                     {
                         Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
-                            Liked = true,
-                            DisLiked = null,
+                            liked = true,
+                            eventid = like.eventid,
+                            userid = Settings.userid,
                         };
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
                     }
                     else
                     {
-                        Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.Liked = (Convert.ToBoolean(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.Liked) == true) ? false : true;
-                        Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.DisLiked = null;
+                        if (Convert.ToBoolean(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.liked) == true)
+                        {
+                            Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.liked = false;
+                        }
+                        else
+                        {
+                            Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.liked = true;
+                        }
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
                     }
                 }
             }
@@ -124,14 +137,25 @@ namespace MME.Mobile.ViewModels
                     {
                         Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
-                            Liked = null,
-                            DisLiked = true,
+                            disliked = true,
+                            eventid = dislike.eventid,
+                            userid = Settings.userid,
                         };
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
                     }
                     else
                     {
-                        Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.DisLiked = (Convert.ToBoolean(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.Liked) == true) ? false : true;
-                        Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.Liked = null;
+                        if (Convert.ToBoolean(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.disliked) == true)
+                        {
+                            Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.disliked = false;
+                        }
+                        else
+                        {
+                            Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.disliked = true;
+                        }
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
                     }
                 }
             }
@@ -147,19 +171,25 @@ namespace MME.Mobile.ViewModels
                     {
                         Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
-                            ReportAbuse = true,
+                            reportabuse = true,
+                            eventid = spam.eventid,
+                            userid = Settings.userid,
                         };
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
                     }
                     else
                     {
-                        if(Convert.ToBoolean(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse))
+                        if (Convert.ToBoolean(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.reportabuse))
                         {
-                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse = null;
+                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.reportabuse = null;
                         }
                         else
                         {
-                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.ReportAbuse = true;
+                            Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.reportabuse = true;
                         }
+                        // save feedback
+                        _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
                     }
                 }
             }
