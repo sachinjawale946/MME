@@ -17,6 +17,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
+                model.userid = Settings.userid;
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.eventSearchApi);

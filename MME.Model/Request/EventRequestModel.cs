@@ -8,8 +8,9 @@ namespace MME.Model.Request
 {
     public class EventRequestModel
     {
-        public string eventname { get; set; }
+        public string? eventname { get; set; }
         public int page { get; set; }
         public int pagesize { get; set; }
+        public Guid userid { get;set; }
     }
 }

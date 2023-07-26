@@ -26,7 +26,7 @@ namespace MME.Web.Apis
         {
             if (model != null)
             {
-                var eventFeedback = _context.EventFeedbacks.Where(e => e.EventId == model.eventid).FirstOrDefault();
+                var eventFeedback = _context.EventFeedbacks.Where(e => e.EventId == model.eventid && e.UserId == model.userid).FirstOrDefault();
                 if (eventFeedback != null)
                 {
                     eventFeedback.DisLiked = model.disliked;

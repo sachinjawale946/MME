@@ -16,6 +16,13 @@ namespace MME.Model.Response
         public DateTime eventdate { get; set; }
         public bool shownoimage { get; set; }
         public bool showbannerimage { get; set; }
+        public int likes { get; set; }
+        public int dislikes { get; set; }
+        public int spams { get; set; }
+        public int participations { get; set; }
+        public decimal donations { get; set; }
+        public int suggestions { get; set; }
+        public int feedbacks { get; set; }
         public EventFeedbackResponseModel? EventFeedback { get; set; }
     }
 }

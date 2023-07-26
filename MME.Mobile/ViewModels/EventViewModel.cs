@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Shapes;
 using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Model.Request;
@@ -99,7 +100,8 @@ namespace MME.Mobile.ViewModels
             {
                 if (Events.Where(e => e.eventid == like.eventid).FirstOrDefault() != null)
                 {
-                    if (Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback == null)
+                    var eventFeedback = Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback;
+                    if (eventFeedback == null || eventFeedback.eventid == Guid.Empty)
                     {
                         Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
@@ -133,7 +135,8 @@ namespace MME.Mobile.ViewModels
             {
                 if (Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault() != null)
                 {
-                    if (Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback == null)
+                    var eventFeedback = Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback;
+                    if (eventFeedback == null || eventFeedback.eventid == Guid.Empty)
                     {
                         Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
@@ -167,7 +170,8 @@ namespace MME.Mobile.ViewModels
             {
                 if (Events.Where(e => e.eventid == spam.eventid).FirstOrDefault() != null)
                 {
-                    if (Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback == null)
+                    var eventFeedback = Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback;
+                    if (eventFeedback == null || eventFeedback.eventid == Guid.Empty)
                     {
                         Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback = new EventFeedbackResponseModel()
                         {
