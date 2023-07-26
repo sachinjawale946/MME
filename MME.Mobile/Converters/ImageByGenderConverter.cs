@@ -14,7 +14,7 @@ namespace MME.Mobile.Converters
             if (value != null && !string.IsNullOrEmpty(value.ToString()) && value.ToString() == "Female")
                 return "female.jpg";
             else
-                return "male.png";
+                return "male.jpg";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

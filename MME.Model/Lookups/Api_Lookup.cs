@@ -13,5 +13,6 @@ namespace MME.Model.Lookups
         public const string loginApi = BaseApi + "/api/v1/authenticate-user";
         public const string memberSearchApi = BaseApi + "/api/v1/members-search";
         public const string memberProfilePicApi = BaseApi + "/api/v1/members-getprofilepicture/{0}";
+        public const string eventSearchApi = BaseApi + "/api/v1/events-search";
     }
 }

@@ -1,0 +1,10 @@
+﻿using MME.Model.Request;
+using MME.Model.Response;
+
+namespace MME.Mobile.Services
+{
+    internal interface IEventService
+    {
+        Task<List<EventResponseModel>> Search(EventRequestModel model);
+    }
+}

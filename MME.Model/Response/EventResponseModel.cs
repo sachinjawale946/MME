@@ -14,5 +14,7 @@ namespace MME.Model.Response
         public byte[] banner { get; set; }
         public string? location { get; set; }
         public DateTime eventdate { get; set; }
+        public bool shownoimage { get; set; }
+        public bool showbannerimage { get; set; }
     }
 }

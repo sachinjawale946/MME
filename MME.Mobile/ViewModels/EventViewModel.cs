@@ -1,46 +1,42 @@
-﻿using CommunityToolkit.Maui.Views;
-using MME.Mobile.Services;
-using MME.Mobile.Views;
+﻿using MME.Mobile.Services;
 using MME.Model.Request;
 using MME.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MME.Mobile.ViewModels
 {
-    internal class MemberViewModel : ViewModelBase
+    internal class EventViewModel : ViewModelBase
     {
-        IMemberService _memberService = new MemberService();
+        IEventService _memberService = new EventService();
         public Command SearchCommand { get; }
-        public Command LoadMoreMembersCommand { get; set; }
+        public Command LoadMoreEventCommand { get; set; }
 
-        public MemberViewModel()
+        public EventViewModel()
         {
             SearchCommand = new Command<string>(Search);
-            LoadMoreMembersCommand = new Command(SearchMore);
+            LoadMoreEventCommand = new Command(SearchMore);
             Search();
         }
 
 
-        private ObservableCollection<MemberResponseModel> _members;
-        public ObservableCollection<MemberResponseModel> Members
+        private ObservableCollection<EventResponseModel> _events;
+        public ObservableCollection<EventResponseModel> Events
         {
-            get { return _members; }
+            get { return _events; }
             set
             {
-                _members = value;
-                OnPropertyChanged(nameof(Members));
+                _events = value;
+                OnPropertyChanged(nameof(Events));
             }
         }
 
-        private MemberRequestModel _searchModel;
-        public MemberRequestModel SearchModel
+        private EventRequestModel _searchModel;
+        public EventRequestModel SearchModel
         {
             get { return _searchModel; }
             set
@@ -52,24 +48,24 @@ namespace MME.Mobile.ViewModels
 
         private async void SearchMore()
         {
-            Search(SearchModel.membername);
+            Search(SearchModel.eventname);
         }
 
         private async void Search(string SearchFilter = "")
         {
-            Members = new ObservableCollection<MemberResponseModel>();
-            if (SearchModel == null) SearchModel = new MemberRequestModel();
+            Events = new ObservableCollection<EventResponseModel>();
+            if (SearchModel == null) SearchModel = new EventRequestModel();
             if (!string.IsNullOrEmpty(SearchFilter.Trim()))
             {
                 // both search terms not null
-                if (!string.IsNullOrEmpty(SearchFilter.Trim()) && !string.IsNullOrEmpty(SearchModel.membername))
+                if (!string.IsNullOrEmpty(SearchFilter.Trim()) && !string.IsNullOrEmpty(SearchModel.eventname))
                 {
                     // search term changed
-                    if (SearchFilter.Trim() != SearchModel.membername.Trim())
+                    if (SearchFilter.Trim() != SearchModel.eventname.Trim())
                     {
-                        Members.Clear();
+                        Events.Clear();
                         SearchModel.page = 0;
-                        SearchModel.membername = SearchFilter.Trim();
+                        SearchModel.eventname= SearchFilter.Trim();
                     }
                     else
                     {
@@ -78,14 +74,14 @@ namespace MME.Mobile.ViewModels
                 }
                 else
                 {
-                    Members.Clear();
+                    Events.Clear();
                     SearchModel.page = 0;
-                    SearchModel.membername = SearchFilter.Trim();
+                    SearchModel.eventname = SearchFilter.Trim();
                 }
             }
             else
             {
-                SearchModel.membername = string.Empty;
+                SearchModel.eventname = string.Empty;
             }
 
             SearchModel.page = SearchModel.page + 1;
@@ -93,28 +89,34 @@ namespace MME.Mobile.ViewModels
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
             var results = await _memberService.Search(SearchModel);
-            if (results != null)
+            if (results != null && results.Count > 0)
             {
                 for (int i = 0; i < results.Count; i++)
                 {
-                    if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
-                    if (results[i].profilepic == null)
+                    if (Events == null) Events = new ObservableCollection<EventResponseModel>();
+                    if (results[i].banner == null)
                     {
-                        results[i].showprofileimage = false;
+                        results[i].showbannerimage = false;
                         results[i].shownoimage = true;
                     }
                     else
                     {
-                        results[i].showprofileimage = true;
+                        results[i].showbannerimage = true;
                         results[i].shownoimage = false;
                     }
-                    if (!Members.Contains(results[i]))
-                        Members.Add(results[i]);
+                    if (!Events.Contains(results[i]))
+                        Events.Add(results[i]);
                 }
+            }
+            else
+            {
+                // reset search
+                Events.Clear();
+                SearchModel.page = 0;
+                SearchModel.eventname = string.Empty;
             }
             //busyPage.Close();
         }
 
-        
     }
 }
