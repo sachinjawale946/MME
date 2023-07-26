@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[tblEventLikeDislikes]
+﻿CREATE TABLE [dbo].[tblEventFeedbacks]
 (
 	[Id] UNIQUEIDENTIFIER DEFAULT NEWID() NOT NULL, 
     [Liked] BIT,
