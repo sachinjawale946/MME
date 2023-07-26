@@ -22,7 +22,7 @@ namespace MME.Mobile.ViewModels
 
         public MemberViewModel()
         {
-            SearchCommand = new Command<string>(Search);
+            SearchCommand = new Command<string>(NewSearch);
             LoadMoreMembersCommand = new Command(SearchMore);
             Search();
         }
@@ -50,54 +50,22 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private async void SearchMore()
+        private void SearchMore()
         {
-            Search(SearchModel.membername);
+            Search();
         }
 
-        private async void Search(string SearchFilter = "")
+        private async void Search()
         {
-            Members = new ObservableCollection<MemberResponseModel>();
-            if (SearchModel == null) SearchModel = new MemberRequestModel();
-            if (!string.IsNullOrEmpty(SearchFilter.Trim()))
-            {
-                // both search terms not null
-                if (!string.IsNullOrEmpty(SearchFilter.Trim()) && !string.IsNullOrEmpty(SearchModel.membername))
-                {
-                    // search term changed
-                    if (SearchFilter.Trim() != SearchModel.membername.Trim())
-                    {
-                        Members.Clear();
-                        SearchModel.page = 0;
-                        SearchModel.membername = SearchFilter.Trim();
-                    }
-                    else
-                    {
-                        // same search term but next page
-                    }
-                }
-                else
-                {
-                    Members.Clear();
-                    SearchModel.page = 0;
-                    SearchModel.membername = SearchFilter.Trim();
-                }
-            }
-            else
-            {
-                SearchModel.membername = string.Empty;
-            }
-
-            SearchModel.page = SearchModel.page + 1;
-
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
+            if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
+            if (SearchModel == null) SearchModel = new MemberRequestModel() { membername = string.Empty, page = 1 };
             var results = await _memberService.Search(SearchModel);
-            if (results != null)
+            if (results != null && results.Count > 0)
             {
                 for (int i = 0; i < results.Count; i++)
                 {
-                    if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
                     if (results[i].profilepic == null)
                     {
                         results[i].showprofileimage = false;
@@ -112,9 +80,24 @@ namespace MME.Mobile.ViewModels
                         Members.Add(results[i]);
                 }
             }
+            else
+            {
+                // reset search
+                Members.Clear();
+                SearchModel.page = 0;
+                SearchModel.membername = string.Empty;
+            }
             //busyPage.Close();
         }
 
-        
+        private void NewSearch(string SearchFilter = "")
+        {
+            Members = new ObservableCollection<MemberResponseModel>();
+            if (SearchModel == null) SearchModel = new MemberRequestModel();
+            SearchModel.page = 0;
+            SearchModel.membername = SearchFilter;
+            Search();
+        }
+
     }
 }

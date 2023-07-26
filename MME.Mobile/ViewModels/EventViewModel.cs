@@ -18,7 +18,7 @@ namespace MME.Mobile.ViewModels
 
         public EventViewModel()
         {
-            SearchCommand = new Command<string>(Search);
+            SearchCommand = new Command<string>(NewSearch);
             LoadMoreEventCommand = new Command(SearchMore);
             Search();
         }
@@ -46,54 +46,22 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private async void SearchMore()
+        private void SearchMore()
         {
-            Search(SearchModel.eventname);
+            Search();
         }
 
-        private async void Search(string SearchFilter = "")
+        private async void Search()
         {
-            Events = new ObservableCollection<EventResponseModel>();
-            if (SearchModel == null) SearchModel = new EventRequestModel();
-            if (!string.IsNullOrEmpty(SearchFilter.Trim()))
-            {
-                // both search terms not null
-                if (!string.IsNullOrEmpty(SearchFilter.Trim()) && !string.IsNullOrEmpty(SearchModel.eventname))
-                {
-                    // search term changed
-                    if (SearchFilter.Trim() != SearchModel.eventname.Trim())
-                    {
-                        Events.Clear();
-                        SearchModel.page = 0;
-                        SearchModel.eventname= SearchFilter.Trim();
-                    }
-                    else
-                    {
-                        // same search term but next page
-                    }
-                }
-                else
-                {
-                    Events.Clear();
-                    SearchModel.page = 0;
-                    SearchModel.eventname = SearchFilter.Trim();
-                }
-            }
-            else
-            {
-                SearchModel.eventname = string.Empty;
-            }
-
-            SearchModel.page = SearchModel.page + 1;
-
             //BusyPage busyPage = new BusyPage();
             //await Application.Current.MainPage.ShowPopupAsync(busyPage);
+            if(Events == null) Events = new ObservableCollection<EventResponseModel>();
+            if(SearchModel == null) SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
             var results = await _memberService.Search(SearchModel);
             if (results != null && results.Count > 0)
             {
                 for (int i = 0; i < results.Count; i++)
                 {
-                    if (Events == null) Events = new ObservableCollection<EventResponseModel>();
                     if (results[i].banner == null)
                     {
                         results[i].showbannerimage = false;
@@ -116,6 +84,15 @@ namespace MME.Mobile.ViewModels
                 SearchModel.eventname = string.Empty;
             }
             //busyPage.Close();
+        }
+
+        private void NewSearch(string SearchFilter = "")
+        {
+            Events = new ObservableCollection<EventResponseModel>();
+            if (SearchModel == null) SearchModel = new EventRequestModel();
+            SearchModel.page = 0;
+            SearchModel.eventname = SearchFilter;
+            Search();
         }
 
     }
