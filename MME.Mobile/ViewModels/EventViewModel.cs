@@ -94,7 +94,7 @@ namespace MME.Mobile.ViewModels
             Search();
         }
 
-        public void LikeAction(EventResponseModel like)
+        public async void LikeAction(EventResponseModel like)
         {
             if (Events != null && Events.Count > 0 && like != null)
             {
@@ -110,7 +110,8 @@ namespace MME.Mobile.ViewModels
                             userid = Settings.userid,
                         };
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(like.eventid, response);
                     }
                     else
                     {
@@ -123,13 +124,14 @@ namespace MME.Mobile.ViewModels
                             Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback.liked = true;
                         }
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(like.eventid, response);
                     }
                 }
             }
         }
 
-        public void DisLikeAction(EventResponseModel dislike)
+        public async void DisLikeAction(EventResponseModel dislike)
         {
             if (Events != null && Events.Count > 0 && dislike != null)
             {
@@ -145,7 +147,8 @@ namespace MME.Mobile.ViewModels
                             userid = Settings.userid,
                         };
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(dislike.eventid, response);
                     }
                     else
                     {
@@ -158,13 +161,14 @@ namespace MME.Mobile.ViewModels
                             Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback.disliked = true;
                         }
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(dislike.eventid, response);
                     }
                 }
             }
         }
 
-        public void SpamAction(EventResponseModel spam)
+        public async void SpamAction(EventResponseModel spam)
         {
             if (Events != null && Events.Count > 0 && spam != null)
             {
@@ -180,7 +184,8 @@ namespace MME.Mobile.ViewModels
                             userid = Settings.userid,
                         };
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(spam.eventid, response);
                     }
                     else
                     {
@@ -193,9 +198,25 @@ namespace MME.Mobile.ViewModels
                             Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback.reportabuse = true;
                         }
                         // save feedback
-                        _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
+                        var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);
+                        SetFeedbackResponse(spam.eventid, response);
                     }
                 }
+            }
+        }
+
+        private void SetFeedbackResponse(Guid eventid, EventFeedbackResponseModel response)
+        {
+            if (response != null)
+            {
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().EventFeedback = response;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().likes = response.likes;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().dislikes = response.dislikes;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().spams = response.spams;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().participations = response.participations;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().donations = response.donations;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().suggestions = response.suggestions;
+                Events.Where(e => e.eventid == eventid).FirstOrDefault().feedbacks = response.feedbacks;
             }
         }
     }

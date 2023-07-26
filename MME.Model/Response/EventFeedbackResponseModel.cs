@@ -18,5 +18,12 @@ namespace MME.Model.Response
         public string? feedback { get; set; }
         public Guid eventid { get; set; }
         public Guid userid { get; set; }
+        public int likes { get; set; }
+        public int dislikes { get; set; }
+        public int spams { get; set; }
+        public int participations { get; set; }
+        public decimal donations { get; set; }
+        public int suggestions { get; set; }
+        public int feedbacks { get; set; }
     }
 }

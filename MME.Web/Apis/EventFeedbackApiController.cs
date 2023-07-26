@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MME.Data;
@@ -37,18 +39,8 @@ namespace MME.Web.Apis
                     eventFeedback.Suggestion = model.suggestion;
                     _context.EventFeedbacks.Update(eventFeedback);
                     _context.SaveChanges();
-                    return new EventFeedbackResponseModel()
-                    {
-                        disliked = eventFeedback.DisLiked,
-                        donation = eventFeedback.Donation,
-                        eventid = eventFeedback.EventId,
-                        feedback = eventFeedback.Feedback,
-                        id = eventFeedback.Id,
-                        liked = eventFeedback.Liked,
-                        reportabuse = eventFeedback.ReportAbuse,
-                        suggestion = eventFeedback.Suggestion,
-                        userid = eventFeedback.UserId,
-                    };
+
+                    return getEventFeedback(model);
                 }
                 else
                 {
@@ -66,18 +58,9 @@ namespace MME.Web.Apis
                     };
                     _context.EventFeedbacks.Add(feedback);
                     _context.SaveChanges();
-                    return new EventFeedbackResponseModel()
-                    {
-                        disliked= feedback.DisLiked,
-                        donation= feedback.Donation,    
-                        eventid= feedback.EventId,
-                        feedback = feedback.Feedback,
-                        id= feedback.Id,
-                        liked= feedback.Liked,
-                        reportabuse = feedback.ReportAbuse, 
-                        suggestion=feedback.Suggestion,
-                        userid = feedback.UserId,
-                    };
+
+                    return getEventFeedback(model);
+
                 }
             }
             else
@@ -86,5 +69,46 @@ namespace MME.Web.Apis
             }
         }
 
+        private EventFeedbackResponseModel getEventFeedback(EventFeedbackResponseModel model)
+        {
+            var EventFeedbacks = _context.EventFeedbacks.Where(e => e.EventId == model.eventid);
+            if (EventFeedbacks.Any())
+            {
+                var EventFeedback = _context.EventFeedbacks.Where(e => e.UserId == model.userid && e.EventId == model.eventid).FirstOrDefault();
+                if (EventFeedback != null)
+                {
+                    var EventFeedbackResponse = new EventFeedbackResponseModel
+                    {
+                        disliked = EventFeedback.DisLiked,
+                        donation = EventFeedback.Donation,
+                        eventid = EventFeedback.EventId,
+                        feedback = EventFeedback.Feedback,
+                        id = EventFeedback.Id,
+                        liked = EventFeedback.Liked,
+                        reportabuse = EventFeedback.ReportAbuse,
+                        suggestion = EventFeedback.Suggestion,
+                        userid = EventFeedback.UserId,
+                    };
+
+                    // counts 
+                    EventFeedbackResponse.likes = EventFeedbacks.Where(c => c.Liked != null && c.Liked == true).Count();
+                    EventFeedbackResponse.dislikes = EventFeedbacks.Where(c => c.DisLiked != null && c.DisLiked == true).Count();
+                    EventFeedbackResponse.spams = EventFeedbacks.Where(c => c.ReportAbuse != null && c.ReportAbuse == true).Count();
+                    // respose.participations = EventFeedbacks.Where(c => c.Participation != null && c.Participation == true).Count();
+                    EventFeedbackResponse.donations = Convert.ToDecimal(EventFeedbacks.Sum(c => c.Donation));
+                    EventFeedbackResponse.suggestions = EventFeedbacks.Where(c => !string.IsNullOrEmpty(c.Suggestion)).Count();
+                    EventFeedbackResponse.feedbacks = EventFeedbacks.Where(c => !string.IsNullOrEmpty(c.Feedback)).Count();
+                    return EventFeedbackResponse;
+                }
+                else
+                {
+                    return new EventFeedbackResponseModel();
+                }
+            }
+            else
+            {
+                return new EventFeedbackResponseModel();
+            }
+        }
     }
 }

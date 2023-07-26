@@ -55,7 +55,7 @@ namespace MME.Web.Apis
                             eventdate = item.EventDate,
                             banner = (string.IsNullOrEmpty(item.Banner)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, item.Banner)),
                         };
-                        var EventFeedbacks = _context.EventFeedbacks.Where(e => e.UserId == model.userid && e.EventId == item.EventId);
+                        var EventFeedbacks = _context.EventFeedbacks.Where(e => e.EventId == item.EventId);
                         if (EventFeedbacks.Any())
                         {
                             var EventFeedback = _context.EventFeedbacks.Where(e => e.UserId == model.userid && e.EventId == item.EventId).FirstOrDefault();
@@ -112,7 +112,7 @@ namespace MME.Web.Apis
                             eventdate = item.EventDate,
                             banner = (string.IsNullOrEmpty(item.Banner)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, item.Banner)),
                         };
-                        var EventFeedbacks = _context.EventFeedbacks.Where(e => e.UserId == model.userid && e.EventId == item.EventId);
+                        var EventFeedbacks = _context.EventFeedbacks.Where(e => e.EventId == item.EventId);
                         if (EventFeedbacks.Any())
                         {
                             var EventFeedback = _context.EventFeedbacks.Where(e => e.UserId == model.userid && e.EventId == item.EventId).FirstOrDefault();
