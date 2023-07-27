@@ -619,6 +619,7 @@ body {
 
 .required {
 	color: red;
+	font-style:oblique;
 }
 
 .page-title-box {
@@ -634,4 +635,9 @@ body {
 	margin-bottom: 0;
 	padding: 0;
 	background-color: transparent;
+}
+
+.form-label {
+	margin-top: 10px;
+	font-weight: bold;
 }

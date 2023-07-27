@@ -16,12 +16,33 @@ namespace MME.Web.Controllers
             _context = context;
         }
 
-        [HttpGet, Route("/events-all")]
-        public IActionResult Events()
+        public IActionResult All()
         {
             if (TempData["SuccessMessage"] != null && !string.IsNullOrEmpty(TempData["SuccessMessage"].ToString()))
             {
                 ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new EventModel { EventTypes = _context.EventTypes.Where(e => e.IsActive).ToList(), EventDate = DateTime.Now, ActivationDate = DateTime.Now });
+        }
+
+        [HttpPost]
+        public IActionResult Create(EventModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                model.IsActive = true;
+                model.CreatedDate= DateTime.Now;
+                model.CreatedBy = Guid.Parse("EDA55024-DBBA-4EF9-ACD3-08DB8CEB09E8");
+                _context.Add(model);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Event added successfully";
+                return RedirectToAction("all");
             }
             return View();
         }

@@ -1,0 +1,119 @@
+﻿@model EventModel
+
+@{
+    ViewData["Title"] = "Create Event";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a href="/dashboard" onclick="SetMenuSelection('DashBoard')"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                    <li class="breadcrumb-item"><a href="/events-all" onclick="SetMenuSelection('DashBoard')">&nbsp;Events</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Create", "Events", FormMethod.Post, new { @class = "events" }))
+    {
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Event,new { @class="form-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Event,new { @class="form-control", placeholder="Event Header", autocomplete="off"})
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.Event,string.Empty,new{@class="required"})
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Description,new { @class="form-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Description,new { @class="form-control", placeholder="Event Description", autocomplete="off", style="height:100px;"})
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.Description,string.Empty,new{@class="required"})
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-2">
+                @Html.Label("Event Type","Event Type" ,new { @class="form-label" })
+            </div>
+            <div class="col-md-4">
+                @Html.DropDownListFor(m => m.EventTypeId,new SelectList(Model.EventTypes, "EventTypeId", "EventType"),"Select Event Type",new { @class = "form-control" })
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.EventTypeId,string.Empty,new{@class="required"})
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Location,new { @class="form-label" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Location,new { @class="form-control", placeholder="Event Location", autocomplete="off"})
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.Location,string.Empty,new{@class="required"})
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.EventDate,new { @class="form-label" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.EventDate,new { id="dateEvent", @class="form-control", placeholder="Event Date", autocomplete="off", @value=Model.EventDate})
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.EventDate,string.Empty,new{@class="required"})
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.ActivationDate,new { @class="form-label" })
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.ActivationDate,new { id="dateEventActivation", @class="form-control", placeholder="Activation From", autocomplete="off"})
+                <div style="margin-top:8px;">
+                    @Html.ValidationMessageFor(m => m.ActivationDate, string.Empty, new{@class="required"})
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-6" style="float:left">
+                <a href="/events/all" class="btn btn-outline-danger">Cancel</a>
+            </div>
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-outline-primary" style="float:right" />
+            </div>
+        </div>
+    }
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
+<script>
+    // date controls
+    var date = new Date();
+    date.setDate(date.getDate());
+    $("#dateEvent").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        startDate: date,
+        format: 'dd/mm/yyyy'
+    }).datepicker('update', new Date());
+    $("#dateEventActivation").datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        startDate: date,
+        format: 'dd/mm/yyyy'
+    }).datepicker('update', new Date());
+</script>

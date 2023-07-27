@@ -77,7 +77,7 @@ namespace MME.Web.Controllers
         [HttpGet("unauthorized")]
         public IActionResult GetUnauthorized()
         {
-            return Unauthorized();
+            return View();
         }
         [HttpGet("forbidden")]
         public IActionResult GetForbidden()
