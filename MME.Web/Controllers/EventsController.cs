@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ImageMagick;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MME.Data;
@@ -10,10 +11,12 @@ namespace MME.Web.Controllers
     public class EventsController : Controller
     {
         readonly MMEAppDBContext _context;
+        readonly IConfiguration _iconfiguration;
 
-        public EventsController(MMEAppDBContext context)
+        public EventsController(MMEAppDBContext context, IConfiguration iconfiguration)
         {
             _context = context;
+            _iconfiguration = iconfiguration;
         }
 
         public IActionResult All()
@@ -34,10 +37,38 @@ namespace MME.Web.Controllers
         [HttpPost]
         public IActionResult Create(EventModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                var bannername = Guid.NewGuid().ToString();
+                var fileUpload = false;
+                if (model.BannerImage != null && model.BannerImage.Length > 0)
+                {
+                    var thumbwidth = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                    var thumbheight = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                    var eventsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpics"].ToString());
+                    var eventsThumbsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
+                    bannername = bannername + System.IO.Path.GetExtension(model.BannerImage.FileName);
+                    var eventfilename = Path.Combine(eventsFolderPath, bannername);
+                    var thumbfilename = Path.Combine(eventsThumbsFolderPath, bannername);
+                    using (Stream fileStream = new FileStream(eventfilename, FileMode.Create, FileAccess.Write))
+                    {
+                        model.BannerImage.CopyTo(fileStream);
+                    }
+
+                    var file = new FileInfo(eventfilename);
+                    using (MagickImage image = new MagickImage(file))
+                    {
+                        {
+                            image.Thumbnail(new MagickGeometry(thumbwidth, thumbheight));
+                            image.Write(thumbfilename);
+                        }
+                    }
+                    fileUpload = true;
+                }
+                if (fileUpload)
+                    model.Banner = bannername;
                 model.IsActive = true;
-                model.CreatedDate= DateTime.Now;
+                model.CreatedDate = DateTime.Now;
                 model.CreatedBy = Guid.Parse("EDA55024-DBBA-4EF9-ACD3-08DB8CEB09E8");
                 _context.Add(model);
                 _context.SaveChanges();

@@ -72,7 +72,7 @@ namespace MME.Web.Apis
 
         private EventResponseModel returnReponseItem(MME.Model.Shared.EventModel item, Guid userid)
         {
-            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpics"].ToString());
+            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
 
             var response = new EventResponseModel
             {

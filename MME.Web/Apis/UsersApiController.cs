@@ -59,7 +59,7 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
-            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepicthumbs"].ToString());
 
             if (model.page == 0) model.page = 1;
             if (model.pagesize == 0) model.pagesize = Convert.ToInt16(_iconfiguration["memberpagesize"].ToString());

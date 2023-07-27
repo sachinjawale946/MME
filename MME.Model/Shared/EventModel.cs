@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -44,5 +45,7 @@ namespace MME.Model.Shared
 
         [NotMapped]
         public List<EventTypeModel>? EventTypes { get; set; }
+        [NotMapped]
+        public IFormFile? BannerImage { get; set; }
     }
 }
