@@ -7,6 +7,7 @@ using System.Security.Claims;
 using MME.Data;
 using MME.Model.Helpers;
 using MME.Model.Response;
+using MME.Model.Lookups;
 
 namespace MME.Web.Controllers
 {
@@ -44,6 +45,12 @@ namespace MME.Web.Controllers
                     if (!user.IsActive)
                     {
                         ModelState.AddModelError("Login", "Member profile is deactivated.");
+                        return View();
+                    }
+
+                    if(user.RoleId != Role_Lookup.Admin)
+                    {
+                        ModelState.AddModelError("Login", "Only Admin Members can login.");
                         return View();
                     }
                 }
