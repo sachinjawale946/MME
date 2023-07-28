@@ -8,7 +8,8 @@ namespace MME.Model.Lookups
 {
     public class Api_Lookup
     {
-        public const string BaseApi = "http://localhost:98";
+        // public const string BaseApi = "http://localhost:98";
+        public const string BaseApi = "https://sachinjawale946.bsite.net";
         public const string getLanguageApi = BaseApi + "/api/v1/getlanguages";
         public const string loginApi = BaseApi + "/api/v1/authenticate-user";
         public const string memberSearchApi = BaseApi + "/api/v1/members-search";

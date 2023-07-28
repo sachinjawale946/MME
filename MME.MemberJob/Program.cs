@@ -14,7 +14,8 @@ using static System.Net.Mime.MediaTypeNames;
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=LT146;Initial Catalog=MME;MultipleActiveResultSets=true;User ID=sa;Password=pass$123;TrustServerCertificate=true"));
+        // services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=LT146;Initial Catalog=MME;MultipleActiveResultSets=true;User ID=sa;Password=pass$123;TrustServerCertificate=true"));
+        services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Initial Catalog=sachinjawale946_SampleDB;MultipleActiveResultSets=true;User ID=sachinjawale946_SampleDB;Password=Sachin@123;TrustServerCertificate=true"));
     })
     .Build();
 
@@ -32,7 +33,7 @@ var user = _context.Users.FirstOrDefault();
 if (user == null)
 {
     var start = 1;
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 25; i++)
     {
         if (i % 2 == 0)
         {

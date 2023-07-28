@@ -86,7 +86,7 @@
                 @Html.LabelFor(m => m.ActivationDate,new { @class="form-label" })
             </div>
             <div class="col-md-4">
-                @Html.TextBoxFor(m => m.ActivationDate,new { id="dateEventActivation", @class="form-control", placeholder="Activation From", autocomplete="off"})
+                @Html.TextBoxFor(m => m.ActivationDate,new { id="dateEventActivation", @class="form-control", placeholder="Activation From", autocomplete="off", @value=Model.EventDate.ToString("dd/mm/yyyy")})
                 <div style="margin-top:8px;">
                     @Html.ValidationMessageFor(m => m.ActivationDate, string.Empty, new{@class="required"})
                 </div>
@@ -159,13 +159,13 @@
             todayHighlight: true,
             startDate: date,
             format: 'dd/mm/yyyy'
-        }).datepicker('update', new Date());
+        });
         jQuery("#dateEventActivation").datepicker({
             autoclose: true,
             todayHighlight: true,
             startDate: date,
             format: 'dd/mm/yyyy'
-        }).datepicker('update', new Date());
+        });
 
     });
 
