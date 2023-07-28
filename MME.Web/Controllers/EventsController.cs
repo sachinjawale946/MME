@@ -82,10 +82,72 @@ namespace MME.Web.Controllers
         [HttpGet("/Events/Edit/{Id}")]
         public IActionResult Edit(Guid Id)
         {
-            var model = _context.Events.Where(e => e.EventId == Id).FirstOrDefault();
-            if (model != null)
-                model.EventTypes = _context.EventTypes.Where(e => e.IsActive).ToList();
-            return View(model);
+            if (Id != Guid.Empty)
+            {
+                var model = _context.Events.Where(e => e.EventId == Id).FirstOrDefault();
+                if (model != null)
+                {
+                    model.EventTypes = _context.EventTypes.Where(e => e.IsActive).ToList();
+                    if (!string.IsNullOrEmpty(model.Banner))
+                    {
+                        var eventsFolderPath = _iconfiguration["eventpics"].ToString();
+                        model.BannerUrl = Path.Combine(eventsFolderPath, model.Banner);
+                    }
+                }
+                return View(model);
+            }
+            else
+            {
+                return View(new EventModel { EventTypes = _context.EventTypes.Where(e => e.IsActive).ToList() });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EventModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var bannername = Guid.NewGuid().ToString();
+                var fileUpload = false;
+                if (model.BannerImage != null && model.BannerImage.Length > 0)
+                {
+                    var thumbwidth = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                    var thumbheight = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                    var eventsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpics"].ToString());
+                    var eventsThumbsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
+                    bannername = bannername + System.IO.Path.GetExtension(model.BannerImage.FileName);
+                    var eventfilename = Path.Combine(eventsFolderPath, bannername);
+                    var thumbfilename = Path.Combine(eventsThumbsFolderPath, bannername);
+                    using (Stream fileStream = new FileStream(eventfilename, FileMode.Create, FileAccess.Write))
+                    {
+                        model.BannerImage.CopyTo(fileStream);
+                    }
+
+                    var file = new FileInfo(eventfilename);
+                    using (MagickImage image = new MagickImage(file))
+                    {
+                        {
+                            image.Thumbnail(new MagickGeometry(thumbwidth, thumbheight));
+                            image.Write(thumbfilename);
+                        }
+                    }
+                    fileUpload = true;
+                }
+
+                if (!string.IsNullOrEmpty(model.Banner) && string.IsNullOrEmpty(model.BannerUrl))
+                    model.Banner = string.Empty;
+                
+                if (fileUpload)
+                    model.Banner = bannername;
+                model.IsActive = true;
+                model.LastUpdatedDate = DateTime.Now;
+                model.LastUpdatedBy = Guid.Parse("EDA55024-DBBA-4EF9-ACD3-08DB8CEB09E8");
+                _context.Update(model);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Event updated successfully";
+                return RedirectToAction("all");
+            }
+            return View();
         }
 
         public IActionResult Read(string draw, string start, int length)

@@ -47,5 +47,7 @@ namespace MME.Model.Shared
         public List<EventTypeModel>? EventTypes { get; set; }
         [NotMapped]
         public IFormFile? BannerImage { get; set; }
+        [NotMapped]
+        public string? BannerUrl { get; set; }
     }
 }

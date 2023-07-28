@@ -28,6 +28,8 @@
         @Html.HiddenFor(m => m.CreatedBy)
         @Html.HiddenFor(m => m.CreatedDate)
         @Html.HiddenFor(m => m.IsActive)
+        @Html.HiddenFor(m => m.Banner,new { })
+        @Html.HiddenFor(m => m.BannerUrl,new { id ="hiddenBanner"})
         <div class="row" style="margin-top:20px;">
             <div class="col-md-2">
                 @Html.LabelFor(m => m.Event,new { @class="form-label" })
@@ -96,10 +98,20 @@
             </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.BannerImage, new { id = "BannerImage", type = "file", accept = "image/*", onchange = "loadBannerImage(event)", @class = "form-control btn btn-outline-primary", style = "display:inline-block;" })
-                <div style="margin-top:15px;display:none;" id="bannerDiv">
-                    <button type="button" class="btn btn-outline-danger" style="float:right;margin-bottom:10px;" onclick="removeEventAttachment()">Remove Banner</button>
-                    <img name="imageBannerImage" id="imageBannerImage" src="" height="100%" width="100%" alt="event banner" />
-                </div>
+                @if (string.IsNullOrEmpty(Model.BannerUrl))
+                {
+                    <div style="margin-top:15px;display:none;" id="bannerDiv">
+                        <button type="button" class="btn btn-outline-danger" style="float:right;margin-bottom:10px;" onclick="removeEventAttachment()">Remove Banner</button>
+                        <img name="imageBannerImage" id="imageBannerImage" src="" height="100%" width="100%" alt="event banner" />
+                    </div>
+                }
+                else
+                {
+                    <div style="margin-top:15px;" id="bannerDiv">
+                        <button type="button" class="btn btn-outline-danger" style="float:right;margin-bottom:10px;" onclick="removeEventAttachment()">Remove Banner</button>
+                        <img name="imageBannerImage" id="imageBannerImage" src="@Model.BannerUrl" height="100%" width="100%" alt="event banner" />
+                    </div>
+                }
             </div>
         </div>
         <div class="row" style="margin-top:70px;">
@@ -124,6 +136,7 @@
         $("#imageBannerImage").src = "";
         $("#BannerImage").val('');
         $("#bannerDiv").css("display", "none");
+        $("#hiddenBanner").val("");
     }
 
     var loadBannerImage = function (event) {
