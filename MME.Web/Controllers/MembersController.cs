@@ -6,8 +6,7 @@ using MME.Model.Shared;
 
 namespace MME.Web.Controllers
 {
-    [Authorize(Policy = "MMECookieScheme")]
-    public class MembersController : Controller
+    public class MembersController : BaseController
     {
         readonly MMEAppDBContext _context;
         readonly IConfiguration _iconfiguration;

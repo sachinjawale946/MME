@@ -133,34 +133,34 @@
 <script>
 
     function removeEventAttachment() {
-        $("#imageBannerImage").src = "";
-        $("#BannerImage").val('');
-        $("#bannerDiv").css("display", "none");
-        $("#hiddenBanner").val("");
+        jQuery("#imageBannerImage").src = "";
+        jQuery("#BannerImage").val('');
+        jQuery("#bannerDiv").css("display", "none");
+        jQuery("#hiddenBanner").val("");
     }
 
     var loadBannerImage = function (event) {
-        $("#imageBannerImage").each(function () {
+        jQuery("#imageBannerImage").each(function () {
             this.src = URL.createObjectURL(event.target.files[0]);
             console.log(event.target.files[0]);
             this.onload = function () {
                 URL.revokeObjectURL(this.src) // free memory
-                $("#bannerDiv").css("display", "block");
+                jQuery("#bannerDiv").css("display", "block");
             }
         })
     };
 
-    $(document).ready(function ($) {
+    jQuery(document).ready(function ($) {
         // date controls
         var date = new Date();
         date.setDate(date.getDate());
-        $("#dateEvent").datepicker({
+        jQuery("#dateEvent").datepicker({
             autoclose: true,
             todayHighlight: true,
             startDate: date,
             format: 'dd/mm/yyyy'
         }).datepicker('update', new Date());
-        $("#dateEventActivation").datepicker({
+        jQuery("#dateEventActivation").datepicker({
             autoclose: true,
             todayHighlight: true,
             startDate: date,

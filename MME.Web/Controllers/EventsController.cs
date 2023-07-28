@@ -8,8 +8,8 @@ using System.Linq;
 
 namespace MME.Web.Controllers
 {
-    [Authorize(Policy = "MMECookieScheme")]
-    public class EventsController : Controller
+    
+    public class EventsController : BaseController
     {
         readonly MMEAppDBContext _context;
         readonly IConfiguration _iconfiguration;
@@ -70,7 +70,7 @@ namespace MME.Web.Controllers
                     model.Banner = bannername;
                 model.IsActive = true;
                 model.CreatedDate = DateTime.Now;
-                model.CreatedBy = Guid.Parse("EDA55024-DBBA-4EF9-ACD3-08DB8CEB09E8");
+                model.CreatedBy = GetUserId();
                 _context.Add(model);
                 _context.SaveChanges();
                 TempData["SuccessMessage"] = "Event added successfully";
@@ -141,7 +141,7 @@ namespace MME.Web.Controllers
                     model.Banner = bannername;
                 model.IsActive = true;
                 model.LastUpdatedDate = DateTime.Now;
-                model.LastUpdatedBy = Guid.Parse("EDA55024-DBBA-4EF9-ACD3-08DB8CEB09E8");
+                model.LastUpdatedBy = GetUserId();
                 _context.Update(model);
                 _context.SaveChanges();
                 TempData["SuccessMessage"] = "Event updated successfully";
