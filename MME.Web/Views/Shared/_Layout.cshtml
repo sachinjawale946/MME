@@ -10,60 +10,91 @@
     @*<link rel="stylesheet" href="~/MME.Web.styles.css" asp-append-version="true" />*@
 </head>
 <body>
-	<div id="header">
-		<div class="section">
-			<div class="logo">
-				<a href="/home">MME</a>
-			</div>
-			<ul>
-				<li class="selected">
-					<a href="/home">home</a> 
-				</li>
-				<li>
-					<a href="/about">about</a>
-				</li>
-				<li>
-					<a href="/events">events</a>
-				</li>
-				<li>
-					<a href="/members">members</a>
-				</li>
-				<li>
-					<a href="/login">login</a>
-				</li>
-			</ul>
-		</div>
-		<div class="article">
-			<img src="images/great-hairstyle.jpg" alt="">
-			<h1>Great hairstyle comes from the experts.</h1>
-		</div>
-	</div>
+    <div id="header">
+        <div class="section">
+            <div class="logo">
+                <a href="/home">MME</a>
+            </div>
+            <ul>
+                <li id="lihome" class="selected">
+                    <a href="/home">home</a>
+                </li>
+                <li id="liabout">
+                    <a href="/about">about</a>
+                </li>
+                <li id="lievents">
+                    <a href="/events">events</a>
+                </li>
+                <li id="limembers">
+                    <a href="/members">members</a>
+                </li>
+                <li id="lilogin">
+                    <a href="/login">login</a>
+                </li>
+            </ul>
+        </div>
+        <div class="article">
+            <img src="images/great-hairstyle.jpg" alt="">
+            <h1>Great hairstyle comes from the experts.</h1>
+        </div>
+    </div>
 
-	<div class="container">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <div id="footer">
-		<div>
-			<div class="connect">
-				<a href="http://freewebsitetemplates.com/go/twitter/" id="twitter">twitter</a>
-				<a href="http://freewebsitetemplates.com/go/facebook/" id="facebook">facebook</a>
-				<a href="http://freewebsitetemplates.com/go/googleplus/" id="googleplus">googleplus</a>
-				<a href="http://pinterest.com/fwtemplates/" id="pinterest">pinterest</a>
-			</div>
-			<p>
-				&copy; copyright 2023 | all rights reserved.
-			</p>
-		</div>
-	</div>
+        <div>
+            <div class="connect">
+                <a href="http://freewebsitetemplates.com/go/twitter/" id="twitter">twitter</a>
+                <a href="http://freewebsitetemplates.com/go/facebook/" id="facebook">facebook</a>
+                <a href="http://freewebsitetemplates.com/go/googleplus/" id="googleplus">googleplus</a>
+                <a href="http://pinterest.com/fwtemplates/" id="pinterest">pinterest</a>
+            </div>
+            <p>
+                &copy; copyright 2023 | all rights reserved.
+            </p>
+        </div>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery.noConflict();
+            jQuery("#lihome").removeClass('selected');
+            jQuery("#liabout").removeClass('selected');
+            jQuery("#lievents").removeClass('selected');
+            jQuery("#lilogin").removeClass('selected');
+            jQuery("#limembers").removeClass('selected');
+            var url = '@Context.Request.HttpContext.Request.Path';
+            if (url.includes("home")) {
+                jQuery("#lihome").addClass('selected');
+            }
+            else if (url.includes("about")) {
+                jQuery("#liabout").addClass('selected');
+            }
+            else if (url.includes("members")) {
+                jQuery("#limembers").addClass('selected');
+            }
+            else if (url.includes("events")) {
+                jQuery("#lievents").addClass('selected');
+            }
+            else if (url.includes("login")) {
+                jQuery("#lilogin").addClass('selected');
+            }
+            else 
+            {
+                jQuery("#lihome").addClass('selected');
+            }
+        });
+    </script>
 </body>
 </html>

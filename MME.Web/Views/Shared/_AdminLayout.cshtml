@@ -15,21 +15,18 @@
 				<a href="/dashboard">MME</a>
 			</div>
 			<ul>
-				<li class="selected">
+                <li id="lihome" class="selected">
 					<a href="/dashboard">home</a>
 				</li>
-				<li>
+                <li id="limembers">
+                    <a href="/members/all">members</a>
+                </li>
+                <li id="lievents">
 					<a href="/events/all">events</a>
 				</li>
-				<li>
+                <li id="lilogout">
 					<a href="/account/logout">logout</a>
 				</li>
-				@*<li>
-					<a href="/members">members</a>
-				</li>
-				<li>
-					<a href="/login">login</a>
-				</li>*@
 			</ul>
 		</div>
 	</div>
@@ -60,5 +57,37 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery.noConflict();
+            jQuery("#lihome").removeClass('selected');
+            jQuery("#lievents").removeClass('selected');
+            jQuery("#lilogout").removeClass('selected');
+            jQuery("#limembers").removeClass('selected');
+            var url = '@Context.Request.HttpContext.Request.Path';
+            if (url.includes("dashboard")) 
+            {
+                jQuery("#lihome").addClass('selected');
+            }
+            else if (url.includes("events"))
+            {
+                jQuery("#lievents").addClass('selected');
+            }
+            else if (url.includes("members"))
+            {
+                jQuery("#limembers").addClass('selected');
+            }
+            else if (url.includes("login")) 
+            {
+                jQuery("#lilogin").addClass('selected');
+            }
+            else 
+            {
+                jQuery("#lihome").addClass('selected');
+            }
+        });
+    </script>
+
 </body>
 </html>
