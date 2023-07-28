@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MME.Data;
 using MME.Model.Shared;
+using System.Linq;
 
 namespace MME.Web.Controllers
 {
@@ -78,6 +79,15 @@ namespace MME.Web.Controllers
             return View();
         }
 
+        [HttpGet("/Events/Edit/{Id}")]
+        public IActionResult Edit(Guid Id)
+        {
+            var model = _context.Events.Where(e => e.EventId == Id).FirstOrDefault();
+            if (model != null)
+                model.EventTypes = _context.EventTypes.Where(e => e.IsActive).ToList();
+            return View(model);
+        }
+
         public IActionResult Read(string draw, string start, int length)
         {
             // Sort Column Name  
@@ -90,7 +100,8 @@ namespace MME.Web.Controllers
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
 
-            var events = GetEvents();
+            //total number of rows count 
+            var events = GetEvents(searchValue, skip, length, out recordsTotal);
 
             //Sorting  
             if ((!string.IsNullOrEmpty(sortColumn) && !string.IsNullOrEmpty(sortColumnDirection)))
@@ -106,27 +117,20 @@ namespace MME.Web.Controllers
                 }
             }
 
-            //Search  
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                events = events.Where(m => m.Event.ToLower().Contains(searchValue.ToLower())).ToList();
-            }
-
-            //total number of rows count 
-            recordsTotal = events.Count;
-            //Paging   
-
-            if (string.IsNullOrEmpty(sortColumn))
-            {
-                events = events.Skip(skip).Take(length).OrderByDescending(m => m.CreatedDate).ToList();
-            }
-
             return Json(new { draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = events });
         }
 
-        private List<EventModel> GetEvents()
+        private List<EventModel> GetEvents(string SearchFilter, int skip, int length, out int recordsTotal)
         {
-            return _context.Events.Include("EventType").Where(u => u.IsActive == true).ToList();
+            var events = new List<EventModel>();
+            if (!string.IsNullOrEmpty(SearchFilter))
+                events = _context.Events.Include("EventType").Where(u => u.IsActive == true && u.Event.ToLower().Contains(SearchFilter.ToLower())).ToList();
+            else
+                events = _context.Events.Include("EventType").Where(u => u.IsActive == true).ToList();
+
+            recordsTotal = events.Count;
+
+            return events.Skip(skip).Take(length).OrderByDescending(m => m.CreatedDate).ToList();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model EventModel
 
 @{
-    ViewData["Title"] = "Create Event";
+    ViewData["Title"] = "Edit Event";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -22,8 +22,12 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("Create", "Events", FormMethod.Post, new { @class = "events", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { @class = "events", enctype = "multipart/form-data" }))
     {
+        @Html.HiddenFor(m => m.EventId)
+        @Html.HiddenFor(m => m.CreatedBy)
+        @Html.HiddenFor(m => m.CreatedDate)
+        @Html.HiddenFor(m => m.IsActive)
         <div class="row" style="margin-top:20px;">
             <div class="col-md-2">
                 @Html.LabelFor(m => m.Event,new { @class="form-label" })
@@ -103,7 +107,7 @@
                 <a href="/events/all" class="btn btn-outline-danger">Cancel</a>
             </div>
             <div class="col-md-6">
-                <input type="submit" class="btn btn-outline-primary" style="float:right" >
+                <input type="submit" class="btn btn-outline-primary" style="float:right">
             </div>
         </div>
 
@@ -116,22 +120,19 @@
 
 <script>
 
-    function removeEventAttachment()
-    {
+    function removeEventAttachment() {
         $("#imageBannerImage").src = "";
         $("#BannerImage").val('');
         $("#bannerDiv").css("display", "none");
     }
 
     var loadBannerImage = function (event) {
-        $("#imageBannerImage").each(function () 
-        {
+        $("#imageBannerImage").each(function () {
             this.src = URL.createObjectURL(event.target.files[0]);
             console.log(event.target.files[0]);
             this.onload = function () {
                 URL.revokeObjectURL(this.src) // free memory
                 $("#bannerDiv").css("display", "block");
-                // $("#imageBannerImage").css("display", "block");
             }
         })
     };
