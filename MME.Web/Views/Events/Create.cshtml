@@ -92,7 +92,10 @@
             </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.BannerImage, new { id = "BannerImage", type = "file", accept = "image/*", onchange = "loadBannerImage(event)", @class = "form-control btn btn-outline-primary", style = "display:inline-block;" })
-                <img style="display:none;margin-top:15px" name="imageBannerImage" id="imageBannerImage" src="" height="100%" width="100%" alt="event banner" />
+                <div style="margin-top:15px;display:none;" id="bannerDiv">
+                    <button type="button" class="btn btn-outline-danger" style="float:right;margin-bottom:10px;" onclick="removeEventAttachment()">Remove Banner</button>
+                    <img name="imageBannerImage" id="imageBannerImage" src="" height="100%" width="100%" alt="event banner" />
+                </div>
             </div>
         </div>
         <div class="row" style="margin-top:70px;">
@@ -100,7 +103,7 @@
                 <a href="/events/all" class="btn btn-outline-danger">Cancel</a>
             </div>
             <div class="col-md-6">
-                <input type="submit" class="btn btn-outline-primary" style="float:right" />
+                <input type="submit" class="btn btn-outline-primary" style="float:right" >
             </div>
         </div>
 
@@ -113,25 +116,29 @@
 
 <script>
 
+    function removeEventAttachment()
+    {
+        $("#imageBannerImage").src = "";
+        $("#BannerImage").val('');
+        $("#bannerDiv").css("display", "none");
+    }
+
     var loadBannerImage = function (event) {
         $("#imageBannerImage").each(function () 
         {
-            console.log('test');
             this.src = URL.createObjectURL(event.target.files[0]);
             console.log(event.target.files[0]);
-            this.onload = function () 
-            {
+            this.onload = function () {
                 URL.revokeObjectURL(this.src) // free memory
-                console.log(this.src);
-                $("#imageBannerImage").css("display","block");
+                $("#bannerDiv").css("display", "block");
+                // $("#imageBannerImage").css("display", "block");
             }
         })
         // upload image
         // UpoadImage("UploadAddressFront", "LicenseFront");
     };
 
-    $(document).ready(function ($) 
-    {
+    $(document).ready(function ($) {
         // date controls
         var date = new Date();
         date.setDate(date.getDate());
