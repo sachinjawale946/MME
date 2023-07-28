@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using Mopups.Hosting;
 
 namespace MME.Mobile
 {
@@ -14,6 +15,7 @@ namespace MME.Mobile
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
+                .ConfigureMopups()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("JosefinSans-Regular.ttf", "OpenSansRegular");

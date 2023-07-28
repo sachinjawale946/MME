@@ -13,6 +13,7 @@ using MME.Mobile.Helpers;
 using Microsoft.Maui.Storage;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Alerts;
+using Mopups.Services;
 
 namespace MME.Mobile.ViewModels
 {
@@ -68,9 +69,8 @@ namespace MME.Mobile.ViewModels
                 await snackbar.Show(cancellationTokenSource.Token);
                 return;
             }
-            //BusyPage busyPage = new BusyPage();
-            //Thread.Sleep(2000);
-            //Application.Current.MainPage.ShowPopup(busyPage);
+            var busy = new BusyPage();
+            await MopupService.Instance.PushAsync(busy);
             var result = await _loginService.Login(UserModel);
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
@@ -84,11 +84,11 @@ namespace MME.Mobile.ViewModels
                 Settings.gender = result.gender;
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
-                // busyPage.Close();
+                await MopupService.Instance.PopAsync(true);
             }
             else
             {
-                // busyPage.Close();
+                await MopupService.Instance.PopAsync(true);
                 var snackbar = Snackbar.Make(result.message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
             }

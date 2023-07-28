@@ -3,6 +3,7 @@ using MME.Mobile.Services;
 using MME.Mobile.Views;
 using MME.Model.Request;
 using MME.Model.Response;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,13 +53,13 @@ namespace MME.Mobile.ViewModels
 
         private void SearchMore()
         {
-            Search();
+            // Search();
         }
 
         private async void Search()
         {
-            BusyPage busyPage = new BusyPage();
-            await Application.Current.MainPage.ShowPopupAsync(busyPage);
+            var busy = new BusyPage();
+            await MopupService.Instance.PushAsync(busy);
             if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
             if (SearchModel == null) SearchModel = new MemberRequestModel() { membername = string.Empty, page = 1 };
             var results = await _memberService.Search(SearchModel);
@@ -87,7 +88,7 @@ namespace MME.Mobile.ViewModels
                 SearchModel.page = 0;
                 SearchModel.membername = string.Empty;
             }
-            busyPage.Close();
+            await MopupService.Instance.PopAsync(true);
         }
 
         private void NewSearch(string SearchFilter = "")

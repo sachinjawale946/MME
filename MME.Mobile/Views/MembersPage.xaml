@@ -20,9 +20,9 @@
         </Grid.RowDefinitions>
         <SearchBar x:Name="searchBar" Grid.Row="0" Placeholder="Search Members"
                    SearchCommand="{Binding SearchCommand}" 
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10"/>
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray"/>
         <ScrollView Grid.Row="1">
-            <CollectionView x:Name="searchResults" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreMembersCommand}"
+            <CollectionView x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreMembersCommand}"
                   ItemsSource="{Binding Members}" Margin="10" VerticalScrollBarVisibility="Always">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

@@ -19,16 +19,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <!--<Grid BackgroundColor="{StaticResource YelloColor}">
-                <Label Style="{StaticResource PageSubHeader}" Text="Choose your preferred language :" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Label>
-            </Grid>-->
-            <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Style="{StaticResource ControlLabel}" Text="Select Laguage :"></Label>
-            <Picker MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" 
+            <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="Select language to continue :"></Label>
+            <Picker HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" 
               ItemsSource="{Binding Languages}" SelectedItem="{Binding Language, Mode=TwoWay}" ItemDisplayBinding="{Binding language}"></Picker>
-            <Button Style="{StaticResource BlackButton}" Command="{Binding NavigateCommand}" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="3"  Text="Continue" />
+            <Button Style="{StaticResource BlackButton}" Command="{Binding NavigateCommand}" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" 
+                    Text="Continue" />
         </Grid>
     </Grid>
 </ContentPage>
