@@ -57,8 +57,8 @@ namespace MME.Mobile.ViewModels
 
         private async void Search()
         {
-            //BusyPage busyPage = new BusyPage();
-            //await Application.Current.MainPage.ShowPopupAsync(busyPage);
+            BusyPage busyPage = new BusyPage();
+            await Application.Current.MainPage.ShowPopupAsync(busyPage);
             if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
             if (SearchModel == null) SearchModel = new MemberRequestModel() { membername = string.Empty, page = 1 };
             var results = await _memberService.Search(SearchModel);
@@ -87,7 +87,7 @@ namespace MME.Mobile.ViewModels
                 SearchModel.page = 0;
                 SearchModel.membername = string.Empty;
             }
-            //busyPage.Close();
+            busyPage.Close();
         }
 
         private void NewSearch(string SearchFilter = "")

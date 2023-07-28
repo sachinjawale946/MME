@@ -10,7 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MME.Mobile.Helpers;
-
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Alerts;
+using System.Threading;
 
 namespace MME.Mobile.Services
 {
@@ -18,6 +20,18 @@ namespace MME.Mobile.Services
     {
         readonly string _HeaderType = "application/json";
         readonly string _MediaType = "application/json";
+
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        SnackbarOptions snackbarOptions = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Red,
+            TextColor = Colors.Green,
+            ActionButtonTextColor = Colors.Yellow,
+            CornerRadius = new CornerRadius(10),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(14),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(14),
+            CharacterSpacing = 0.5
+        };
 
         public async Task<byte[]?> GetProfileImage(Guid UserId)
         {
@@ -34,16 +48,17 @@ namespace MME.Mobile.Services
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    //SessionExpiredPage sessionExpiredPage = new SessionExpiredPage();
-                    //Application.Current.MainPage.ShowPopup(sessionExpiredPage);
+                    var _message = "Your session is expired, please relogin.";
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
                 }
                 return await Task.FromResult(new byte[] { });
             }
             catch (Exception ex)
             {
-                var errorMessage = "Some error occured, while processing your request. Please try again later.";
-                //ErrorPage errorPage = new ErrorPage(errorMessage);
-                //Application.Current.MainPage.ShowPopup(errorPage);
+                var _message = "Some error occured, while processing your request. Please try again later.";
+                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new byte[] { });
             }
         }
@@ -64,16 +79,17 @@ namespace MME.Mobile.Services
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    //SessionExpiredPage sessionExpiredPage = new SessionExpiredPage();
-                    //Application.Current.MainPage.ShowPopup(sessionExpiredPage);
+                    var _message = "Your session is expired, please relogin.";
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
                 }
                 return await Task.FromResult(new List<MemberResponseModel>());
             }
             catch(Exception ex)
             {
-                var errorMessage = "Some error occured, while processing your request. Please try again later.";
-                //ErrorPage errorPage = new ErrorPage(errorMessage);
-                //Application.Current.MainPage.ShowPopup(errorPage);
+                var _message = "Some error occured, while processing your request. Please try again later.";
+                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new List<MemberResponseModel>());
             }
         }

@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MME.Mobile.Helpers;
 using Microsoft.Maui.Storage;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Alerts;
 
 namespace MME.Mobile.ViewModels
 {
@@ -19,6 +21,18 @@ namespace MME.Mobile.ViewModels
         ILoginService _loginService = new LoginService();
         public Command LoginCommand { get; }
         public Command ForgotPasswordCommand { get; }
+
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        SnackbarOptions snackbarOptions = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Red,
+            TextColor = Colors.White,
+            ActionButtonTextColor = Colors.Yellow,
+            CornerRadius = new CornerRadius(5),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+            CharacterSpacing = 0.1
+        };
 
         public LoginPageViewModel(Page page) : base(page)
         {
@@ -50,13 +64,13 @@ namespace MME.Mobile.ViewModels
             if(UserModel == null || string.IsNullOrEmpty(UserModel.username.Trim()) || string.IsNullOrEmpty(UserModel.password.Trim()))
             {
                 var _message = "Username and Password both are manadatory fields";
-                ErrorPage errorPage = new ErrorPage(_message);
-                Application.Current.MainPage.ShowPopup(errorPage);
+                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
                 return;
             }
-            BusyPage busyPage = new BusyPage();
-            Thread.Sleep(2000);
-            Application.Current.MainPage.ShowPopup(busyPage);
+            //BusyPage busyPage = new BusyPage();
+            //Thread.Sleep(2000);
+            //Application.Current.MainPage.ShowPopup(busyPage);
             var result = await _loginService.Login(UserModel);
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
@@ -70,13 +84,13 @@ namespace MME.Mobile.ViewModels
                 Settings.gender = result.gender;
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
-                busyPage.Close();
+                // busyPage.Close();
             }
             else
             {
-                busyPage.Close();
-                ErrorPage errorPage = new ErrorPage(result.message);
-                Application.Current.MainPage.ShowPopup(errorPage);
+                // busyPage.Close();
+                var snackbar = Snackbar.Make(result.message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
             }
         }
     }

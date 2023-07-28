@@ -15,7 +15,7 @@ namespace MME.Mobile
         {
             if (string.IsNullOrEmpty(Settings.username))
             {
-                MainPage = new NavigationPage(new Login());
+                MainPage = new NavigationPage(new LandigPage());
             }
             else
             {

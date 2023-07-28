@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
 using MME.Model.Response;
@@ -16,6 +18,18 @@ namespace MME.Mobile.ViewModels
     {
         readonly ILanguageService _languageService = new LanguageService();
         public Command NavigateCommand { get; }
+        
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        SnackbarOptions snackbarOptions = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Red,
+            TextColor = Colors.White,
+            ActionButtonTextColor = Colors.Yellow,
+            CornerRadius = new CornerRadius(5),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+            CharacterSpacing = 0.1
+        };
 
         public LandigPageViewModel(Page page) : base(page)
         {
@@ -64,8 +78,9 @@ namespace MME.Mobile.ViewModels
             }
             else
             {
-                ErrorPage errorPage = new ErrorPage("Please select language to continue");
-                await Application.Current.MainPage.ShowPopupAsync(errorPage);
+                var _message = "Please select language to continue";
+                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
             }
         }
     }
