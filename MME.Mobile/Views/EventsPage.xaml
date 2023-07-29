@@ -33,80 +33,90 @@
                     <DataTemplate>
                         <StackLayout x:Name="EventStackPanel" Margin="0,0,0,0" x:DataType="model:EventResponseModel">
                             <Frame BackgroundColor="#00FBC1BC" BorderColor="{StaticResource AppBorderColor}" 
-                               Padding="4" CornerRadius="4" Margin="0,0,0,10">
-                                <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="250"/>
-                                        <ColumnDefinition Width="80"/>
-                                        <ColumnDefinition Width="40"/>
+                               Padding="1" CornerRadius="4" Margin="0,0,0,10">
+                                <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
+                                    <!--<Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="20"/>
                                         <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                    </Grid.ColumnDefinitions>-->
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="50"/>
-                                        <RowDefinition Height="35"/>
-                                        <RowDefinition Height="35"/>
-                                        <RowDefinition Height="35"/>
-                                        <RowDefinition Height="70"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <!--<RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>-->
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="5" IsVisible="{Binding shownoimage}" Aspect="AspectFill" Margin="10,10,20,0" 
-                                           Source="event.png"/>
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="5" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,20,0" 
-                                           Source="{Binding banner, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
-                                    <Label Style="{StaticResource PageSubHeader}" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding header}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding description}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="1" Text="Event Date" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="3" Text="{Binding eventdate,StringFormat='{0:dd MMM yyyy}'}" VerticalOptions="CenterAndExpand"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="1" Text="Location" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                    <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="3" Grid.Column="3" Text="{Binding location}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
-                                    <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3">
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="3" IsVisible="{Binding shownoimage}" Aspect="AspectFill" Margin="10,10,20,0" 
+                                           Source="event.png" WidthRequest="125"/>
+                                        <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="3" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,20,0" 
+                                           Source="{Binding banner, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" WidthRequest="125"/>
+                                        <Label Style="{StaticResource PageSubHeader}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding header}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                        <!--<Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding description}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>-->
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Text="Date" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="3" Text="{Binding eventdate,StringFormat='{0:dd MMM yyyy}'}" VerticalOptions="CenterAndExpand"/>
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="1" Text="Location" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="2" Grid.Column="3" Text="{Binding location}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Grid HeightRequest="75" Grid.Column="0" Margin="0,0,20,0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
-                                            <ImageButton Aspect="AspectFit" Source="donate.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource CharityEventOptionConverter}}"/>
-                                            <ImageButton Aspect="AspectFit" Source="participate.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource ParticipationEventOptionConverter}}" />
-                                            <ImageButton Aspect="AspectFit" Source="contribue.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource FundraiserEventOptionConverter}}"/>
-                                            <ImageButton Aspect="AspectFit" Source="attend.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource ConferenceEventOptionConverter}}"/>
+                                        <Grid HeightRequest="40" Grid.Column="0" Margin="0,0,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                            <ImageButton Aspect="AspectFit" Source="donate.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource CharityEventOptionConverter}}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                                            <ImageButton Aspect="AspectFit" Source="participate.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource ParticipationEventOptionConverter}}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                                            <ImageButton Aspect="AspectFit" Source="contribue.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource FundraiserEventOptionConverter}}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+                                            <ImageButton Aspect="AspectFit" Source="attend.png" IsVisible="{Binding event_type_id, Mode=OneWay, Converter={StaticResource ConferenceEventOptionConverter}}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                                         </Grid>
-                                        <Grid HeightRequest="40" Grid.Column="1" Margin="0,0,20,0" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" >
+                                        <Grid HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="1">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <Grid HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Column="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <ImageButton Opacity="{Binding EventFeedback.liked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}" 
+                                            <ImageButton Opacity="{Binding EventFeedback.liked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}" 
                                                          Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="like.png" x:Name="like" Clicked="like_Clicked"
                                                          HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
-                                                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding likes}" VerticalOptions="Center" Margin="5,0"/>
-                                            </Grid>
-                                            <Grid Margin="50,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Column="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <ImageButton Opacity="{Binding EventFeedback.disliked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
+                                            <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding likes}" VerticalOptions="Center" Margin="5,0"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <ImageButton Opacity="{Binding EventFeedback.disliked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
                                                          HorizontalOptions="EndAndExpand" Margin="10,0" Aspect="AspectFill" WidthRequest="25" HeightRequest="25" 
                                                          Source="dislike.png" x:Name="dislike" Clicked="dislike_Clicked" CommandParameter="{x:Reference EventStackPanel}"/>
-                                                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding dislikes}" VerticalOptions="Center" Margin="5,0"/>
-                                            </Grid>
-                                            <Grid Margin="50,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Grid.Column="2">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <ImageButton Opacity="{Binding EventFeedback.reportabuse, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
+                                            <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding dislikes}" VerticalOptions="Center" Margin="0,0,5,0"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,0" HeightRequest="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <ImageButton Opacity="{Binding EventFeedback.reportabuse, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
                                                          Aspect="AspectFill" WidthRequest="25" HeightRequest="25" Source="spam.png" x:Name="spam" Clicked="spam_Clicked"
                                                          HorizontalOptions="Start"  CommandParameter="{x:Reference EventStackPanel}"/>
-                                                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding spams}" VerticalOptions="Center" Margin="5,0"/>
-                                            </Grid>
+                                            <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding spams}" VerticalOptions="Center" Margin="5,0"/>
                                         </Grid>
                                     </Grid>
                                 </Grid>

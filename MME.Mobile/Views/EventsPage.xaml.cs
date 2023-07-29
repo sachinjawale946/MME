@@ -13,7 +13,7 @@ public partial class EventsPage : ContentPage
 
     protected override void OnAppearing()
     {
-        if(viewModel == null) viewModel= new EventViewModel();
+        viewModel= new EventViewModel();
         this.BindingContext = viewModel;
         base.OnAppearing();
     }

@@ -16,10 +16,10 @@
         </Style>
     </Shell.Resources>
 
-    <ShellContent Title="Events" Icon="dashboard.png" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
-    <ShellContent Title="Members" Icon="dashboard.png" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
+    <ShellContent Title="Events" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
+    <ShellContent Title="Members" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
     
-    <MenuItem IconImageSource="logout.png" Text="Sign Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <MenuItem IconImageSource="logouticon.png" Text="Sign Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 
     <TabBar>

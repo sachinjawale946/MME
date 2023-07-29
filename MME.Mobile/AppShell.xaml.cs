@@ -22,7 +22,7 @@ namespace MME.Mobile
             Settings.lastname = string.Empty;
             Settings.mobile = string.Empty;
             Settings.accesstoken = string.Empty;
-            App.Current.MainPage = new NavigationPage(new Login());
+            App.Current.MainPage = new NavigationPage(new LandigPage());
         }
     }
 }

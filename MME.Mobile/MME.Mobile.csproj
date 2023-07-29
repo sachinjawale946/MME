@@ -61,9 +61,12 @@
 	  <None Remove="Resources\Images\dislike.png" />
 	  <None Remove="Resources\Images\donate.png" />
 	  <None Remove="Resources\Images\event.png" />
+	  <None Remove="Resources\Images\eventicon.png" />
 	  <None Remove="Resources\Images\female.jpg" />
 	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\logouticon.png" />
 	  <None Remove="Resources\Images\male.jpg" />
+	  <None Remove="Resources\Images\membericon.png" />
 	  <None Remove="Resources\Images\participate.png" />
 	  <None Remove="Resources\Images\spam.png" />
 	  <None Remove="Resources\Raw\busyanimation.json" />
