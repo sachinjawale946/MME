@@ -16,6 +16,7 @@
         </Style>
     </Shell.Resources>
 
+    <ShellContent Title="Dashboard" Icon="dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" ></ShellContent>
     <ShellContent Title="Events" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
     <ShellContent Title="Members" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
     

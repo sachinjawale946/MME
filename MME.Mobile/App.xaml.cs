@@ -20,7 +20,7 @@ namespace MME.Mobile
             else
             {
                 App.Current.MainPage = new AppShell();
-                Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
+                Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
             }
         }
     }

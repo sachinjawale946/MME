@@ -55,6 +55,7 @@
 	  <None Remove="Resources\Images\boy.png" />
 	  <None Remove="Resources\Images\close.png" />
 	  <None Remove="Resources\Images\contribue.png" />
+	  <None Remove="Resources\Images\dashboard.png" />
 	  <None Remove="Resources\Images\dislike.png" />
 	  <None Remove="Resources\Images\donate.png" />
 	  <None Remove="Resources\Images\event.png" />
@@ -88,6 +89,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\BusyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Dashboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\EventsPage.xaml">

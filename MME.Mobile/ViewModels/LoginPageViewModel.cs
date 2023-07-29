@@ -83,7 +83,7 @@ namespace MME.Mobile.ViewModels
                 Settings.accesstoken = result.accesstoken;
                 Settings.gender = result.gender;
                 App.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"//{nameof(EventsPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
                 await MopupService.Instance.PopAsync(true);
             }
             else
