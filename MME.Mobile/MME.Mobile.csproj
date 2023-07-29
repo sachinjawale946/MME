@@ -40,10 +40,6 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-		<MauiImage Update="Resources\Images\male.jpg">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</MauiImage>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -56,16 +52,16 @@
 	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Fonts\JosefinSans-SemiBold.ttf" />
 	  <None Remove="Resources\Images\attend.png" />
+	  <None Remove="Resources\Images\boy.png" />
 	  <None Remove="Resources\Images\close.png" />
 	  <None Remove="Resources\Images\contribue.png" />
 	  <None Remove="Resources\Images\dislike.png" />
 	  <None Remove="Resources\Images\donate.png" />
 	  <None Remove="Resources\Images\event.png" />
 	  <None Remove="Resources\Images\eventicon.png" />
-	  <None Remove="Resources\Images\female.jpg" />
+	  <None Remove="Resources\Images\girl.png" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\logouticon.png" />
-	  <None Remove="Resources\Images\male.jpg" />
 	  <None Remove="Resources\Images\membericon.png" />
 	  <None Remove="Resources\Images\participate.png" />
 	  <None Remove="Resources\Images\spam.png" />

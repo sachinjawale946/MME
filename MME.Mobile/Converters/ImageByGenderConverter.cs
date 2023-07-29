@@ -12,9 +12,9 @@ namespace MME.Mobile.Converters
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo info)
         {
             if (value != null && !string.IsNullOrEmpty(value.ToString()) && value.ToString() == "Female")
-                return "female.jpg";
+                return "girl.png";
             else
-                return "male.jpg";
+                return "boy.png";
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
