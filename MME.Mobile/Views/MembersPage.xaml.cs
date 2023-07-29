@@ -11,6 +11,7 @@ public partial class MembersPage : ContentPage
 
     protected override void OnAppearing()
     {
+        this.searchBar.Text = string.Empty;
         this.BindingContext = new MemberViewModel();
         base.OnAppearing();
     }

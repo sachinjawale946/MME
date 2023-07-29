@@ -13,7 +13,8 @@ public partial class EventsPage : ContentPage
 
     protected override void OnAppearing()
     {
-        viewModel= new EventViewModel();
+        this.searchBar.Text = string.Empty;
+        viewModel = new EventViewModel();
         this.BindingContext = viewModel;
         base.OnAppearing();
     }

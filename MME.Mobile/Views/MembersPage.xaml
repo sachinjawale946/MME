@@ -28,7 +28,7 @@
                     <DataTemplate>
                         <StackLayout Margin="0,0,0,0" x:DataType="model:MemberResponseModel">
                             <Frame BackgroundColor="#00FBC1BC" BorderColor="{StaticResource AppBorderColor}" 
-                               Padding="4" CornerRadius="4" Margin="0,0,0,10">
+                               Padding="0" CornerRadius="4" Margin="0,0,0,10">
                                 <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -48,18 +48,18 @@
                                            Source="{Binding gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
                                     <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="5,5,5,5" 
                                            Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
-                                    <Label Grid.Column="1" Text="Name" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="Profession" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding occupation}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="2" Grid.Column="1" Text="Gender" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="2" Grid.Column="3" Text="{Binding gender}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="3" Grid.Column="1" Text="Address" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-                                    <Label Grid.Row="3" Grid.Column="3" Text="{Binding fulladdress}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"/>
+                                    <Label Grid.Column="1" Text="Name" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="Profession" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding occupation}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="Gender" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="2" Grid.Column="3" Text="{Binding gender}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                                    <Label Grid.Row="3" Grid.Column="1" Text="Address" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="3" Grid.Column="3" Text="{Binding fulladdress}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
                                 </Grid>
                             </Frame>
                         </StackLayout>
