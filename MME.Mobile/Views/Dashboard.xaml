@@ -2,7 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.Dashboard"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="Dashboard" Shell.NavBarIsVisible="True">
+
+    <ContentPage.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{StaticResource AppPrimaryBackground}"/>
+    </ContentPage.Behaviors>
+    
     <Grid VerticalOptions="Fill" BackgroundColor="#FFF">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
@@ -35,7 +41,7 @@
                     <ImageButton x:Name="EventsImage" Command="{Binding NavigateCommand}" CommandParameter="events" WidthRequest="75" HeightRequest="75" Source="eventicon.png" 
                                  VerticalOptions="Start" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10" >
                     </ImageButton>
-                    <Label Style="{StaticResource PageSubHeader}" FontAttributes="Bold" Text="Events">
+                    <Label Margin="0,10,0,0" Style="{StaticResource PageSubHeader}" FontAttributes="Bold" Text="Events" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     </Label>
                 </StackLayout>
             </Frame>
@@ -44,7 +50,7 @@
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <ImageButton x:Name="MembersImage" BackgroundColor="Transparent" Command="{Binding NavigateCommand}" CommandParameter="members"  
                                  WidthRequest="75" HeightRequest="75" Source="membericon.png" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10"/>
-                    <Label Style="{StaticResource PageSubHeader}" FontAttributes="Bold" Text="Members" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                    <Label Margin="0,10,0,0" Style="{StaticResource PageSubHeader}" FontAttributes="Bold" Text="Members" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
             </Frame>
 

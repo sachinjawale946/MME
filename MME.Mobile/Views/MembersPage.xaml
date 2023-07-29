@@ -6,13 +6,15 @@
              xmlns:convertes="clr-namespace:MME.Mobile.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Members">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource AppPrimaryBackground}"/>
+    </ContentPage.Behaviors>
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
             <convertes:ImageByGenderConverter x:Key="ImageByGenderConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
