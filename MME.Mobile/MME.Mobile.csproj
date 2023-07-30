@@ -62,6 +62,7 @@
 	  <None Remove="Resources\Images\eventicon.png" />
 	  <None Remove="Resources\Images\girl.png" />
 	  <None Remove="Resources\Images\like.png" />
+	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logouticon.png" />
 	  <None Remove="Resources\Images\membericon.png" />
 	  <None Remove="Resources\Images\participate.png" />
