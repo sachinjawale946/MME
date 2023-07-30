@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>MME.Mobile</ApplicationTitle>
+		<ApplicationTitle>Community App</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.mme.mobile</ApplicationId>
