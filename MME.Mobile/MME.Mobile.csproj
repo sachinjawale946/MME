@@ -67,6 +67,8 @@
 	  <None Remove="Resources\Images\membericon.png" />
 	  <None Remove="Resources\Images\participate.png" />
 	  <None Remove="Resources\Images\spam.png" />
+	  <None Remove="Resources\Raw\bubblebouncing.json" />
+	  <None Remove="Resources\Raw\bubblesanimation.json" />
 	  <None Remove="Resources\Raw\busyanimation.json" />
 	  <None Remove="Resources\Raw\dotnetbot.json" />
 	  <None Remove="Resources\Raw\erroranimation.json" />
