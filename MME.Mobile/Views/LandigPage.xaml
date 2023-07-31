@@ -40,7 +40,7 @@
             <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="Select language to continue"></Label>
             <!--<Picker FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" 
               ItemsSource="{Binding Languages}" SelectedItem="{Binding Language, Mode=TwoWay}" ItemDisplayBinding="{Binding language}"></Picker>-->
-            <inputLayout:SfTextInputLayout ContainerType="Outlined" ContainerBackground="{StaticResource SfTextInputLayoutBackground}" 
+            <inputLayout:SfTextInputLayout ContainerType="Outlined"
                                                 Grid.Row="1"  HeightRequest="70">
                 <editors:SfComboBox HeightRequest="70" Margin="0,0"
                                                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="-- Select Language --" 

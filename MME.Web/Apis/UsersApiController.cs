@@ -56,6 +56,52 @@ namespace MME.Web.Apis
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
+        [HttpGet, Route("~/api/v1/members-getprofile/{userid}")]
+        public ProfileResponseModel Profile(Guid userid)
+        {
+            if (userid != Guid.Empty)
+            {
+                var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+                var profile = _context.Users.Where(u => u.UserId.ToString().ToLower() == userid.ToString().ToLower()).FirstOrDefault();
+                if (profile != null)
+                {
+                    return new ProfileResponseModel
+                    {
+                        profilepic = (string.IsNullOrEmpty(profile.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic)),
+                        Area = profile.Area,
+                        BirthDate = profile.BirthDate,
+                        CasteId = profile.CasteId,
+                        City = profile.City,
+                        Email = profile.Email,
+                        FirstName = profile.FirstName,
+                        Gender = profile.Gender,
+                        InviteCode = profile.InviteCode,
+                        IsActive = profile.IsActive,
+                        Landmark = profile.Landmark,
+                        LanguageId = profile.LanguageId,
+                        LastName = profile.LastName,
+                        Latitude = profile.Latitude,
+                        Location = profile.Location,
+                        Longtitude = profile.Longtitude,
+                        MaritalStatus = profile.MaritalStatus,
+                        MiddleName = profile.MiddleName,
+                        Mobile = profile.Mobile,
+                        OccupationId = profile.OccupationId,
+                        PincodeId = profile.PincodeId,
+                        ReligionId = profile.ReligionId,
+                        RoleId = profile.RoleId,
+                        Society = profile.Society,
+                        StateId = profile.StateId,
+                        SubCasteId = profile.SubCasteId,
+                        UserId = profile.UserId,
+                        Username = profile.Username,
+                    };
+                }
+            }
+            return new ProfileResponseModel();
+        }
+
+        [Authorize(Policy = "MMEJwtScheme")]
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {

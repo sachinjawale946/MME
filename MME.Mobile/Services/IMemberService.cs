@@ -7,5 +7,6 @@ namespace MME.Mobile.Services
     {
         Task<List<MemberResponseModel>> Search(MemberRequestModel model);
         Task<byte[]> GetProfileImage(Guid UserId);
+        Task<ProfileResponseModel> GetProfile(Guid UserId);
     }
 }

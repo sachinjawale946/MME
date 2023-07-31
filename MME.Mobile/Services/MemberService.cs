@@ -93,5 +93,36 @@ namespace MME.Mobile.Services
                 return await Task.FromResult(new List<MemberResponseModel>());
             }
         }
+
+        public async Task<ProfileResponseModel> GetProfile(Guid UserId)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(string.Format(Api_Lookup.memberProfileApi, UserId));
+                HttpResponseMessage response = client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<ProfileResponseModel>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = "Your session is expired, please relogin.";
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                return await Task.FromResult(new ProfileResponseModel());
+            }
+            catch (Exception ex)
+            {
+                var _message = "Some error occured, while processing your request. Please try again later.";
+                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
+                return await Task.FromResult(new ProfileResponseModel());
+            }
+        }
+
     }
 }
