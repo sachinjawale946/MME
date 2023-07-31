@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.Login"
                xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
-             Title="Login" NavigationPage.HasNavigationBar="False">
+              Title="Login" NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>

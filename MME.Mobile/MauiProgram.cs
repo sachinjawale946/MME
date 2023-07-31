@@ -3,6 +3,7 @@ using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Mopups.Hosting;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace MME.Mobile
 {
@@ -15,6 +16,7 @@ namespace MME.Mobile
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
+                .ConfigureSyncfusionCore()
                 .ConfigureMopups()
                 .ConfigureFonts(fonts =>
                 {

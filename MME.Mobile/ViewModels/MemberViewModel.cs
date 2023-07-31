@@ -25,7 +25,10 @@ namespace MME.Mobile.ViewModels
         {
             SearchCommand = new Command<string>(NewSearch);
             LoadMoreMembersCommand = new Command(SearchMore);
-            Search();
+            Task.Run(async () =>
+            {
+                await Search();
+            });
         }
 
 
@@ -56,7 +59,7 @@ namespace MME.Mobile.ViewModels
             // Search();
         }
 
-        private async void Search()
+        private async Task Search()
         {
             var busy = new BusyPage();
             await MopupService.Instance.PushAsync(busy);

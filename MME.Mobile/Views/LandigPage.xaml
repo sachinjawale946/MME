@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.LandigPage"
               xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
@@ -28,15 +31,30 @@
                 HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Image WidthRequest="250"  Aspect="Fill" Grid.Row="1" Grid.RowSpan="2" Margin="0,50,0,0" Source="logo.png" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"></Image>
         </Grid>
-        <Grid Grid.Row="1" VerticalOptions="CenterAndExpand">
+        <Grid Grid.Row="1" VerticalOptions="CenterAndExpand" WidthRequest="300">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/> 
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="Select language to continue"></Label>
-            <Picker FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" 
-              ItemsSource="{Binding Languages}" SelectedItem="{Binding Language, Mode=TwoWay}" ItemDisplayBinding="{Binding language}"></Picker>
+            <!--<Picker FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" 
+              ItemsSource="{Binding Languages}" SelectedItem="{Binding Language, Mode=TwoWay}" ItemDisplayBinding="{Binding language}"></Picker>-->
+            <inputLayout:SfTextInputLayout ContainerType="Outlined" ContainerBackground="{StaticResource SfTextInputLayoutBackground}" 
+                                                Grid.Row="1"  HeightRequest="70">
+                <editors:SfComboBox HeightRequest="70" Margin="0,0"
+                                                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="-- Select Language --" 
+                                                PlaceholderColor="#adb2bb" 
+                                                MaxDropDownHeight="400"
+                                                DisplayMemberPath="language"
+                                                TextMemberPath="language"
+                                                WidthRequest="300"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Style="{StaticResource SfComboBoxStyle}"
+                                                SelectedItem="{Binding Language, Mode=TwoWay}"
+                                                ItemsSource="{Binding Languages}">
+                </editors:SfComboBox>
+            </inputLayout:SfTextInputLayout>
             <Button Style="{StaticResource RedButton}" Command="{Binding NavigateCommand}" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" 
                     Text="Continue" />
         </Grid>

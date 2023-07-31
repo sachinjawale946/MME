@@ -21,7 +21,10 @@ namespace MME.Mobile.ViewModels
         {
             SearchCommand = new Command<string>(NewSearch);
             LoadMoreEventCommand = new Command(SearchMore);
-            Search();
+            Task.Run(async () =>
+            {
+                await Search();
+            });
         }
 
 
@@ -52,7 +55,7 @@ namespace MME.Mobile.ViewModels
            // Search();
         }
 
-        private async void Search()
+        private async Task Search()
         {
             var busy = new BusyPage();
             await MopupService.Instance.PushAsync(busy);
@@ -87,13 +90,13 @@ namespace MME.Mobile.ViewModels
             await MopupService.Instance.PopAsync(true);
         }
 
-        private void NewSearch(string SearchFilter = "")
+        private async void NewSearch(string SearchFilter = "")
         {
             Events = new ObservableCollection<EventResponseModel>();
             if (SearchModel == null) SearchModel = new EventRequestModel();
             SearchModel.page = 0;
             SearchModel.eventname = SearchFilter;
-            Search();
+            await Search();
         }
 
         public async void LikeAction(EventResponseModel like)
