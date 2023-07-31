@@ -40,11 +40,5 @@ public partial class ProfilePage : ContentPage
         txtMobile.IsEnabled = true;
     }
 
-    private void txtMaritalStatus_Completed(object sender, EventArgs e)
-    {
-        txtMaritalStatus.IsEnabled = false;
-        txtMaritalStatus.IsEnabled = true;
-    }
-
    
 }

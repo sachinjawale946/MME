@@ -18,102 +18,127 @@
     </ContentPage.Resources>
     <tabView:SfTabView x:Name="tabView">
         <tabView:SfTabView.Items>
-            <tabView:SfTabItem Header="Personal" FontFamily="OpenSansSemiBold" BackgroundColor="{StaticResource AppPrimaryBackground}">
+            <tabView:SfTabItem Header="Personal" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                            <RowDefinition Height="10"/>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                    <ScrollView>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding shownoimage}" Aspect="Fill" Margin="10,10,10,0" 
-               Source="{Binding Gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
-                        <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,10,0" 
+                            <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,10,0" 
+               Source="{Binding Profile.Gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
+                            <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,10,0" 
                Source="{Binding Profile.profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
 
-                        <Label Grid.Row="2" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="First Name" />
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry Completed="txtFirstName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                            <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="First Name" />
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry Completed="txtFirstName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtFirstName" MaxLength="50" Text="{Binding Profile.FirstName}"/>
-                        </inputLayout:SfTextInputLayout>
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="6" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Middle Name"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="8" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry Completed="txtMiddleName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                            <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Middle Name"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="8" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry Completed="txtMiddleName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtMiddleName" MaxLength="50" Text="{Binding Profile.MiddleName}"/>
-                        </inputLayout:SfTextInputLayout>
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="10" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Last Name"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="12" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry Completed="txtLastName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                            <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Last Name"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="12" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry Completed="txtLastName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtLastName" MaxLength="50" Text="{Binding Profile.LastName}"/>
-                        </inputLayout:SfTextInputLayout>
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="14" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Date Of Birth"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="16" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                            <Label Grid.Row="14" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Date Of Birth"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="16" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtBirthDate" MaxLength="50" Text="{Binding Profile.BirthDate}"/>
-                        </inputLayout:SfTextInputLayout>
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="18" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Mobile"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="20" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry Completed="txtMobile_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                            <Label Grid.Row="18" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Mobile"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="20" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry Completed="txtMobile_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtMobile" MaxLength="10" Text="{Binding Profile.Mobile}"/>
-                        </inputLayout:SfTextInputLayout>
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="22" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Gender"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="24" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
-                                   x:Name="txtGender" MaxLength="10" Text="{Binding Profile.Gender}"/>
-                        </inputLayout:SfTextInputLayout>
+                            <Label Grid.Row="22" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Gender"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="24" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <!--<Entry VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtGender" MaxLength="10" Text="{Binding Profile.Gender}"/>-->
+                                <editors:SfComboBox HeightRequest="60" Margin="10,0"
+                                                Placeholder="-- Select --" 
+                                                PlaceholderColor="#adb2bb" 
+                                                MaxDropDownHeight="400"
+                                                DisplayMemberPath="Value"
+                                                TextMemberPath="Value"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Style="{StaticResource SfComboBoxStyle}"
+                                                SelectedItem="{Binding Gender, Mode=TwoWay}"
+                                                ItemsSource="{Binding Genders}" />
+                            </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="26" VerticalOptions="End" HorizontalOptions="Start" Margin="10,10,10,0" Style="{StaticResource ControlLabel}" Text="Marital Status"/>
-                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="28" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                            <Entry Completed="txtMaritalStatus_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
-                                   x:Name="txtMaritalStatus" MaxLength="10" Text="{Binding Profile.MaritalStatus}"/>
-                        </inputLayout:SfTextInputLayout>
+                            <Label Grid.Row="26" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Marital Status"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="28" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <!--<Entry Completed="txtMaritalStatus_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtMaritalStatus" MaxLength="10" Text="{Binding Profile.MaritalStatus}"/>-->
+                                <editors:SfComboBox HeightRequest="60" Margin="10,0"
+                                                Placeholder="-- Select --" 
+                                                PlaceholderColor="#adb2bb" 
+                                                MaxDropDownHeight="400"
+                                                DisplayMemberPath="Value"
+                                                TextMemberPath="Value"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Style="{StaticResource SfComboBoxStyle}"
+                                                SelectedItem="{Binding MartialStatus, Mode=TwoWay}"
+                                                ItemsSource="{Binding MartialStatues}" />
+                            </inputLayout:SfTextInputLayout>
 
-                    </Grid>
+                        </Grid>
+                    </ScrollView>
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
-            <tabView:SfTabItem Header="Address" FontFamily="OpenSansSemiBold" BackgroundColor="{StaticResource AppPrimaryBackground}">
+            <tabView:SfTabItem Header="Address" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
                     <Grid />
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
 
-            <tabView:SfTabItem Header="Other" FontFamily="OpenSansSemiBold" BackgroundColor="{StaticResource AppPrimaryBackground}">
+            <tabView:SfTabItem Header="Other" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
                     <Grid/>
                 </tabView:SfTabItem.Content>
