@@ -19,6 +19,7 @@
     <ShellContent Title="Dashboard" Icon="dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" ></ShellContent>
     <ShellContent Title="Events" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
     <ShellContent Title="Members" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
+    <ShellContent Title="My Profile" Icon="profileicon" Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}" ></ShellContent>
     
     <MenuItem IconImageSource="logouticon.png" Text="Sign Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>

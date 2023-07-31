@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MME.Mobile.Views.ProfilePage"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             Shell.TabBarBackgroundColor="Azure"
+             Shell.BackgroundColor="{StaticResource AppPrimaryBackground}"
+             Title="My Profile">
+    <tabView:SfTabView x:Name="tabView">
+        <tabView:SfTabView.Items>
+            <tabView:SfTabItem Header="Personal" FontFamily="OpenSansSemiBold">
+                <tabView:SfTabItem.Content>
+                    <Grid />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+            <tabView:SfTabItem Header="Address" FontFamily="OpenSansSemiBold">
+                <tabView:SfTabItem.Content>
+                    <Grid />
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem Header="Other" FontFamily="OpenSansSemiBold">
+                <tabView:SfTabItem.Content>
+                    <Grid/>
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+        </tabView:SfTabView.Items>
+    </tabView:SfTabView>
+
+</ContentPage>

@@ -9,7 +9,6 @@ namespace MME.Mobile
         {
             // syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjYxMjc4OUAzMjMyMmUzMDJlMzBSOFM1S0cvajRKQWs2SXhpMXNrc1pKbm5LL0txK1JaY1haK05mdjhCb2I4PQ==");
-
             InitializeComponent();
             MainPage = new NavigationPage(new LandigPage());
         }
