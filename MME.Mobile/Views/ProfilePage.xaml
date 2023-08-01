@@ -152,7 +152,108 @@
             </tabView:SfTabItem>
             <tabView:SfTabItem Header="Address" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
-                    <Grid />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="House / Society / Building" />
+                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                            <Entry Completed="txtAddressLine_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtAddressLine" MaxLength="80" Text="{Binding Profile.Society}"/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Street / Locality / Area"/>
+                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="8" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                            <Entry Completed="txtArea_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtArea" MaxLength="50" Text="{Binding Profile.Area}"/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Landmark / Near By"/>
+                        <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="12" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                            <Entry Completed="txtLandmark_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtLandmark" MaxLength="50" Text="{Binding Profile.Landmark}"/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <Grid Grid.Row="14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                            </Grid.RowDefinitions>
+
+                            <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="City / Taluka"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Entry Completed="txtCity_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
+                                   x:Name="txtCity" MaxLength="50" Text="{Binding Profile.City}"/>
+                            </inputLayout:SfTextInputLayout>
+
+                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Mobile"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <editors:SfComboBox HeightRequest="60" Margin="10,0"
+                                                Placeholder="-- Select State --" 
+                                                PlaceholderColor="#adb2bb" 
+                                                MaxDropDownHeight="400"
+                                                DisplayMemberPath="state"
+                                                TextMemberPath="state"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Style="{StaticResource SfComboBoxStyle}"
+                                                SelectedItem="{Binding State, Mode=TwoWay}"
+                                                ItemsSource="{Binding States}" />
+                            </inputLayout:SfTextInputLayout>
+                        </Grid>
+
+                        <Grid Grid.Row="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="45"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Pincode"/>
+                            <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <editors:SfComboBox HeightRequest="60" Margin="10,0"
+                                                Placeholder="-- Select Pincode --" 
+                                                PlaceholderColor="#adb2bb" 
+                                                MaxDropDownHeight="400"
+                                                DisplayMemberPath="pincode"
+                                                TextMemberPath="pincode"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Style="{StaticResource SfComboBoxStyle}"
+                                                SelectedItem="{Binding Pincode, Mode=TwoWay}"
+                                                ItemsSource="{Binding Pincodes}" />
+                            </inputLayout:SfTextInputLayout>
+                        </Grid>
+                        
+                    </Grid>
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
 

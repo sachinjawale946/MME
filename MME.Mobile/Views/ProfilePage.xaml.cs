@@ -41,5 +41,27 @@ public partial class ProfilePage : ContentPage
         txtMobile.IsEnabled = true;
     }
 
-   
+    private void txtAddressLine_Completed(object sender, EventArgs e)
+    {
+        txtAddressLine.IsEnabled = false;
+        txtAddressLine.IsEnabled = true;
+    }
+
+    private void txtArea_Completed(object sender, EventArgs e)
+    {
+        txtArea.IsEnabled = false;
+        txtArea.IsEnabled = true;
+    }
+
+    private void txtLandmark_Completed(object sender, EventArgs e)
+    {
+        txtLandmark.IsEnabled = false;
+        txtLandmark.IsEnabled = true;
+    }
+
+    private void txtCity_Completed(object sender, EventArgs e)
+    {
+        txtCity.IsEnabled = false;
+        txtCity.IsEnabled = true;
+    }
 }

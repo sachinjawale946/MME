@@ -23,15 +23,16 @@ namespace MME.Web.Apis
             _context = context;
         }
 
-        [HttpGet, Route("~/api/v1/getpincodes")]
-        public List<PincodeResponseModel> Get()
+        [HttpGet, Route("~/api/v1/getpincodes-bystate/{State}")]
+        public List<PincodeResponseModel> GetByState(int State)
         {
-            return _context.Pincodes.Where(c => c.IsActive)
+            return _context.Pincodes.Where(c => c.IsActive && c.State == State)
                    .OrderBy(c => c.DisplayOrder)
                    .Select(o => new PincodeResponseModel
                    {
                        pincode = o.PinCode,
                        pincodeid = o.PinCodeId,
+                       stateId = o.State,
                    }).ToList();
         }
     }

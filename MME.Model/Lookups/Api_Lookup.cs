@@ -17,5 +17,7 @@ namespace MME.Model.Lookups
         public const string memberProfileApi = BaseApi + "/api/v1/members-getprofile/{0}";
         public const string eventSearchApi = BaseApi + "/api/v1/events-search";
         public const string eventFeedbackApi = BaseApi + "/api/v1/save-event-feedback";
+        public const string statesApi = BaseApi + "/api/v1/getstates";
+        public const string pincodesByStateApi = BaseApi + "/api/v1/getpincodes-bystate/{State}";
     }
 }

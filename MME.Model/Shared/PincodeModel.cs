@@ -13,6 +13,7 @@ namespace MME.Model.Shared
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PinCodeId { get; set; }
         public string PinCode { get; set; }
+        public int State { get; set; }
         public int DisplayOrder { get; set; }
         public bool IsActive { get; set; }
     }

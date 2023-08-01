@@ -10,5 +10,6 @@ namespace MME.Model.Response
     {
         public int pincodeid { get; set; }
         public string pincode { get; set; }
+        public int stateId { get; set; }
     }
 }

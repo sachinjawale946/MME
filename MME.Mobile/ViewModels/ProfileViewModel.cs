@@ -16,14 +16,59 @@ namespace MME.Mobile.ViewModels
     internal class ProfileViewModel : ViewModelBase
     {
         IMemberService _memberService = new MemberService();
+        ICommonService _commonService = new CommonService();
 
         public ProfileViewModel()
         {
             Task.Run(async () =>
             {
-                MasterData();
                 await GetProfile();
+                await MasterData();
             });
+        }
+
+        private List<StateResponseModel> _states;
+        public List<StateResponseModel> States
+        {
+            get { return _states; }
+            set
+            {
+                _states = value;
+                OnPropertyChanged(nameof(States));
+            }
+        }
+
+        private StateResponseModel _state;
+        public StateResponseModel State
+        {
+            get { return _state; }
+            set
+            {
+                _state = value;
+                OnPropertyChanged(nameof(State));
+            }
+        }
+
+        private List<PincodeResponseModel> _pincodes;
+        public List<PincodeResponseModel> Pincodes
+        {
+            get { return _pincodes; }
+            set
+            {
+                _pincodes = value;
+                OnPropertyChanged(nameof(Pincodes));
+            }
+        }
+
+        private PincodeResponseModel _pincode;
+        public PincodeResponseModel Pincode
+        {
+            get { return _pincode; }
+            set
+            {
+                _pincode = value;
+                OnPropertyChanged(nameof(Pincode));
+            }
         }
 
         private DateTime _maxBirthDate;
@@ -92,7 +137,17 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private void MasterData()
+        private async Task GetPincodes()
+        {
+            if(State == null) return;
+            Pincodes = await _commonService.GetPincodes(State.stateid);
+            if (Pincodes != null && Pincodes.Count > 0 && Profile != null && Convert.ToInt16(Profile.PincodeId) > 0)
+            {
+                Pincode = Pincodes.Where(s => s.pincodeid == Profile.PincodeId).FirstOrDefault();
+            }
+        }
+
+        private async Task MasterData()
         {
             Genders = new List<DropdownModel>
             {
@@ -107,6 +162,11 @@ namespace MME.Mobile.ViewModels
                 new DropdownModel{ Text = "Divorced", Value="Divorced" },
             };
             MaxBirthDate = DateTime.Now.AddYears(-1);
+            States = await _commonService.GetStates();
+            if (States != null && States.Count > 0 && Profile != null && Convert.ToInt16(Profile.StateId) > 0)
+            {
+                State = States.Where(s => s.stateid == Profile.StateId).FirstOrDefault();
+            }
         }
         private async Task GetProfile()
         {
@@ -126,7 +186,7 @@ namespace MME.Mobile.ViewModels
                     Profile.shownoimage = true;
                 }
 
-                if(!string.IsNullOrEmpty(Profile.Gender) && Genders != null && Genders.Count > 0)
+                if (!string.IsNullOrEmpty(Profile.Gender) && Genders != null && Genders.Count > 0)
                 {
                     Gender = Genders.Where(g => g.Value == Profile.Gender).FirstOrDefault();
                 }
