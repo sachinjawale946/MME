@@ -1,5 +1,6 @@
 ﻿using MME.Mobile.Views;
 using MME.Mobile.Helpers;
+using System.Globalization;
 
 namespace MME.Mobile
 {
@@ -24,6 +25,16 @@ namespace MME.Mobile
                 App.Current.MainPage = new AppShell();
                 Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
             }
+            SetLangaugeCode(Settings.language);
+        }
+
+        private void SetLangaugeCode(string LanguageCode)
+        {
+            if (string.IsNullOrEmpty(LanguageCode)) LanguageCode = "en";
+            CultureInfo language = new CultureInfo(LanguageCode);
+            Thread.CurrentThread.CurrentUICulture = language;
+            Resx.AppResources.Culture = language;
+            Settings.language = LanguageCode;
         }
     }
 }
