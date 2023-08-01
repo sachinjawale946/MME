@@ -22,12 +22,12 @@ namespace MME.Mobile.Services
         SnackbarOptions snackbarOptions = new SnackbarOptions
         {
             BackgroundColor = Colors.Red,
-            TextColor = Colors.Green,
+            TextColor = Colors.White,
             ActionButtonTextColor = Colors.Yellow,
-            CornerRadius = new CornerRadius(10),
-            Font = Microsoft.Maui.Font.SystemFontOfSize(14),
-            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(14),
-            CharacterSpacing = 0.5
+            CornerRadius = new CornerRadius(5),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+            CharacterSpacing = 0.1
         };
 
         public async Task<List<LanguageResponseModel>> GetLanguages()
