@@ -43,7 +43,7 @@ namespace MME.Mobile.Services
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    var _message = "Your session is expired, please relogin.";
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
                     var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                     await snackbar.Show(cancellationTokenSource.Token);
                 }
@@ -51,8 +51,8 @@ namespace MME.Mobile.Services
             }
             catch (Exception ex)
             {
-                var _message = "Some error occured, while processing your request. Please try again later.";
-                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new List<EventResponseModel>());
             }
@@ -74,7 +74,7 @@ namespace MME.Mobile.Services
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    var _message = "Your session is expired, please relogin.";
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
                     var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                     await snackbar.Show(cancellationTokenSource.Token);
                 }
@@ -82,8 +82,8 @@ namespace MME.Mobile.Services
             }
             catch (Exception ex)
             {
-                var _message = "Some error occured, while processing your request. Please try again later.";
-                var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new EventFeedbackResponseModel());
             }

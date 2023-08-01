@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MME.Mobile.Views.Login"
-               xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
-              Title="Login" NavigationPage.HasNavigationBar="False">
+             xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:resource="clr-namespace:MME.Mobile.Resx"
+             NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300"/>
@@ -37,13 +38,13 @@
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label VerticalOptions="End" Grid.Row="0" Margin="10,0,0,0" Text="Username" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
+            <Label VerticalOptions="End" Grid.Row="0" Margin="10,0,0,0" Text="{x:Static resource:AppResources.Username}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
 
             <Entry x:Name="LoginEntry"  Grid.Row="1" Margin="10,0,10,0" Completed="LoginEntry_Completed" HeightRequest="40" VerticalOptions="Center"
                    VerticalTextAlignment="Center" Text="{Binding UserModel.username, Mode=TwoWay}" MaxLength="15">
             </Entry>
 
-            <Label VerticalOptions="End" Grid.Row="2" Margin="10,0,0,0" Text="Password" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
+            <Label VerticalOptions="End" Grid.Row="2" Margin="10,0,0,0" Text="{x:Static resource:AppResources.Password}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
 
             <Entry IsPassword="True" x:Name="PasswordEntry" Grid.Row="3" Margin="10,0,10,0"  Completed="PasswordEntry_Completed" 
                    VerticalOptions="Center" HeightRequest="40" VerticalTextAlignment="Center" Text="{Binding UserModel.password, Mode=TwoWay}" MaxLength="10" />
@@ -55,9 +56,9 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Button MaximumWidthRequest="200" MinimumWidthRequest="150" HorizontalOptions="Start" Grid.Column="0" Text="Login" Margin="10,0,10,0" FontAttributes="Bold" HeightRequest="45" Style="{StaticResource BlackButton}" Command="{Binding LoginCommand}" VerticalOptions="Center"/>
+                <Button MaximumWidthRequest="200" MinimumWidthRequest="150" HorizontalOptions="Start" Grid.Column="0" Text="{x:Static resource:AppResources.Login}" Margin="10,0,10,0" FontAttributes="Bold" HeightRequest="45" Style="{StaticResource BlackButton}" Command="{Binding LoginCommand}" VerticalOptions="Center"/>
 
-                <Button x:Name="ForgotPasswordButton" MaximumWidthRequest="200" HorizontalOptions="End" Grid.Column="1" FontAttributes="Bold" HeightRequest="45" Text="Forgot Password" Style="{StaticResource RedButton}" Command="{Binding ForgotPasswordCommand}" Margin="10,0,10,0" VerticalOptions="Center"/>
+                <Button x:Name="ForgotPasswordButton" MaximumWidthRequest="200" HorizontalOptions="End" Grid.Column="1" FontAttributes="Bold" HeightRequest="45" Text="{x:Static resource:AppResources.ForgotPassword}" Style="{StaticResource RedButton}" Command="{Binding ForgotPasswordCommand}" Margin="10,0,10,0" VerticalOptions="Center"/>
             </Grid>
 
         </Grid>
@@ -68,7 +69,7 @@
                 </Path.Fill>
             </Path>
             <Label TextColor="#FFF" FontSize="Micro" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="10,0,0,0" Style="{StaticResource ControlLabel}" 
-                   Text="Dear User, if you have any trouble while using a app or need any assistance, please reach out to us at support@mme.com or +91 (888)-888-8888." ></Label>
+                   Text="{x:Static resource:AppResources.StaticFooterLine}" ></Label>
         </Grid>
     </Grid>
 </ContentPage>

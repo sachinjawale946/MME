@@ -64,7 +64,7 @@ namespace MME.Mobile.ViewModels
         {
             if(UserModel == null || string.IsNullOrEmpty(UserModel.username.Trim()) || string.IsNullOrEmpty(UserModel.password.Trim()))
             {
-                var _message = "Username and Password both are manadatory fields";
+                var _message = Resx.AppResources.Validation_Message_Language_Selection;
                 var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return;

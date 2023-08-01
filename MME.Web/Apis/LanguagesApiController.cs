@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MME.Data;
 using MME.Model.Response;
+using MME.Model.Shared;
 using MME.Web.Filters;
 
 namespace MME.Web.Apis
@@ -30,6 +31,7 @@ namespace MME.Web.Apis
                    {
                        language  = o.Language,
                        languageid = o.LanguageId,
+                       languagecode = o.LanguageCode
                    }).ToList();
         }
     }

@@ -6,6 +6,7 @@
               xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:resource="clr-namespace:MME.Mobile.Resx"
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
@@ -37,13 +38,11 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="Select language to continue"></Label>
-            <!--<Picker FontSize="Subtitle" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" 
-              ItemsSource="{Binding Languages}" SelectedItem="{Binding Language, Mode=TwoWay}" ItemDisplayBinding="{Binding language}"></Picker>-->
+            <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="{x:Static resource:AppResources.SelectLanguage}"></Label>
             <inputLayout:SfTextInputLayout ContainerType="Outlined"
                                                 Grid.Row="1"  HeightRequest="70">
                 <editors:SfComboBox HeightRequest="70" Margin="0,0"
-                                                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="-- Select Language --" 
+                                                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="{x:Static resource:AppResources.SelectLanguagePlaceholder}" 
                                                 PlaceholderColor="#adb2bb" 
                                                 MaxDropDownHeight="400"
                                                 DisplayMemberPath="language"
@@ -56,7 +55,7 @@
                 </editors:SfComboBox>
             </inputLayout:SfTextInputLayout>
             <Button Style="{StaticResource RedButton}" Command="{Binding NavigateCommand}" MinimumWidthRequest="300" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" 
-                    Text="Continue" />
+                    Text="{x:Static resource:AppResources.Continue}" />
         </Grid>
         <Grid Grid.Row="2" Margin="0">
             <Path Rotation="180" HeightRequest="100" VerticalOptions="Fill" Aspect="Fill" HorizontalOptions="Fill" Stroke="{StaticResource AppBorderColor}" Data="m163.98106,117.29l516.00002,0l0,231.50484c-91.00001,90 -413.00001,-34.79241 -516.00002,38.08965l0,-269.59449z">
@@ -65,7 +64,7 @@
                 </Path.Fill>
             </Path>
             <Label TextColor="#FFF" FontSize="Micro" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="10,0,0,0" Style="{StaticResource ControlLabel}" 
-                   Text="Dear User, if you have any trouble while using a app or need any assistance, please reach out to us at support@mme.com or +91 (888)-888-8888." ></Label>
+                   Text="{x:Static resource:AppResources.StaticFooterLine}" ></Label>
         </Grid>
     </Grid>
 </ContentPage>

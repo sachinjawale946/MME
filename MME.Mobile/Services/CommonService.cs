@@ -34,11 +34,17 @@ namespace MME.Mobile.Services
                 {
                     return JsonConvert.DeserializeObject<List<PincodeResponseModel>>(response.Content.ReadAsStringAsync().Result);
                 }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
                 return await Task.FromResult(new List<PincodeResponseModel>());
             }
             catch (Exception ex)
             {
-                var errorMessage = "Some error occured, while processing your request. Please try again later.";
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, null, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new List<PincodeResponseModel>());
@@ -58,11 +64,17 @@ namespace MME.Mobile.Services
                 {
                     return JsonConvert.DeserializeObject<List<StateResponseModel>>(response.Content.ReadAsStringAsync().Result);
                 }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
                 return await Task.FromResult(new List<StateResponseModel>());
             }
             catch (Exception ex)
             {
-                var errorMessage = "Some error occured, while processing your request. Please try again later.";
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, null, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new List<StateResponseModel>());

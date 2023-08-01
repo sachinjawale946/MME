@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
+using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
 using MME.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -70,15 +72,25 @@ namespace MME.Mobile.ViewModels
              Languages = await _languageService.GetLanguages();
         }
 
+        public void SetLangaugeCode(string LanguageCode)
+        {
+            if (string.IsNullOrEmpty(LanguageCode)) LanguageCode = "en";
+            CultureInfo language = new CultureInfo(LanguageCode);
+            Thread.CurrentThread.CurrentUICulture = language;
+            Resx.AppResources.Culture = language;
+            Settings.language = LanguageCode;
+        }
+
         private async void OnNavigate()
         {
             if (Language != null && Language.languageid > 0)
             {
+                SetLangaugeCode(Language.languagecode);
                 await page.Navigation.PushAsync(new Login(), true);
             }
             else
             {
-                var _message = "Please select language to continue";
+                var _message = Resx.AppResources.Validation_Message_Language_Selection;
                 var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
             }

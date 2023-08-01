@@ -9,7 +9,8 @@
              xmlns:convertes="clr-namespace:MME.Mobile.Converters"
              xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             Title="My Profile">
+             xmlns:resource="clr-namespace:MME.Mobile.Resx"
+             Title="{x:Static resource:AppResources.MyProfile}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
@@ -18,7 +19,7 @@
     </ContentPage.Resources>
     <tabView:SfTabView x:Name="tabView">
         <tabView:SfTabView.Items>
-            <tabView:SfTabItem Header="Personal" FontFamily="OpenSansSemiBold">
+            <tabView:SfTabItem Header="{x:Static resource:AppResources.Personal}" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
                     <ScrollView>
                         <Grid>
@@ -44,21 +45,6 @@
                                 <RowDefinition Height="10"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="10"/>
-                                <!--<RowDefinition Height="30"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="45"/>
-                                <RowDefinition Height="0"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="45"/>
-                                <RowDefinition Height="0"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="45"/>
-                                <RowDefinition Height="0"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition />-->
                             </Grid.RowDefinitions>
 
                             <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,10,0" 
@@ -66,19 +52,19 @@
                             <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding showprofileimage}" Aspect="AspectFit" Margin="10,10,10,0" 
                Source="{Binding Profile.profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
 
-                            <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="First Name" />
+                            <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.FirstName}" />
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <Entry Completed="txtFirstName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtFirstName" MaxLength="50" Text="{Binding Profile.FirstName}"/>
                             </inputLayout:SfTextInputLayout>
 
-                            <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Middle Name"/>
+                            <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.MiddleName}"/>
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="8" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <Entry Completed="txtMiddleName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtMiddleName" MaxLength="50" Text="{Binding Profile.MiddleName}"/>
                             </inputLayout:SfTextInputLayout>
 
-                            <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Last Name"/>
+                            <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.LastName}"/>
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="12" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <Entry Completed="txtLastName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtLastName" MaxLength="50" Text="{Binding Profile.LastName}"/>
@@ -94,13 +80,13 @@
                                     <RowDefinition Height="10"/>
                                     <RowDefinition Height="45"/>
                                 </Grid.RowDefinitions>
-                                
-                                <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Date Of Birth"/>
+
+                                <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.DateOfBirth}"/>
                                 <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                     <DatePicker HeightRequest="40" Margin="10,0,10,0" x:Name="txtBirthDate" Date="{Binding Profile.BirthDate}" MaximumDate="{Binding MaxBirthDate}"/>
                                 </inputLayout:SfTextInputLayout>
 
-                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Mobile"/>
+                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.Mobile}"/>
                                 <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                     <Entry Completed="txtMobile_Completed" VerticalOptions="Center" HeightRequest="40" Margin="10,0,10,0"  
                                    x:Name="txtMobile" MaxLength="10" Text="{Binding Profile.Mobile}"/>
@@ -117,7 +103,7 @@
                                     <RowDefinition Height="10"/>
                                     <RowDefinition Height="45"/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Gender"/>
+                                <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.Gender}"/>
                                 <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                     <editors:SfComboBox HeightRequest="60" Margin="10,0"
                                                 Placeholder="-- Select --" 
@@ -131,7 +117,7 @@
                                                 ItemsSource="{Binding Genders}" />
                                 </inputLayout:SfTextInputLayout>
 
-                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Marital Status"/>
+                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.MaritalStatus}"/>
                                 <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                     <editors:SfComboBox HeightRequest="60" Margin="10,0"
                                                 Placeholder="-- Select --" 
@@ -150,7 +136,7 @@
                     </ScrollView>
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
-            <tabView:SfTabItem Header="Address" FontFamily="OpenSansSemiBold">
+            <tabView:SfTabItem Header="{x:Static resource:AppResources.Address}" FontFamily="OpenSansSemiBold">
                 <tabView:SfTabItem.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -177,19 +163,19 @@
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="House / Society / Building" />
+                        <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.HouseSocietyBuilding}" />
                         <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                             <Entry Completed="txtAddressLine_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtAddressLine" MaxLength="80" Text="{Binding Profile.Society}"/>
                         </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Street / Locality / Area"/>
+                        <Label Grid.Row="6" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.StreetLocalityArea}"/>
                         <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="8" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                             <Entry Completed="txtArea_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtArea" MaxLength="50" Text="{Binding Profile.Area}"/>
                         </inputLayout:SfTextInputLayout>
 
-                        <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Landmark / Near By"/>
+                        <Label Grid.Row="10" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.LandmarkNearBy}"/>
                         <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="12" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                             <Entry Completed="txtLandmark_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtLandmark" MaxLength="50" Text="{Binding Profile.Landmark}"/>
@@ -206,16 +192,16 @@
                                 <RowDefinition Height="45"/>
                             </Grid.RowDefinitions>
 
-                            <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="City / Taluka"/>
+                            <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.CityTaluka}"/>
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <Entry Completed="txtCity_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
                                    x:Name="txtCity" MaxLength="50" Text="{Binding Profile.City}"/>
                             </inputLayout:SfTextInputLayout>
 
-                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="State"/>
+                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.State}"/>
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <editors:SfComboBox HeightRequest="60" Margin="10,0"
-                                                Placeholder="-- Select State --" 
+                                                Placeholder="{x:Static resource:AppResources.SelectState}" 
                                                 PlaceholderColor="#adb2bb" 
                                                 MaxDropDownHeight="400"
                                                 DisplayMemberPath="state"
@@ -238,10 +224,10 @@
                                 <RowDefinition Height="45"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="Pincode"/>
+                            <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource ControlLabel}" Text="{x:Static resource:AppResources.Pincode}"/>
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <editors:SfComboBox HeightRequest="60" Margin="10,0"
-                                                Placeholder="-- Select Pincode --" 
+                                                Placeholder="{x:Static resource:AppResources.SelectPincode}" 
                                                 PlaceholderColor="#adb2bb" 
                                                 MaxDropDownHeight="400"
                                                 DisplayMemberPath="pincode"

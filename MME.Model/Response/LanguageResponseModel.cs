@@ -10,5 +10,6 @@ namespace MME.Model.Response
     {
         public int languageid { get; set; }
         public string language { get; set; }
+        public string languagecode { get; set; }
     }
 }

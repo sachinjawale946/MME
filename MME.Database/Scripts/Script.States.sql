@@ -122,24 +122,24 @@ VALUES
 
 -- LANGUAGES
 INSERT INTO tblLanguages
-(Language,DisplayOrder, IsActive)
+(Language, LanguageCode,DisplayOrder, IsActive)
 VALUES
-('English',1,1)
+('English','en',1,1)
 
 INSERT INTO tblLanguages
-(Language,DisplayOrder,IsActive)
+(Language, LanguageCode, DisplayOrder,IsActive)
 VALUES
-('Hindi',2,1)
+('Hindi','hn',2,1)
 
 INSERT INTO tblLanguages
-(Language,DisplayOrder,IsActive)
+(Language, LanguageCode, DisplayOrder,IsActive)
 VALUES
-('Marathi',3,1)
+('Marathi','mr',3,1)
 
 INSERT INTO tblLanguages
-(Language,DisplayOrder,IsActive)
+(Language, LanguageCode, DisplayOrder,IsActive)
 VALUES
-('Gujrati',4,1)
+('Gujrati','gj',4,1)
 -- LANGUAGES
 
 -- OCCUPATIONS

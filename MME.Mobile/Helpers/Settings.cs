@@ -113,6 +113,18 @@ namespace MME.Mobile.Helpers
                 AppSettings.AddOrUpdateValue("gender", value);
             }
         }
+
+        public static string language
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("language", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("language", value);
+            }
+        }
         
     }
 }

@@ -49,7 +49,7 @@ namespace MME.Mobile.Services
             }
             catch (Exception ex)
             {
-                var errorMessage = "Some error occured, while processing your request. Please try again later.";
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, null, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new AuthenticationResponseModel());
