@@ -118,135 +118,135 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>पता</value>
   </data>
   <data name="BackToLogin" xml:space="preserve">
-    <value>Back To Login</value>
+    <value>लॉगिन पर वापस जाएं</value>
   </data>
   <data name="CityTaluka" xml:space="preserve">
-    <value>City / Taluka</value>
+    <value>शहर / तालुका</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>आगे बढिये</value>
   </data>
   <data name="DashBoard" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>डैशबोर्ड</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>तारीख</value>
   </data>
   <data name="DateOfBirth" xml:space="preserve">
-    <value>Date Of Birth</value>
+    <value>जन्म की तारीख</value>
   </data>
   <data name="Events" xml:space="preserve">
-    <value>Events</value>
+    <value>इव्हेंट्स</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>First Name</value>
+    <value>प्रथम नाम</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot Password</value>
+    <value>पासवर्ड भूल गए</value>
   </data>
   <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
+    <value>लिंग</value>
   </data>
   <data name="HouseSocietyBuilding" xml:space="preserve">
-    <value>House / Society / Building</value>
+    <value>घर नंबर / सोसायटी </value>
   </data>
   <data name="LandmarkNearBy" xml:space="preserve">
-    <value>Landmark / Near By</value>
+    <value>सीमाचिह्न / आस-पास</value>
   </data>
   <data name="LastName" xml:space="preserve">
-    <value>Last Name</value>
+    <value>कुलनाम</value>
   </data>
   <data name="Location" xml:space="preserve">
-    <value>Location</value>
+    <value>जगह</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>लॉग इन</value>
   </data>
   <data name="MaritalStatus" xml:space="preserve">
-    <value>Marital Status</value>
+    <value>वैवाहिक स्थिति</value>
   </data>
   <data name="Members" xml:space="preserve">
-    <value>Members</value>
+    <value>सदस्य</value>
   </data>
   <data name="MiddleName" xml:space="preserve">
-    <value>Middle Name</value>
+    <value>उपनाम</value>
   </data>
   <data name="Mobile" xml:space="preserve">
-    <value>Mobile</value>
+    <value>मोबाईल</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
-    <value>My Profile</value>
+    <value>मेरी प्रोफाइल</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>नाम</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>पासवर्ड</value>
   </data>
   <data name="Personal" xml:space="preserve">
-    <value>Personal</value>
+    <value>निजी</value>
   </data>
   <data name="Pincode" xml:space="preserve">
-    <value>Pincode</value>
+    <value>पिन कोड</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>Please Wait...</value>
+    <value>कृपया प्रतीक्षा करें...</value>
   </data>
   <data name="Profession" xml:space="preserve">
-    <value>Profession</value>
+    <value>पेशा</value>
   </data>
   <data name="Profile" xml:space="preserve">
-    <value>Profile</value>
+    <value>प्रोफ़ाइल</value>
   </data>
   <data name="SearchEvents" xml:space="preserve">
-    <value>Search Events</value>
+    <value>इव्हेंट्स खोजे</value>
   </data>
   <data name="SearchMembers" xml:space="preserve">
-    <value>Search Members</value>
+    <value>सदस्य खोजे</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
-    <value>Select language to continue</value>
+    <value>जारी रखने के लिए भाषा चुनें</value>
   </data>
   <data name="SelectLanguagePlaceholder" xml:space="preserve">
-    <value>-- Select Language --</value>
+    <value>-- भाषा चुने --</value>
   </data>
   <data name="SelectPincode" xml:space="preserve">
-    <value>-- Select Pincode --</value>
+    <value>-- पिनकोड चुनें --</value>
   </data>
   <data name="SelectState" xml:space="preserve">
-    <value>-- Select State --</value>
+    <value>-- राज्य चुनें --</value>
   </data>
   <data name="ShellFooterLine" xml:space="preserve">
-    <value>All rights reserved @MME.</value>
+    <value>सर्वाधिकार सुरक्षित @MME.</value>
   </data>
   <data name="State" xml:space="preserve">
-    <value>State</value>
+    <value>राज्य</value>
   </data>
   <data name="StaticFooterLine" xml:space="preserve">
-    <value>Dear User, if you have any trouble while using a app or need any assistance, please reach out to us at support@mme.com or +91 (888)-888-8888.</value>
+    <value>प्रिय उपयोगकर्ता, यदि आपको ऐप का उपयोग करते समय कोई परेशानी हो या किसी सहायता की आवश्यकता हो, तो कृपया support@mme.com या +91 (888)-888-8888 पर हमसे संपर्क करें।</value>
   </data>
   <data name="StreetLocalityArea" xml:space="preserve">
-    <value>Street / Locality / Area</value>
+    <value>गली  /मुहल्ला / क्षेत्र</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>उपयोगकर्ता नाम</value>
   </data>
   <data name="Validation_Message_Api_Error" xml:space="preserve">
-    <value>Some error occured, while processing your request. Please try again later.</value>
+    <value>आपके अनुरोध को संसाधित करते समय कुछ त्रुटि उत्पन्न हुई। कृपया बाद में पुन: प्रयास करें।</value>
   </data>
   <data name="Validation_Message_Language_Selection" xml:space="preserve">
-    <value>Please select language to continue</value>
+    <value>कृपया जारी रखने के लिए भाषा चुनें</value>
   </data>
   <data name="Validation_Message_Login_Fields" xml:space="preserve">
-    <value>Username and Password both are manadatory fields</value>
+    <value>उपयोगकर्ता नाम और पासवर्ड दोनों अनिवार्य हैं</value>
   </data>
   <data name="Validation_Message_Session_Expired" xml:space="preserve">
-    <value>Your session is expired, please relogin.</value>
+    <value>आपका सत्र समाप्त हो गया है, कृपया पुनः लॉगिन करें।</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome,</value>
+    <value>स्वागत,</value>
   </data>
 </root>

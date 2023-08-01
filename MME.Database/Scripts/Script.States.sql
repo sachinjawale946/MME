@@ -129,7 +129,7 @@ VALUES
 INSERT INTO tblLanguages
 (Language, LanguageCode, DisplayOrder,IsActive)
 VALUES
-('Hindi','hn',2,1)
+('Hindi','hi',2,1)
 
 INSERT INTO tblLanguages
 (Language, LanguageCode, DisplayOrder,IsActive)
