@@ -81,8 +81,8 @@ namespace MME.Mobile.ViewModels
         private List<CasteResponseModel> _castes;
         public List<CasteResponseModel> Castes
         {
-            get 
-            { 
+            get
+            {
                 return _castes;
             }
             set
@@ -244,16 +244,45 @@ namespace MME.Mobile.ViewModels
                 new DropdownModel{ Text = "Unmarried", Value="Unmarried" },
                 new DropdownModel{ Text = "Divorced", Value="Divorced" },
             };
-
             States = await _commonService.GetStates();
+            Occupations = await _commonService.GetOccupations();
+            Religions = await _commonService.GetReligions();
+            Castes = await _commonService.GetCastes();
+            SetDropdownSelections();
+        }
+
+        private void SetDropdownSelections()
+        {
             if (States != null && States.Count > 0 && Profile != null && Convert.ToInt16(Profile.StateId) > 0)
             {
                 State = States.Where(s => s.stateid == Profile.StateId).FirstOrDefault();
             }
-            Occupations = await _commonService.GetOccupations();
-            Religions = await _commonService.GetReligions();
-            Castes = await _commonService.GetCastes();
+            if (Occupations != null && Occupations.Count > 0 && Profile != null && Convert.ToInt16(Profile.OccupationId) > 0)
+            {
+
+                Occupation = Occupations.Where(o => o.occupationid == Profile.OccupationId).FirstOrDefault();
+            }
+            if (Religions != null && Religions.Count > 0 && Profile != null && Convert.ToInt16(Profile.ReligionId) > 0)
+            {
+
+                Religion = Religions.Where(o => o.religionid == Profile.ReligionId).FirstOrDefault();
+            }
+            if (Castes != null && Castes.Count > 0 && Profile != null && Convert.ToInt16(Profile.CasteId) > 0)
+            {
+
+                Caste = Castes.Where(o => o.casteid == Profile.CasteId).FirstOrDefault();
+            }
+            if (!string.IsNullOrEmpty(Profile.Gender) && Genders != null && Genders.Count > 0)
+            {
+                Gender = Genders.Where(g => g.Value == Profile.Gender).FirstOrDefault();
+            }
+
+            if (!string.IsNullOrEmpty(Profile.MaritalStatus) && MartialStatues != null && MartialStatues.Count > 0)
+            {
+                MartialStatus = MartialStatues.Where(g => g.Value == Profile.MaritalStatus).FirstOrDefault();
+            }
         }
+
         private async Task GetProfile()
         {
             var busy = new BusyPage();
@@ -272,15 +301,7 @@ namespace MME.Mobile.ViewModels
                     Profile.shownoimage = true;
                 }
 
-                if (!string.IsNullOrEmpty(Profile.Gender) && Genders != null && Genders.Count > 0)
-                {
-                    Gender = Genders.Where(g => g.Value == Profile.Gender).FirstOrDefault();
-                }
-
-                if (!string.IsNullOrEmpty(Profile.MaritalStatus) && MartialStatues != null && MartialStatues.Count > 0)
-                {
-                    MartialStatus = MartialStatues.Where(g => g.Value == Profile.MaritalStatus).FirstOrDefault();
-                }
+                SetDropdownSelections();
             }
             else
             {
