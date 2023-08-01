@@ -26,6 +26,17 @@ namespace MME.Mobile.ViewModels
             });
         }
 
+        private DateTime _maxBirthDate;
+        public DateTime MaxBirthDate
+        {
+            get { return _maxBirthDate; }
+            set
+            {
+                _maxBirthDate = value;
+                OnPropertyChanged(nameof(MaxBirthDate));
+            }
+        }
+
         private ProfileResponseModel _profile;
         public ProfileResponseModel Profile
         {
@@ -95,6 +106,7 @@ namespace MME.Mobile.ViewModels
                 new DropdownModel{ Text = "Unmarried", Value="Unmarried" },
                 new DropdownModel{ Text = "Divorced", Value="Divorced" },
             };
+            MaxBirthDate = DateTime.Now.AddYears(-1);
         }
         private async Task GetProfile()
         {

@@ -11,6 +11,7 @@ public partial class ProfilePage : ContentPage
 
     protected override void OnAppearing()
     {
+        // txtBirthDate.MaximumDate = DateTime.Now.AddDays(-1);
         this.BindingContext = new ProfileViewModel();
         base.OnAppearing();
     }
