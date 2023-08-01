@@ -25,5 +25,8 @@ public partial class Dashboard : ContentPage
         await MembersImage.RotateTo(360, 4000);
         await MembersImage.ScaleTo(2, 2000);
         await MembersImage.ScaleTo(1, 2000);
+        await ProfileImage.RotateTo(360, 4000);
+        await ProfileImage.ScaleTo(2, 2000);
+        await ProfileImage.ScaleTo(1, 2000);
     }
 }

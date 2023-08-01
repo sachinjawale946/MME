@@ -28,6 +28,84 @@ namespace MME.Mobile.ViewModels
             });
         }
 
+        private List<OccupationResponseModel> _occupations;
+        public List<OccupationResponseModel> Occupations
+        {
+            get { return _occupations; }
+            set
+            {
+                _occupations = value;
+                OnPropertyChanged(nameof(Occupations));
+            }
+        }
+
+        private OccupationResponseModel _occupation;
+        public OccupationResponseModel Occupation
+        {
+            get
+            {
+                return _occupation;
+            }
+            set
+            {
+                _occupation = value;
+                OnPropertyChanged(nameof(Occupation));
+            }
+        }
+
+        private List<ReligionResponseModel> _religions;
+        public List<ReligionResponseModel> Religions
+        {
+            get { return _religions; }
+            set
+            {
+                _religions = value;
+                OnPropertyChanged(nameof(Religions));
+            }
+        }
+
+        private ReligionResponseModel _religion;
+        public ReligionResponseModel Religion
+        {
+            get
+            {
+                return _religion;
+            }
+            set
+            {
+                _religion = value;
+                OnPropertyChanged(nameof(Religion));
+            }
+        }
+
+        private List<CasteResponseModel> _castes;
+        public List<CasteResponseModel> Castes
+        {
+            get 
+            { 
+                return _castes;
+            }
+            set
+            {
+                _castes = value;
+                OnPropertyChanged(nameof(Castes));
+            }
+        }
+
+        private CasteResponseModel _caste;
+        public CasteResponseModel Caste
+        {
+            get
+            {
+                return _caste;
+            }
+            set
+            {
+                _caste = value;
+                OnPropertyChanged(nameof(Caste));
+            }
+        }
+
         private List<StateResponseModel> _states;
         public List<StateResponseModel> States
         {
@@ -172,6 +250,9 @@ namespace MME.Mobile.ViewModels
             {
                 State = States.Where(s => s.stateid == Profile.StateId).FirstOrDefault();
             }
+            Occupations = await _commonService.GetOccupations();
+            Religions = await _commonService.GetReligions();
+            Castes = await _commonService.GetCastes();
         }
         private async Task GetProfile()
         {

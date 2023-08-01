@@ -123,6 +123,9 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>लॉगिन पर वापस जाएं</value>
   </data>
+  <data name="Caste" xml:space="preserve">
+    <value>जाति</value>
+  </data>
   <data name="CityTaluka" xml:space="preserve">
     <value>शहर / तालुका</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="DateOfBirth" xml:space="preserve">
     <value>जन्म की तारीख</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ईमेल</value>
   </data>
   <data name="Events" xml:space="preserve">
     <value>इव्हेंट्स</value>
@@ -183,11 +189,17 @@
   <data name="Name" xml:space="preserve">
     <value>नाम</value>
   </data>
+  <data name="Occupation" xml:space="preserve">
+    <value>नौकरी / पेशा</value>
+  </data>
+  <data name="OtherDetails" xml:space="preserve">
+    <value>अन्य विवरण</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>पासवर्ड</value>
   </data>
-  <data name="Personal" xml:space="preserve">
-    <value>निजी</value>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>प्राथमिक विवरण</value>
   </data>
   <data name="Pincode" xml:space="preserve">
     <value>पिन कोड</value>
@@ -201,11 +213,17 @@
   <data name="Profile" xml:space="preserve">
     <value>प्रोफ़ाइल</value>
   </data>
+  <data name="Religion" xml:space="preserve">
+    <value>धर्म</value>
+  </data>
   <data name="SearchEvents" xml:space="preserve">
     <value>इव्हेंट्स खोजे</value>
   </data>
   <data name="SearchMembers" xml:space="preserve">
     <value>सदस्य खोजे</value>
+  </data>
+  <data name="SelectCaste" xml:space="preserve">
+    <value>जाति चुनें</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
     <value>जारी रखने के लिए भाषा चुनें</value>
@@ -213,8 +231,14 @@
   <data name="SelectLanguagePlaceholder" xml:space="preserve">
     <value>-- भाषा चुने --</value>
   </data>
+  <data name="SelectOccupation" xml:space="preserve">
+    <value>नौकरी / पेशा चुनें</value>
+  </data>
   <data name="SelectPincode" xml:space="preserve">
     <value>-- पिनकोड चुनें --</value>
+  </data>
+  <data name="SelectReligion" xml:space="preserve">
+    <value>धर्म चुनें</value>
   </data>
   <data name="SelectState" xml:space="preserve">
     <value>-- राज्य चुनें --</value>
@@ -233,6 +257,9 @@
   </data>
   <data name="StreetLocalityArea" xml:space="preserve">
     <value>गली  /मुहल्ला / क्षेत्र</value>
+  </data>
+  <data name="SubCaste" xml:space="preserve">
+    <value>उप जाति</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>उपयोगकर्ता नाम</value>

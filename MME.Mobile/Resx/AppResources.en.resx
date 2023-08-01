@@ -123,6 +123,9 @@
   <data name="BackToLogin" xml:space="preserve">
     <value>Back To Login</value>
   </data>
+  <data name="Caste" xml:space="preserve">
+    <value>Caste</value>
+  </data>
   <data name="CityTaluka" xml:space="preserve">
     <value>City / Taluka</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="DateOfBirth" xml:space="preserve">
     <value>Date Of Birth</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Events" xml:space="preserve">
     <value>Events</value>
@@ -183,11 +189,17 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Occupation" xml:space="preserve">
+    <value>Job / Profession</value>
+  </data>
+  <data name="OtherDetails" xml:space="preserve">
+    <value>Other Details</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Personal" xml:space="preserve">
-    <value>Personal</value>
+  <data name="PersonalDetails" xml:space="preserve">
+    <value>Primary Details</value>
   </data>
   <data name="Pincode" xml:space="preserve">
     <value>Pincode</value>
@@ -201,11 +213,17 @@
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="Religion" xml:space="preserve">
+    <value>Religion</value>
+  </data>
   <data name="SearchEvents" xml:space="preserve">
     <value>Search Events</value>
   </data>
   <data name="SearchMembers" xml:space="preserve">
     <value>Search Members</value>
+  </data>
+  <data name="SelectCaste" xml:space="preserve">
+    <value>Select Caste</value>
   </data>
   <data name="SelectLanguage" xml:space="preserve">
     <value>Select language to continue</value>
@@ -213,8 +231,14 @@
   <data name="SelectLanguagePlaceholder" xml:space="preserve">
     <value>-- Select Language --</value>
   </data>
+  <data name="SelectOccupation" xml:space="preserve">
+    <value>Select Job / Profession</value>
+  </data>
   <data name="SelectPincode" xml:space="preserve">
     <value>-- Select Pincode --</value>
+  </data>
+  <data name="SelectReligion" xml:space="preserve">
+    <value>Select Religion</value>
   </data>
   <data name="SelectState" xml:space="preserve">
     <value>-- Select State --</value>
@@ -233,6 +257,9 @@
   </data>
   <data name="StreetLocalityArea" xml:space="preserve">
     <value>Street / Locality / Area</value>
+  </data>
+  <data name="SubCaste" xml:space="preserve">
+    <value>Sub Caste</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

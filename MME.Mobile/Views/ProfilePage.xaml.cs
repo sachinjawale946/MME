@@ -64,4 +64,12 @@ public partial class ProfilePage : ContentPage
         txtCity.IsEnabled = false;
         txtCity.IsEnabled = true;
     }
+
+    private void txtEmail_Completed(object sender, EventArgs e)
+    {
+        txtEmail.IsEnabled = false;
+        txtEmail.IsEnabled = true;
+    }
+
+  
 }

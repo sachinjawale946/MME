@@ -79,6 +79,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Caste.
+        /// </summary>
+        internal static string Caste {
+            get {
+                return ResourceManager.GetString("Caste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City / Taluka.
         /// </summary>
         internal static string CityTaluka {
@@ -120,6 +129,15 @@ namespace MME.Mobile.Resx {
         internal static string DateOfBirth {
             get {
                 return ResourceManager.GetString("DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -259,6 +277,24 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job / Profession.
+        /// </summary>
+        internal static string Occupation {
+            get {
+                return ResourceManager.GetString("Occupation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Details.
+        /// </summary>
+        internal static string OtherDetails {
+            get {
+                return ResourceManager.GetString("OtherDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string Password {
@@ -268,11 +304,11 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal.
+        ///   Looks up a localized string similar to Primary Details.
         /// </summary>
-        internal static string Personal {
+        internal static string PersonalDetails {
             get {
-                return ResourceManager.GetString("Personal", resourceCulture);
+                return ResourceManager.GetString("PersonalDetails", resourceCulture);
             }
         }
         
@@ -313,6 +349,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Religion.
+        /// </summary>
+        internal static string Religion {
+            get {
+                return ResourceManager.GetString("Religion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Events.
         /// </summary>
         internal static string SearchEvents {
@@ -327,6 +372,15 @@ namespace MME.Mobile.Resx {
         internal static string SearchMembers {
             get {
                 return ResourceManager.GetString("SearchMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Caste.
+        /// </summary>
+        internal static string SelectCaste {
+            get {
+                return ResourceManager.GetString("SelectCaste", resourceCulture);
             }
         }
         
@@ -349,11 +403,29 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Job / Profession.
+        /// </summary>
+        internal static string SelectOccupation {
+            get {
+                return ResourceManager.GetString("SelectOccupation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- Select Pincode --.
         /// </summary>
         internal static string SelectPincode {
             get {
                 return ResourceManager.GetString("SelectPincode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Religion.
+        /// </summary>
+        internal static string SelectReligion {
+            get {
+                return ResourceManager.GetString("SelectReligion", resourceCulture);
             }
         }
         
@@ -408,6 +480,15 @@ namespace MME.Mobile.Resx {
         internal static string StreetLocalityArea {
             get {
                 return ResourceManager.GetString("StreetLocalityArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Caste.
+        /// </summary>
+        internal static string SubCaste {
+            get {
+                return ResourceManager.GetString("SubCaste", resourceCulture);
             }
         }
         
