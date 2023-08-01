@@ -45,6 +45,7 @@ namespace MME.Mobile.ViewModels
             set
             {
                 _state = value;
+                if (State != null) GetPincodes().RunSynchronously();
                 OnPropertyChanged(nameof(State));
             }
         }
@@ -139,7 +140,7 @@ namespace MME.Mobile.ViewModels
 
         private async Task GetPincodes()
         {
-            if(State == null) return;
+            if (State == null) return;
             Pincodes = await _commonService.GetPincodes(State.stateid);
             if (Pincodes != null && Pincodes.Count > 0 && Profile != null && Convert.ToInt16(Profile.PincodeId) > 0)
             {
