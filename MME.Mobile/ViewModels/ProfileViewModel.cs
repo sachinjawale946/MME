@@ -20,6 +20,7 @@ namespace MME.Mobile.ViewModels
 
         public ProfileViewModel()
         {
+            MaxBirthDate = DateTime.Now.AddYears(-1);
             Task.Run(async () =>
             {
                 await GetProfile();
@@ -41,11 +42,14 @@ namespace MME.Mobile.ViewModels
         private StateResponseModel _state;
         public StateResponseModel State
         {
-            get { return _state; }
+            get
+            {
+                return _state;
+            }
             set
             {
                 _state = value;
-                if (State != null) GetPincodes().RunSynchronously();
+                if (value != null && value.stateid > 0) GetPincodes(value.stateid);
                 OnPropertyChanged(nameof(State));
             }
         }
@@ -138,10 +142,10 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private async Task GetPincodes()
+        private void GetPincodes(int stateid)
         {
             if (State == null) return;
-            Pincodes = await _commonService.GetPincodes(State.stateid);
+            Pincodes = _commonService.GetPincodes(stateid).Result;
             if (Pincodes != null && Pincodes.Count > 0 && Profile != null && Convert.ToInt16(Profile.PincodeId) > 0)
             {
                 Pincode = Pincodes.Where(s => s.pincodeid == Profile.PincodeId).FirstOrDefault();
@@ -162,7 +166,7 @@ namespace MME.Mobile.ViewModels
                 new DropdownModel{ Text = "Unmarried", Value="Unmarried" },
                 new DropdownModel{ Text = "Divorced", Value="Divorced" },
             };
-            MaxBirthDate = DateTime.Now.AddYears(-1);
+
             States = await _commonService.GetStates();
             if (States != null && States.Count > 0 && Profile != null && Convert.ToInt16(Profile.StateId) > 0)
             {

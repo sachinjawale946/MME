@@ -51,7 +51,7 @@ namespace MME.Mobile.Services
             {
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
-                string url = string.Format(Api_Lookup.pincodesByStateApi);
+                string url = string.Format(Api_Lookup.statesApi);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;
                 if (response.IsSuccessStatusCode)
