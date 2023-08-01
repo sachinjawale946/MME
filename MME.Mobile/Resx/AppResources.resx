@@ -222,6 +222,9 @@
   <data name="ShellFooterLine" xml:space="preserve">
     <value>All rights reserved @MME.</value>
   </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
   <data name="State" xml:space="preserve">
     <value>State</value>
   </data>

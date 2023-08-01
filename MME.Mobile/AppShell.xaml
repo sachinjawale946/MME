@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MME.Mobile"
     xmlns:views="clr-namespace:MME.Mobile.Views"
+    xmlns:resource="clr-namespace:MME.Mobile.Resx"
     xmlns:templates="clr-namespace:MME.Mobile.Views.Templates"
     FlyoutHeaderTemplate="{DataTemplate templates:FlyoutHeaderTemplate}">
 
@@ -16,12 +17,12 @@
         </Style>
     </Shell.Resources>
 
-    <ShellContent Title="Dashboard" Icon="dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" ></ShellContent>
-    <ShellContent Title="Events" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
-    <ShellContent Title="Members" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
-    <ShellContent Title="My Profile" Icon="profileicon" Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}" ></ShellContent>
-    
-    <MenuItem IconImageSource="logouticon.png" Text="Sign Out" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <ShellContent Title="{x:Static resource:AppResources.DashBoard}" Icon="dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" ></ShellContent>
+    <ShellContent Title="{x:Static resource:AppResources.Events}" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
+    <ShellContent Title="{x:Static resource:AppResources.Members}" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
+    <ShellContent Title="{x:Static resource:AppResources.MyProfile}" Icon="profileicon" Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}" ></ShellContent>
+
+    <MenuItem IconImageSource="logouticon.png" Text="{x:Static resource:AppResources.SignOut}" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 
     <TabBar>

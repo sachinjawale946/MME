@@ -222,6 +222,9 @@
   <data name="ShellFooterLine" xml:space="preserve">
     <value>सर्वाधिकार सुरक्षित @MME.</value>
   </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>साइन आउट</value>
+  </data>
   <data name="State" xml:space="preserve">
     <value>राज्य</value>
   </data>
