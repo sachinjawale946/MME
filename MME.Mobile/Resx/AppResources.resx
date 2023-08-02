@@ -177,6 +177,9 @@
   <data name="Members" xml:space="preserve">
     <value>Members</value>
   </data>
+  <data name="Message_Profile_Picture_Delete" xml:space="preserve">
+    <value>Profile Image is deleted successfully</value>
+  </data>
   <data name="MiddleName" xml:space="preserve">
     <value>Middle Name</value>
   </data>
@@ -191,6 +194,9 @@
   </data>
   <data name="Occupation" xml:space="preserve">
     <value>Job / Profession</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="OtherDetails" xml:space="preserve">
     <value>Other Details</value>
@@ -267,11 +273,17 @@
   <data name="Validation_Message_Api_Error" xml:space="preserve">
     <value>Some error occured, while processing your request. Please try again later.</value>
   </data>
+  <data name="Validation_Message_Camera_Permission" xml:space="preserve">
+    <value>Allow camera permission to capture photo</value>
+  </data>
   <data name="Validation_Message_Language_Selection" xml:space="preserve">
     <value>Please select language to continue</value>
   </data>
   <data name="Validation_Message_Login_Fields" xml:space="preserve">
     <value>Username and Password both are manadatory fields</value>
+  </data>
+  <data name="Validation_Message_Profile_Picture_Delete" xml:space="preserve">
+    <value>No profile picture found to delete</value>
   </data>
   <data name="Validation_Message_Session_Expired" xml:space="preserve">
     <value>Your session is expired, please relogin.</value>

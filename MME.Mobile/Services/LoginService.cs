@@ -50,7 +50,7 @@ namespace MME.Mobile.Services
             catch (Exception ex)
             {
                 var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
-                var snackbar = Snackbar.Make(errorMessage, null, null, TimeSpan.FromSeconds(5), snackbarOptions);
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new AuthenticationResponseModel());
             }

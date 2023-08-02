@@ -241,6 +241,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile Image is deleted successfully.
+        /// </summary>
+        internal static string Message_Profile_Picture_Delete {
+            get {
+                return ResourceManager.GetString("Message_Profile_Picture_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Middle Name.
         /// </summary>
         internal static string MiddleName {
@@ -282,6 +291,15 @@ namespace MME.Mobile.Resx {
         internal static string Occupation {
             get {
                 return ResourceManager.GetString("Occupation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -511,6 +529,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow camera permission to capture photo.
+        /// </summary>
+        internal static string Validation_Message_Camera_Permission {
+            get {
+                return ResourceManager.GetString("Validation_Message_Camera_Permission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select language to continue.
         /// </summary>
         internal static string Validation_Message_Language_Selection {
@@ -525,6 +552,15 @@ namespace MME.Mobile.Resx {
         internal static string Validation_Message_Login_Fields {
             get {
                 return ResourceManager.GetString("Validation_Message_Login_Fields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No profile picture found to delete.
+        /// </summary>
+        internal static string Validation_Message_Profile_Picture_Delete {
+            get {
+                return ResourceManager.GetString("Validation_Message_Profile_Picture_Delete", resourceCulture);
             }
         }
         

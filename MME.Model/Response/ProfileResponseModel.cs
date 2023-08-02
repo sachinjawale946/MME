@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MME.Model.Response
 {
-    public class ProfileResponseModel
+    public class ProfileResponseModel : ModelBase
     {
         public Guid UserId { get; set; }
         public string Username { get; set; }
@@ -20,9 +20,50 @@ namespace MME.Model.Response
         public string? Email { get; set; }
         public string Gender { get; set; }
         public string? MaritalStatus { get; set; }
-        public bool shownoimage { get; set; }
-        public bool showprofileimage { get; set; }
-        public byte[] profilepic { get; set; }
+        
+
+        private bool _shownoimage;
+        public bool shownoimage
+        {
+            get
+            {
+                return _shownoimage;
+            }
+            set
+            {
+                _shownoimage = value;
+                OnPropertyChanged(nameof(shownoimage));
+            }
+        }
+
+        private bool _showprofileimage;
+        public bool showprofileimage
+        {
+            get
+            {
+                return _showprofileimage;
+            }
+            set
+            {
+                _showprofileimage = value;
+                OnPropertyChanged(nameof(showprofileimage));
+            }
+        }
+
+        private byte[] _profilepic;
+        public byte[] profilepic
+        {
+            get
+            {
+                return _profilepic;
+            }
+            set
+            {
+                _profilepic = value;
+                OnPropertyChanged(nameof(profilepic));
+            }
+        }
+
         public string? Society { get; set; }
         public string? Area { get; set; }
         public string? Location { get; set; }

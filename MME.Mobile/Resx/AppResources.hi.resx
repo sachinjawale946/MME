@@ -177,6 +177,9 @@
   <data name="Members" xml:space="preserve">
     <value>सदस्य</value>
   </data>
+  <data name="Message_Profile_Picture_Delete" xml:space="preserve">
+    <value>प्रोफ़ाइल छवि सफलतापूर्वक हटा दी गई है !</value>
+  </data>
   <data name="MiddleName" xml:space="preserve">
     <value>उपनाम</value>
   </data>
@@ -191,6 +194,9 @@
   </data>
   <data name="Occupation" xml:space="preserve">
     <value>नौकरी / पेशा</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>ओके</value>
   </data>
   <data name="OtherDetails" xml:space="preserve">
     <value>अन्य विवरण</value>
@@ -265,7 +271,10 @@
     <value>उपयोगकर्ता नाम</value>
   </data>
   <data name="Validation_Message_Api_Error" xml:space="preserve">
-    <value>आपके अनुरोध को संसाधित करते समय कुछ त्रुटि उत्पन्न हुई। कृपया बाद में पुन: प्रयास करें।</value>
+    <value>आपके अनुरोध को संसाधित करते समय कुछ त्रुटि उत्पन्न हुई। कृपया बाद में पुन: प्रयास करें !</value>
+  </data>
+  <data name="Validation_Message_Camera_Permission" xml:space="preserve">
+    <value>कैमरे को फोटो खींचने की परमिशन दें</value>
   </data>
   <data name="Validation_Message_Language_Selection" xml:space="preserve">
     <value>कृपया जारी रखने के लिए भाषा चुनें</value>
@@ -273,8 +282,11 @@
   <data name="Validation_Message_Login_Fields" xml:space="preserve">
     <value>उपयोगकर्ता नाम और पासवर्ड दोनों अनिवार्य हैं</value>
   </data>
+  <data name="Validation_Message_Profile_Picture_Delete" xml:space="preserve">
+    <value>हटाने के लिए कोई प्रोफ़ाइल चित्र नहीं मिला</value>
+  </data>
   <data name="Validation_Message_Session_Expired" xml:space="preserve">
-    <value>आपका सत्र समाप्त हो गया है, कृपया पुनः लॉगिन करें।</value>
+    <value>आपका सत्र समाप्त हो गया है, कृपया पुनः लॉगिन करें !</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>स्वागत,</value>
