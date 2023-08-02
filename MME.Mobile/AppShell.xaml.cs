@@ -12,6 +12,7 @@ namespace MME.Mobile
             Routing.RegisterRoute("EventsPage", typeof(EventsPage));
             Routing.RegisterRoute("MembersPage", typeof(MembersPage));
             Routing.RegisterRoute("ProfilePage", typeof(ProfilePage));
+            Routing.RegisterRoute("PaymentPage", typeof(PaymentPage));
         }
 
         private void OnMenuItemClicked(object sender, EventArgs e)

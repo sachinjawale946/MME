@@ -57,6 +57,10 @@ namespace MME.Mobile.ViewModels
             {
                 await Shell.Current.GoToAsync($"//{nameof(ProfilePage)}");
             }
+            else if (page == "payments")
+            {
+                await Shell.Current.GoToAsync($"//{nameof(PaymentPage)}");
+            }
             await MopupService.Instance.PopAsync(true);
         }
     }

@@ -72,6 +72,7 @@
 	  <None Remove="Resources\Images\logouticon.png" />
 	  <None Remove="Resources\Images\membericon.png" />
 	  <None Remove="Resources\Images\participate.png" />
+	  <None Remove="Resources\Images\paymenticon.png" />
 	  <None Remove="Resources\Images\profileicon.png" />
 	  <None Remove="Resources\Images\remove.png" />
 	  <None Remove="Resources\Images\spam.png" />
@@ -140,6 +141,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MembersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PaymentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProfilePage.xaml">

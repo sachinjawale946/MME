@@ -129,6 +129,9 @@
   <data name="CityTaluka" xml:space="preserve">
     <value>शहर / तालुका</value>
   </data>
+  <data name="CommingSoon" xml:space="preserve">
+    <value>जल्द आ रहा है !</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>आगे बढिये</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>पासवर्ड</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>पेमेंटस</value>
   </data>
   <data name="PersonalDetails" xml:space="preserve">
     <value>प्राथमिक विवरण</value>

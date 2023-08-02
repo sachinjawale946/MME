@@ -70,6 +70,14 @@
                 </StackLayout>
             </Frame>
 
+            <Frame Grid.Row="1" Grid.Column="1" CornerRadius="0" BorderColor="Transparent" BackgroundColor="Transparent">
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <ImageButton x:Name="PaymentImage" BackgroundColor="Transparent" Command="{Binding NavigateCommand}" CommandParameter="payments"  
+                                 WidthRequest="75" HeightRequest="75" Source="paymenticon.png" VerticalOptions="Start" HorizontalOptions="CenterAndExpand" Margin="0,10,0,10"/>
+                    <Label Margin="0,10,0,0" Style="{StaticResource PageSubHeader}" FontAttributes="Bold" Text="{x:Static resource:AppResources.Payments}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </Frame>
+            
         </Grid>
     </Grid>
 </ContentPage>

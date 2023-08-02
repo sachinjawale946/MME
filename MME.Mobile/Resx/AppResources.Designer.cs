@@ -97,6 +97,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comming Soon !.
+        /// </summary>
+        internal static string CommingSoon {
+            get {
+                return ResourceManager.GetString("CommingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         internal static string Continue {
@@ -318,6 +327,15 @@ namespace MME.Mobile.Resx {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payments.
+        /// </summary>
+        internal static string Payments {
+            get {
+                return ResourceManager.GetString("Payments", resourceCulture);
             }
         }
         

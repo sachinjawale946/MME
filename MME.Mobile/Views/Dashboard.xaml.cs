@@ -28,5 +28,8 @@ public partial class Dashboard : ContentPage
         await ProfileImage.RotateTo(360, 4000);
         await ProfileImage.ScaleTo(2, 2000);
         await ProfileImage.ScaleTo(1, 2000);
+        await PaymentImage.RotateTo(360, 4000);
+        await PaymentImage.ScaleTo(2, 2000);
+        await PaymentImage.ScaleTo(1, 2000);
     }
 }

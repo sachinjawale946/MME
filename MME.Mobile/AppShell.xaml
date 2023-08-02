@@ -20,6 +20,7 @@
     <ShellContent Title="{x:Static resource:AppResources.DashBoard}" Icon="dashboard" Route="Dashboard" ContentTemplate="{DataTemplate views:Dashboard}" ></ShellContent>
     <ShellContent Title="{x:Static resource:AppResources.Events}" Icon="eventicon" Route="EventsPage" ContentTemplate="{DataTemplate views:EventsPage}" ></ShellContent>
     <ShellContent Title="{x:Static resource:AppResources.Members}" Icon="membericon" Route="MembersPage" ContentTemplate="{DataTemplate views:MembersPage}" ></ShellContent>
+    <ShellContent Title="{x:Static resource:AppResources.Payments}" Icon="paymenticon" Route="PaymentPage" ContentTemplate="{DataTemplate views:PaymentPage}" ></ShellContent>
     <ShellContent Title="{x:Static resource:AppResources.MyProfile}" Icon="profileicon" Route="ProfilePage" ContentTemplate="{DataTemplate views:ProfilePage}" ></ShellContent>
 
     <MenuItem IconImageSource="logouticon.png" Text="{x:Static resource:AppResources.SignOut}" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

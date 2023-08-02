@@ -129,6 +129,9 @@
   <data name="CityTaluka" xml:space="preserve">
     <value>City / Taluka</value>
   </data>
+  <data name="CommingSoon" xml:space="preserve">
+    <value>Comming Soon !</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
   </data>
   <data name="PersonalDetails" xml:space="preserve">
     <value>Primary Details</value>
