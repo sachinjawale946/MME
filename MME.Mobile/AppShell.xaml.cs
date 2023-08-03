@@ -1,5 +1,6 @@
 ﻿using MME.Mobile.Views;
 using MME.Mobile.Helpers;
+using AndroidX.ConstraintLayout.Core.Parser;
 
 namespace MME.Mobile
 {
@@ -24,6 +25,7 @@ namespace MME.Mobile
             Settings.lastname = string.Empty;
             Settings.mobile = string.Empty;
             Settings.accesstoken = string.Empty;
+            Settings.fcmtoken = string.Empty;
             App.Current.MainPage = new NavigationPage(new LandigPage());
         }
     }

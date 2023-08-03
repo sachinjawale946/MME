@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "388025109157",
+    "project_id": "my-community-2cd32",
+    "storage_bucket": "my-community-2cd32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388025109157:android:0e56fb365aea81d74bdb4c",
+        "android_client_info": {
+          "package_name": "com.astech.mycommunity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388025109157-icb3k1g6dpsi5ffkep00gk0t4oipgrfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOhlXszZWtfTVAiZ-StXN6hhUgWBpwHcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388025109157-icb3k1g6dpsi5ffkep00gk0t4oipgrfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

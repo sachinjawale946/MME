@@ -102,6 +102,18 @@ namespace MME.Mobile.Helpers
             }
         }
 
+        public static string fcmtoken
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("fcmtoken", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("fcmtoken", value);
+            }
+        }
+
         public static string gender
         {
             get

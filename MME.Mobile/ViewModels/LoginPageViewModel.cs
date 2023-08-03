@@ -14,6 +14,7 @@ using Microsoft.Maui.Storage;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Alerts;
 using Mopups.Services;
+using Plugin.Firebase.CloudMessaging;
 
 namespace MME.Mobile.ViewModels
 {
@@ -74,6 +75,13 @@ namespace MME.Mobile.ViewModels
             var result = await _loginService.Login(UserModel);
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
+                if (string.IsNullOrEmpty(Settings.fcmtoken))
+                {
+                    string fcmToken = await GetFCMToken();
+                    if (!string.IsNullOrEmpty(fcmToken))
+                        Settings.fcmtoken = fcmToken;
+                }
+
                 Settings.username = result.username;
                 Settings.roleid = result.roleid;
                 Settings.userid = result.userid;
@@ -93,5 +101,12 @@ namespace MME.Mobile.ViewModels
                 await snackbar.Show(cancellationTokenSource.Token);
             }
         }
+    
+        private async Task<string> GetFCMToken()
+        {
+            await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+            return await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+        }
+
     }
 }
