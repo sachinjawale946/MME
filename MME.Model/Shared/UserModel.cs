@@ -33,7 +33,8 @@ namespace MME.Model.Shared
         public string? City { get; set; }
         public string? Latitude { get; set; }
         public string? Longtitude { get; set; }
-        
+        public string? FCMToken { get; set; }
+
         [ForeignKey("State")]
         public int? StateId { get; set; }
         [ForeignKey("Pincode")]

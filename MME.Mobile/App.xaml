@@ -25,6 +25,12 @@
                 <Setter Property="CharacterSpacing" Value="1"/>
             </Style>
 
+            <Style x:Key="MembersListControlLabel" TargetType="Label" >
+                <Setter Property="TextColor" Value="#2F0642"/>
+                <Setter Property="FontFamily" Value="OpenSansRegular"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+            </Style>
+
             <Style x:Key="FormControlLabel" TargetType="Label" >
                 <Setter Property="TextColor" Value="#2F0642"/>
                 <Setter Property="FontFamily" Value="OpenSansSemiBold"/>

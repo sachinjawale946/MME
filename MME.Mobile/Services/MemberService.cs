@@ -40,7 +40,7 @@ namespace MME.Mobile.Services
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
-                Uri uri = new Uri(string.Format(Api_Lookup.memberProfilePicApi, UserId));
+                Uri uri = new Uri(string.Format(Api_Lookup.memberGetProfilePicApi, UserId));
                 HttpResponseMessage response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -60,6 +60,68 @@ namespace MME.Mobile.Services
                 var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
                 return await Task.FromResult(new byte[] { });
+            }
+        }
+
+        public async Task<string> SaveProfileImage(ProfilePictureRequestModel model)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(Api_Lookup.memberSaveProfilePicApi);
+                var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
+                HttpResponseMessage response = client.PostAsync(uri, data).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                return await Task.FromResult(Api_Result_Lookup.Error);
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
+                return await Task.FromResult(Api_Result_Lookup.Error);
+            }
+        }
+
+        public async Task<string> AddFCMToken(FCMRequestModel model, string accesstoken)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(Api_Lookup.memberProfileFCMApi);
+                var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
+                HttpResponseMessage response = client.PostAsync(uri, data).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                return await Task.FromResult(Api_Result_Lookup.Error);
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
+                return await Task.FromResult(Api_Result_Lookup.Error);
             }
         }
 

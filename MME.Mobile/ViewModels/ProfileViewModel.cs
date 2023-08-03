@@ -1,7 +1,11 @@
-﻿using MME.Mobile.Helpers;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using Java.Lang;
+using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
 using MME.Model.BindingModels.Mobile;
+using MME.Model.Lookups;
 using MME.Model.Request;
 using MME.Model.Response;
 using Mopups.Services;
@@ -15,8 +19,30 @@ namespace MME.Mobile.ViewModels
 {
     internal class ProfileViewModel : ViewModelBase
     {
-        IMemberService _memberService = new MemberService();
-        ICommonService _commonService = new CommonService();
+        readonly IMemberService _memberService = new MemberService();
+        readonly ICommonService _commonService = new CommonService();
+
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        SnackbarOptions snackbarOptions = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Red,
+            TextColor = Colors.White,
+            ActionButtonTextColor = Colors.Yellow,
+            CornerRadius = new CornerRadius(5),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+            CharacterSpacing = 0.1,
+        };
+        SnackbarOptions successSnackbarOptions = new SnackbarOptions
+        {
+            BackgroundColor = Colors.Green,
+            TextColor = Colors.White,
+            ActionButtonTextColor = Colors.Yellow,
+            CornerRadius = new CornerRadius(5),
+            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+            CharacterSpacing = 0.1,
+        };
 
         public ProfileViewModel()
         {
@@ -228,6 +254,31 @@ namespace MME.Mobile.ViewModels
             {
                 Pincode = Pincodes.Where(s => s.pincodeid == Profile.PincodeId).FirstOrDefault();
             }
+        }
+
+        public async Task<string> AddProfiePicture(string fileextenstion)
+        {
+            var result = string.Empty;
+            if (Profile != null && Profile.profilepic != null && Profile.profilepic.Length > 0 && !string.IsNullOrEmpty(fileextenstion))
+            {
+                result = await _memberService.SaveProfileImage(new ProfilePictureRequestModel
+                {
+                    picture = Profile.profilepic,
+                    pictureextenstion = fileextenstion,
+                    userid = Settings.userid
+                });
+                if (string.IsNullOrEmpty(result) || result == Api_Result_Lookup.Error)
+                {
+                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                else
+                {
+                    var snackbar = Snackbar.Make("Your profile picture is added successfully", null, string.Empty, TimeSpan.FromSeconds(8), successSnackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+            }
+            return result;
         }
 
         private async Task MasterData()

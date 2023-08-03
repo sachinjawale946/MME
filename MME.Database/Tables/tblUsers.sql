@@ -21,6 +21,7 @@
 	[City] VARCHAR(80),
 	[Latitude] VARCHAR(100),
 	[Longtitude] VARCHAR(100),
+	[FCMToken] NVARCHAR(500),
 	[StateId] INT,
 	[PinCodeId] INT,
 	[LanguageId] INT,

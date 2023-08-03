@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ImageMagick;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MME.Data;
+using MME.Model.Lookups;
 using MME.Model.Request;
 using MME.Model.Response;
 using MME.Model.Shared;
@@ -53,6 +55,59 @@ namespace MME.Web.Apis
                     return System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic));
             }
             return new byte[] { };
+        }
+
+        [Authorize(Policy = "MMEJwtScheme")]
+        [HttpPost, Route("~/api/v1/members-saveprofilepicture")]
+        public string AddProfilePicture(ProfilePictureRequestModel model)
+        {
+            if (model != null && model.userid != Guid.Empty && model.picture != null && model.picture.Length > 0)
+            {
+                var thumbwidth = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                var thumbheight = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
+                var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+                var profilesThumbesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepicthumbs"].ToString());
+                var profile = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
+                if (profile != null)
+                {
+                    var ProfilePic = Guid.NewGuid() + model.pictureextenstion;
+                    // main profile pic
+                    System.IO.File.WriteAllBytes(Path.Combine(profilesFolderPath, ProfilePic), model.picture);
+                    // thumb profile pic
+                    using (MagickImage image = new MagickImage(Path.Combine(profilesFolderPath, ProfilePic)))
+                    {
+                        {
+                            image.Thumbnail(new MagickGeometry(thumbwidth, thumbheight));
+                            image.Write(Path.Combine(profilesThumbesFolderPath, ProfilePic));
+                        }
+                    }
+                    profile.ProfilePic = ProfilePic;
+                    _context.Users.Update(profile);
+                    _context.SaveChanges();
+                    return Api_Result_Lookup.Success;
+                }
+                return Api_Result_Lookup.Error;
+            }
+            return Api_Result_Lookup.Error;
+        }
+
+        [Authorize(Policy = "MMEJwtScheme")]
+        [HttpPost, Route("~/api/v1/members-add-fcmtoken")]
+        public string AddFCMToken(FCMRequestModel model)
+        {
+            if (model != null&& !string.IsNullOrEmpty(model.token))
+            {
+                var profile = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
+                if (profile != null)
+                {
+                    profile.FCMToken = model.token;
+                    _context.Users.Update(profile);
+                    _context.SaveChanges();
+                    return Api_Result_Lookup.Success;
+                }
+                return Api_Result_Lookup.Error;
+            }
+            return Api_Result_Lookup.Error;
         }
 
         [Authorize(Policy = "MMEJwtScheme")]

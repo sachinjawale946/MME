@@ -13,8 +13,10 @@ namespace MME.Model.Lookups
         public const string getLanguageApi = BaseApi + "/api/v1/getlanguages";
         public const string loginApi = BaseApi + "/api/v1/authenticate-user";
         public const string memberSearchApi = BaseApi + "/api/v1/members-search";
-        public const string memberProfilePicApi = BaseApi + "/api/v1/members-getprofilepicture/{0}";
+        public const string memberGetProfilePicApi = BaseApi + "/api/v1/members-getprofilepicture/{0}";
+        public const string memberSaveProfilePicApi = BaseApi + "/api/v1/members-saveprofilepicture";
         public const string memberProfileApi = BaseApi + "/api/v1/members-getprofile/{0}";
+        public const string memberProfileFCMApi = BaseApi + "/api/v1/members-add-fcmtoken";
         public const string eventSearchApi = BaseApi + "/api/v1/events-search";
         public const string eventFeedbackApi = BaseApi + "/api/v1/save-event-feedback";
         public const string statesApi = BaseApi + "/api/v1/getstates";

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MME.Mobile.Helpers;
+using static System.Net.Mime.MediaTypeNames;
+using Bertuzzi.MAUI.EventAggregator;
 
 namespace MME.Mobile.ViewModels
 {
@@ -18,6 +20,8 @@ namespace MME.Mobile.ViewModels
         public FlyoutHeaderViewModel()
         {
             ShowProfilePic();
+            EventAggregator.Instance.RegisterHandler<byte[]>(ProfilePictureHandler);
+
         }
 
         private bool _showprofileimage;
@@ -62,6 +66,16 @@ namespace MME.Mobile.ViewModels
             {
                 _gender = value;
                 OnPropertyChanged(nameof(Gender));
+            }
+        }
+
+        private void ProfilePictureHandler(byte[] Picture)
+        {
+            if (Picture == null && Picture.Length > 0)
+            {
+                ProfileImage = Picture;
+                _showprofileimage = true;
+                _showprofileimage = false;
             }
         }
 

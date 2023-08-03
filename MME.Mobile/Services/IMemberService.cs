@@ -8,5 +8,7 @@ namespace MME.Mobile.Services
         Task<List<MemberResponseModel>> Search(MemberRequestModel model);
         Task<byte[]> GetProfileImage(Guid UserId);
         Task<ProfileResponseModel> GetProfile(Guid UserId);
+        Task<string> SaveProfileImage(ProfilePictureRequestModel model);
+        Task<string> AddFCMToken(FCMRequestModel model, string accesstoken);
     }
 }

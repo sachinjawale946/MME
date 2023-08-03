@@ -20,7 +20,8 @@ namespace MME.Mobile.ViewModels
 {
     internal class LoginPageViewModel : ViewModelBase
     {
-        ILoginService _loginService = new LoginService();
+        readonly ILoginService _loginService = new LoginService();
+        readonly IMemberService _memberService = new MemberService();
         public Command LoginCommand { get; }
         public Command ForgotPasswordCommand { get; }
 
@@ -79,7 +80,21 @@ namespace MME.Mobile.ViewModels
                 {
                     string fcmToken = await GetFCMToken();
                     if (!string.IsNullOrEmpty(fcmToken))
+                    {
+                        string message = await _memberService.AddFCMToken(new FCMRequestModel
+                        {
+                            token = fcmToken,
+                            userid = result.userid
+                        }, result.accesstoken);
+                        if (string.IsNullOrEmpty(message) || message == Api_Result_Lookup.Error)
+                        {
+                            await MopupService.Instance.PopAsync(true);
+                            var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                            await snackbar.Show(cancellationTokenSource.Token);
+                            return;
+                        }
                         Settings.fcmtoken = fcmToken;
+                    }
                 }
 
                 Settings.username = result.username;

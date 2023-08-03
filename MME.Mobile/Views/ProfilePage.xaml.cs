@@ -1,7 +1,9 @@
+using Bertuzzi.MAUI.EventAggregator;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using MME.Mobile.ViewModels;
+using MME.Model.Lookups;
 using Mopups.Services;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -113,6 +115,11 @@ public partial class ProfilePage : ContentPage
             viewModel.Profile.profilepic = read(result.Path);
             viewModel.Profile.shownoimage = false;
             viewModel.Profile.showprofileimage = true;
+            var addPictureResult = await viewModel.AddProfiePicture(fileInfo.Extension);
+            if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Success)
+            {
+                EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+            }
             await MopupService.Instance.PopAsync(true);
         }
         catch (Exception ex)
