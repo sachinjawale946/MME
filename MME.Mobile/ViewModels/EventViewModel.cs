@@ -64,21 +64,7 @@ namespace MME.Mobile.ViewModels
             var results = await _eventService.Search(SearchModel);
             if (results != null && results.Count > 0)
             {
-                for (int i = 0; i < results.Count; i++)
-                {
-                    if (results[i].banner == null)
-                    {
-                        results[i].showbannerimage = false;
-                        results[i].shownoimage = true;
-                    }
-                    else
-                    {
-                        results[i].showbannerimage = true;
-                        results[i].shownoimage = false;
-                    }
-                    if (!Events.Contains(results[i]))
-                        Events.Add(results[i]);
-                }
+                Events = new ObservableCollection<EventResponseModel>(results);
             }
             else
             {

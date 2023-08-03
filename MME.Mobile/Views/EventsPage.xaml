@@ -46,12 +46,10 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="0" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="10,10,10,10" 
-                                           Source="event.png" HeightRequest="125"/>
-                                    <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="0" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,10,10" 
-                                           Source="{Binding banner, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" HeightRequest="125"/>
+                                    <Image Grid.RowSpan="0" Aspect="AspectFit" Margin="10,10,10,10" 
+                                           Source="{Binding bannerurl}" HeightRequest="150" HorizontalOptions="CenterAndExpand"/>
 
-                                    <Label Margin="10,0,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="1" Text="{Binding header}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                    <Label Margin="10,0,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="1" Text="{Binding header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
                                     
                                     <Grid Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" >
                                         <Grid.ColumnDefinitions>

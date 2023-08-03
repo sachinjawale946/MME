@@ -72,7 +72,9 @@ namespace MME.Web.Apis
 
         private EventResponseModel returnReponseItem(MME.Model.Shared.EventModel item, Guid userid)
         {
-            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
+            // var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
+            var profilesFolderPath = _iconfiguration["alleventimages"].ToString();
+            var defaulteventimage = _iconfiguration["defaulteventimage"].ToString();
 
             var response = new EventResponseModel
             {
@@ -82,7 +84,8 @@ namespace MME.Web.Apis
                 header = item.Event,
                 location = (string.IsNullOrEmpty(item.Location)) ? string.Empty : item.Location,
                 eventdate = item.EventDate,
-                banner = (string.IsNullOrEmpty(item.Banner)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, item.Banner)),
+                // banner = (string.IsNullOrEmpty(item.Banner)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, item.Banner)),
+                bannerurl = (string.IsNullOrEmpty(item.Banner)) ? defaulteventimage : profilesFolderPath + item.Banner,
             };
             var EventFeedbacks = _context.EventFeedbacks.Where(e => e.EventId == item.EventId);
             if (EventFeedbacks.Any())

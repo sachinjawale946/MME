@@ -14,11 +14,10 @@ namespace MME.Model.Response
         public Guid eventid { get; set; }
         public string header { get; set; }
         public string description { get; set; }
-        public byte[] banner { get; set; }
+        // public byte[] banner { get; set; }
+        public string bannerurl { get; set; }
         public string? location { get; set; }
         public DateTime eventdate { get; set; }
-        public bool shownoimage { get; set; }
-        public bool showbannerimage { get; set; }
         
         private int _event_type_id;
         public int event_type_id
