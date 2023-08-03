@@ -40,16 +40,8 @@
                             <Frame BackgroundColor="#00FBC1BC" BorderColor="{StaticResource AppBorderColor}" 
                                Padding="1" CornerRadius="4" Margin="0,0,0,10">
                                 <Grid VerticalOptions="CenterAndExpand" Margin="0,0,0,0">
-                                    <!--<Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="20"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>-->
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
-                                        <!--<RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>-->
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
@@ -71,7 +63,6 @@
                                         <Image HorizontalOptions="StartAndExpand" Grid.RowSpan="3" IsVisible="{Binding showbannerimage}" Aspect="AspectFit" Margin="10,10,20,0" 
                                            Source="{Binding banner, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" WidthRequest="125"/>
                                         <Label Style="{StaticResource PageSubHeader}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding header}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
-                                        <!--<Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding description}" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation"/>-->
                                         <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="1" Text="{x:Static resource:AppResources.Date}" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
                                         <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                         <Label TextColor="{StaticResource AppPrimaryBackground}" Grid.Row="1" Grid.Column="3" Text="{Binding eventdate,StringFormat='{0:dd MMM yyyy}'}" VerticalOptions="CenterAndExpand"/>

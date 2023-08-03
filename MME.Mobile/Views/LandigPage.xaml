@@ -41,7 +41,7 @@
             <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Style="{StaticResource PageSubHeader}" Text="{x:Static resource:AppResources.SelectLanguage}"></Label>
             <inputLayout:SfTextInputLayout ContainerType="Outlined"
                                                 Grid.Row="1"  HeightRequest="70">
-                <editors:SfComboBox HeightRequest="70" Margin="0,0"
+                <editors:SfComboBox HeightRequest="70" Padding="10,0,0,5"
                                                 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Placeholder="{x:Static resource:AppResources.SelectLanguagePlaceholder}" 
                                                 PlaceholderColor="#adb2bb" 
                                                 MaxDropDownHeight="400"

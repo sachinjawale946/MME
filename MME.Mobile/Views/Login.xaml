@@ -4,6 +4,8 @@
              x:Class="MME.Mobile.Views.Login"
              xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              xmlns:resource="clr-namespace:MME.Mobile.Resx"
+              xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              NavigationPage.HasNavigationBar="False">
     <Grid>
         <Grid.RowDefinitions>
@@ -38,16 +40,22 @@
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label VerticalOptions="End" Grid.Row="0" Margin="10,0,0,0" Text="{x:Static resource:AppResources.Username}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
+            <Label VerticalOptions="End" Grid.Row="0" Margin="12,0,0,0" Text="{x:Static resource:AppResources.Username}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
 
-            <Entry x:Name="LoginEntry"  Grid.Row="1" Margin="10,0,10,0" Completed="LoginEntry_Completed" HeightRequest="40" VerticalOptions="Center"
+            <inputLayout:SfTextInputLayout ContainerType="Outlined"
+                                           Margin="10,0,10,0" Grid.Row="1" HeightRequest="70">
+                <Entry x:Name="LoginEntry"  Grid.Row="1" Margin="10,0,10,0" Completed="LoginEntry_Completed" HeightRequest="40" VerticalOptions="Center"
                    VerticalTextAlignment="Center" Text="{Binding UserModel.username, Mode=TwoWay}" MaxLength="15">
-            </Entry>
+                </Entry>
+            </inputLayout:SfTextInputLayout>
 
-            <Label VerticalOptions="End" Grid.Row="2" Margin="10,0,0,0" Text="{x:Static resource:AppResources.Password}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
+            <Label VerticalOptions="End" Grid.Row="2" Margin="12,0,0,0" Text="{x:Static resource:AppResources.Password}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
 
-            <Entry IsPassword="True" x:Name="PasswordEntry" Grid.Row="3" Margin="10,0,10,0"  Completed="PasswordEntry_Completed" 
+            <inputLayout:SfTextInputLayout ContainerType="Outlined"
+                                           Margin="10,0,10,0" Grid.Row="3" HeightRequest="70">
+                <Entry IsPassword="True" x:Name="PasswordEntry" Grid.Row="3" Margin="10,0,10,0"  Completed="PasswordEntry_Completed" 
                    VerticalOptions="Center" HeightRequest="40" VerticalTextAlignment="Center" Text="{Binding UserModel.password, Mode=TwoWay}" MaxLength="10" />
+            </inputLayout:SfTextInputLayout>
 
             <Grid Grid.Row="4" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions>
