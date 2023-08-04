@@ -160,7 +160,7 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/members-search")]
         public List<MemberResponseModel> Search(MemberRequestModel model)
         {
-            var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepicthumbs"].ToString());
+            var profilesPicsFolderPath = _iconfiguration["allprofileimages"].ToString();
 
             if (model.page == 0) model.page = 1;
             if (model.pagesize == 0) model.pagesize = Convert.ToInt16(_iconfiguration["memberpagesize"].ToString());
@@ -183,7 +183,7 @@ namespace MME.Web.Apis
                             fullname = o.FirstName + " " + o.LastName,
                             occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
                             gender = o.Gender,
-                            profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
+                            profilepicurl = (string.IsNullOrEmpty(o.ProfilePic)) ? string.Empty : profilesPicsFolderPath + o.ProfilePic,
                         }).ToList();
             }
             else
@@ -202,7 +202,7 @@ namespace MME.Web.Apis
                            fullname = o.FirstName + " " + o.LastName,
                            occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
                            gender = o.Gender,
-                           profilepic = (string.IsNullOrEmpty(o.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, o.ProfilePic))
+                           profilepicurl = (string.IsNullOrEmpty(o.ProfilePic)) ? string.Empty : profilesPicsFolderPath + o.ProfilePic,
                        }).ToList();
             }
         }

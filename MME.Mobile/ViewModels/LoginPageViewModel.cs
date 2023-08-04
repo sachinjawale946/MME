@@ -111,6 +111,10 @@ namespace MME.Mobile.ViewModels
             }
             else
             {
+                if (result == null || string.IsNullOrEmpty(result.message)) result = new Model.Response.AuthenticationResponseModel
+                {
+                    message = Resx.AppResources.Validation_Message_Api_Error,
+                };
                 await MopupService.Instance.PopAsync(true);
                 var snackbar = Snackbar.Make(result.message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);

@@ -51,7 +51,7 @@
                                     <Image WidthRequest="125" HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding shownoimage}" Aspect="AspectFit" Margin="5,5,5,5" 
                                            Source="{Binding gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
                                     <Image WidthRequest="125" HorizontalOptions="StartAndExpand" Grid.RowSpan="4" IsVisible="{Binding showprofileimage}" Aspect="AspectFill" Margin="5,5,5,5" 
-                                           Source="{Binding profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+                                           Source="{Binding profilepicurl}"/>
                                     <Label Style="{StaticResource MembersListControlLabel}" Margin="10,0" Grid.Column="1" Text="{x:Static resource:AppResources.Name}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <Label Style="{StaticResource MembersListControlLabel}" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <Label Style="{StaticResource MembersListControlLabel}" Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>

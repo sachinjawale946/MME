@@ -70,7 +70,7 @@ namespace MME.Mobile.ViewModels
             {
                 for (int i = 0; i < results.Count; i++)
                 {
-                    if (results[i].profilepic == null)
+                    if (string.IsNullOrEmpty(results[i].profilepicurl))
                     {
                         results[i].showprofileimage = false;
                         results[i].shownoimage = true;

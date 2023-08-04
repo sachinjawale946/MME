@@ -18,7 +18,7 @@ namespace MME.Model.Response
         public string? occupation { get; set; }
         public string? fulladdress { get; set; }
         public string? gender { get; set; }
-        public byte[] profilepic { get; set; }
+        public string profilepicurl { get; set; }
         public bool showprofileimage { get; set; }
         public bool shownoimage { get; set; }
     }
