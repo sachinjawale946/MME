@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MME.Web.Models;
 using System.Diagnostics;
+using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+using Google.Apis.Auth.OAuth2;
 
 namespace MME.Web.Controllers
 {
@@ -15,6 +18,26 @@ namespace MME.Web.Controllers
 
         public IActionResult Index()
         {
+            IReadOnlyList<string> list = new List<string>
+            {
+                "c0PKHeTXTduKpoaRf3yC1z:APA91bFqpond7qLHo293mx5zQZKe5slRGtfs40Naf1Jnku1dh45jOLmaOtQGZSvfp5ZXNvskPNv-ekU09rOYJKcyvySuNV2wdx0rT3yyZYRFpBUuxNsO5VGvVYa16CJDTksBOjt5D2DD",
+            };
+            var message = new MulticastMessage()
+            {
+                Notification = new Notification
+                {
+                    Title = "Message Title",
+                    Body = "Message Body",
+                },
+                //Topic = "news",
+                Tokens = list,
+            };
+            var defaultApp = FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
+            });
+            var messaging = FirebaseMessaging.DefaultInstance;
+            var result = messaging.SendMulticastAsync(message).Result;
             return View();
         }
 
