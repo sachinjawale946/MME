@@ -161,6 +161,10 @@ namespace MME.MemberJob
                 foreach (var pro in properties)
                 {
                     var column = columnNames.Where(c => c.Trim() == pro.Name).FirstOrDefault();
+                    if(!string.IsNullOrEmpty(column) && column == "StateId")
+                    {
+
+                    }
                     //if (columnNames.Contains(pro.Name.Trim()))
                     if (column != null)
                     {
@@ -170,6 +174,17 @@ namespace MME.MemberJob
                             if (!string.IsNullOrEmpty(row[pro.Name].ToString()))
                             {
                                 pro.SetValue(objT, row[column] == DBNull.Value ? null : Convert.ChangeType(row[column], typeof(decimal)));
+                            }
+                            else
+                            {
+                                pro.SetValue(objT, null);
+                            }
+                        }
+                        else if (pI != null && pI.PropertyType.FullName == "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]")
+                        {
+                            if (!string.IsNullOrEmpty(row[pro.Name].ToString()))
+                            {
+                                pro.SetValue(objT, row[column] == DBNull.Value ? null : Convert.ChangeType(row[column], typeof(Int32)));
                             }
                             else
                             {
@@ -193,7 +208,7 @@ namespace MME.MemberJob
                             {
                                 pro.SetValue(objT, row[column] == DBNull.Value ? null : Convert.ChangeType(row[column], pI.PropertyType));
                             }
-                            catch
+                            catch(Exception ex)
                             {
 
                             }

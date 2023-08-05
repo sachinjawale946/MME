@@ -35,6 +35,7 @@ namespace MME.Mobile.ViewModels
         };
         SnackbarOptions successSnackbarOptions = new SnackbarOptions
         {
+
             BackgroundColor = Colors.Green,
             TextColor = Colors.White,
             ActionButtonTextColor = Colors.Yellow,
@@ -47,6 +48,10 @@ namespace MME.Mobile.ViewModels
         public ProfileViewModel()
         {
             MaxBirthDate = DateTime.Now.AddYears(-1);
+            if (Profile == null)
+            {
+                Profile = new ProfileResponseModel { shownoimage = true };
+            }
             Task.Run(async () =>
             {
                 await GetProfile();
@@ -349,6 +354,11 @@ namespace MME.Mobile.ViewModels
                 {
                     Profile.showprofileimage = false;
                     Profile.shownoimage = true;
+                }
+
+                if(Profile.BirthDate == null || !Profile.BirthDate.HasValue || Profile.BirthDate == DateTime.MinValue)
+                {
+                    Profile.BirthDate = null;
                 }
 
                 SetDropdownSelections();

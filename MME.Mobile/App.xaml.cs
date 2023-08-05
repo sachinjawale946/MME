@@ -16,6 +16,7 @@ namespace MME.Mobile
 
         protected override void OnStart()
         {
+            SetLangaugeCode(Settings.language);
             if (string.IsNullOrEmpty(Settings.username))
             {
                 MainPage = new NavigationPage(new LandigPage());
@@ -25,7 +26,6 @@ namespace MME.Mobile
                 App.Current.MainPage = new AppShell();
                 Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
             }
-            SetLangaugeCode(Settings.language);
         }
 
         private void SetLangaugeCode(string LanguageCode)

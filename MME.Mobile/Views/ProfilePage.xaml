@@ -85,7 +85,7 @@
 
                                 <Label VerticalOptions="Start" HorizontalOptions="Start" Margin="15,0,10,0" Style="{StaticResource FormControlLabel}" Text="{x:Static resource:AppResources.DateOfBirth}"/>
                                 <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="0" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
-                                    <DatePicker HeightRequest="40" Margin="10,0,10,0" x:Name="txtBirthDate" Date="{Binding Profile.BirthDate}" MaximumDate="{Binding MaxBirthDate}"/>
+                                    <DatePicker HeightRequest="40" Margin="10,0,10,0" x:Name="txtBirthDate" Date="{Binding Profile.BirthDate,StringFormat='{0:dd MMM yyyy}'}"/>
                                 </inputLayout:SfTextInputLayout>
 
                                 <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,0,10,0" Style="{StaticResource FormControlLabel}" Text="{x:Static resource:AppResources.Mobile}"/>
@@ -161,7 +161,7 @@
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="0"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="0"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="20"/>
                                 <RowDefinition Height="20"/>
