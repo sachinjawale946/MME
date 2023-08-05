@@ -5,7 +5,7 @@ namespace MME.Mobile.Services
 {
     internal interface IMemberService
     {
-        Task<List<MemberResponseModel>> Search(MemberRequestModel model);
+        Task<MemberResponseWrapperModel> Search(MemberRequestModel model);
         Task<byte[]> GetProfileImage(Guid UserId);
         Task<ProfileResponseModel> GetProfile(Guid UserId);
         Task<string> SaveProfileImage(ProfilePictureRequestModel model);

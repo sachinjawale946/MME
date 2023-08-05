@@ -54,53 +54,84 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private void SearchMore()
+        private int _totalMembers;
+        public int TotalMembers
         {
-            // Search();
+            get { return _totalMembers; }
+            set
+            {
+                _totalMembers = value;
+                OnPropertyChanged(nameof(TotalMembers));
+            }
         }
 
-        private async Task Search()
+        private async void SearchMore()
         {
-            var busy = new BusyPage();
-            await MopupService.Instance.PushAsync(busy);
-            if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
-            if (SearchModel == null) SearchModel = new MemberRequestModel() { membername = string.Empty, page = 1 };
-            var results = await _memberService.Search(SearchModel);
-            if (results != null && results.Count > 0)
+            if (Members == null || Members.Count == 0) return;
+            if (Members.Count >= TotalMembers) return;
+            await Search(false, true);
+        }
+
+        private async Task Search(bool showloader = true, bool morecommand = false)
+        {
+            if (showloader)
             {
-                for (int i = 0; i < results.Count; i++)
+                var busy = new BusyPage();
+                await MopupService.Instance.PushAsync(busy);
+            }
+            if (Members == null) Members = new ObservableCollection<MemberResponseModel>();
+            if (SearchModel == null)
+            {
+                SearchModel = new MemberRequestModel() { membername = string.Empty, page = 1 };
+            }
+            else
+            {
+                if(morecommand)
                 {
-                    if (string.IsNullOrEmpty(results[i].profilepicurl))
+                    SearchModel.page = SearchModel.page + 1;
+                }
+                else
+                {
+                    SearchModel.page = 1;
+                }
+            }
+            var result = await _memberService.Search(SearchModel);
+            if (result != null && result.Members != null && result.Members.Count > 0)
+            {
+                TotalMembers = result.MembersCount;
+                for (int i = 0; i < result.Members.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(result.Members[i].profilepicurl))
                     {
-                        results[i].showprofileimage = false;
-                        results[i].shownoimage = true;
+                        result.Members[i].showprofileimage = false;
+                        result.Members[i].shownoimage = true;
                     }
                     else
                     {
-                        results[i].showprofileimage = true;
-                        results[i].shownoimage = false;
+                        result.Members[i].showprofileimage = true;
+                        result.Members[i].shownoimage = false;
                     }
-                    if (!Members.Contains(results[i]))
-                        Members.Add(results[i]);
+                    if (!Members.Contains(result.Members[i]))
+                        Members.Add(result.Members[i]);
                 }
             }
             else
             {
                 // reset search
+                TotalMembers= 0;
                 Members.Clear();
                 SearchModel.page = 0;
                 SearchModel.membername = string.Empty;
             }
-            await MopupService.Instance.PopAsync(true);
+            if (showloader)
+                await MopupService.Instance.PopAsync(true);
         }
 
-        private void NewSearch(string SearchFilter = "")
+        private async void NewSearch(string SearchFilter = "")
         {
             Members = new ObservableCollection<MemberResponseModel>();
-            if (SearchModel == null) SearchModel = new MemberRequestModel();
-            SearchModel.page = 0;
-            SearchModel.membername = SearchFilter;
-            Search();
+            SearchModel = new MemberRequestModel() { membername = SearchFilter, page = 1 };
+            await Search();
         }
 
     }

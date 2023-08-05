@@ -125,7 +125,7 @@ namespace MME.Mobile.Services
             }
         }
 
-        public async Task<List<MemberResponseModel>> Search(MemberRequestModel model)
+        public async Task<MemberResponseWrapperModel> Search(MemberRequestModel model)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace MME.Mobile.Services
                 HttpResponseMessage response = client.PostAsync(uri, data).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<List<MemberResponseModel>>(response.Content.ReadAsStringAsync().Result);
+                    return JsonConvert.DeserializeObject<MemberResponseWrapperModel>(response.Content.ReadAsStringAsync().Result);
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
@@ -145,14 +145,14 @@ namespace MME.Mobile.Services
                     var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                     await snackbar.Show(cancellationTokenSource.Token);
                 }
-                return await Task.FromResult(new List<MemberResponseModel>());
+                return await Task.FromResult(new MemberResponseWrapperModel { Members = new List<MemberResponseModel>() });
             }
             catch(Exception ex)
             {
                 var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
-                return await Task.FromResult(new List<MemberResponseModel>());
+                return await Task.FromResult(new MemberResponseWrapperModel { Members = new List<MemberResponseModel>() });
             }
         }
 

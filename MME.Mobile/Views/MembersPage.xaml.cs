@@ -15,4 +15,9 @@ public partial class MembersPage : ContentPage
         this.BindingContext = new MemberViewModel();
         base.OnAppearing();
     }
+
+    private void searchResults_RemainingItemsThresholdReached(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -95,7 +95,7 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/members-add-fcmtoken")]
         public string AddFCMToken(FCMRequestModel model)
         {
-            if (model != null&& !string.IsNullOrEmpty(model.token))
+            if (model != null && !string.IsNullOrEmpty(model.token))
             {
                 var profile = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
                 if (profile != null)
@@ -158,7 +158,7 @@ namespace MME.Web.Apis
 
         [Authorize(Policy = "MMEJwtScheme")]
         [HttpPost, Route("~/api/v1/members-search")]
-        public List<MemberResponseModel> Search(MemberRequestModel model)
+        public MemberResponseWrapperModel Search(MemberRequestModel model)
         {
             var profilesPicsFolderPath = _iconfiguration["allprofileimages"].ToString();
 
@@ -167,8 +167,15 @@ namespace MME.Web.Apis
 
             if (!string.IsNullOrEmpty(model.membername))
             {
-                return _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
-                        || c.LastName.ToLower().Contains(model.membername.ToLower())))
+                return new MemberResponseWrapperModel
+                {
+                    MembersCount = _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
+                            || c.LastName.ToLower().Contains(model.membername.ToLower())))
+                        .Include("Occupation")
+                        .OrderBy(c => c.FirstName).ThenBy(c => c.LastName).Count(),
+
+                    Members = _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
+                            || c.LastName.ToLower().Contains(model.membername.ToLower())))
                         .Include("Occupation")
                         .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
                         .Skip((model.page - 1) * model.pagesize)
@@ -183,12 +190,19 @@ namespace MME.Web.Apis
                             fullname = o.FirstName + " " + o.LastName,
                             occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
                             gender = o.Gender,
+                            fulladdress = o.City,
                             profilepicurl = (string.IsNullOrEmpty(o.ProfilePic)) ? string.Empty : profilesPicsFolderPath + o.ProfilePic,
-                        }).ToList();
+                        }).ToList()
+                };
             }
             else
             {
-                return _context.Users.Where(c => c.IsActive)
+                return new MemberResponseWrapperModel
+                {
+                    MembersCount = _context.Users.Where(c => c.IsActive)
+                       .OrderBy(c => c.FirstName).ThenBy(c => c.LastName).Count(),
+
+                    Members = _context.Users.Where(c => c.IsActive)
                        .OrderBy(c => c.FirstName).ThenBy(c => c.LastName)
                        .Skip((model.page - 1) * model.pagesize)
                        .Take(model.pagesize)
@@ -202,8 +216,10 @@ namespace MME.Web.Apis
                            fullname = o.FirstName + " " + o.LastName,
                            occupation = (o.Occupation == null) ? string.Empty : o.Occupation.Occupation,
                            gender = o.Gender,
+                           fulladdress = o.City,
                            profilepicurl = (string.IsNullOrEmpty(o.ProfilePic)) ? string.Empty : profilesPicsFolderPath + o.ProfilePic,
-                       }).ToList();
+                       }).ToList()
+                };
             }
         }
 
