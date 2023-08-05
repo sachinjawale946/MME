@@ -127,8 +127,9 @@ namespace MME.Mobile.ViewModels
                 await MopupService.Instance.PopAsync(true);
         }
 
-        private async void NewSearch(string SearchFilter = "")
+        public async void NewSearch(string SearchFilter = "")
         {
+            TotalMembers = 0;
             Members = new ObservableCollection<MemberResponseModel>();
             SearchModel = new MemberRequestModel() { membername = SearchFilter, page = 1 };
             await Search();
