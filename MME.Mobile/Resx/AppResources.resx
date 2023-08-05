@@ -150,6 +150,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="EventDetails" xml:space="preserve">
     <value>Event Details</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
+  </data>
+  <data name="Hindi" xml:space="preserve">
+    <value>हिंदी</value>
   </data>
   <data name="HouseSocietyBuilding" xml:space="preserve">
     <value>House / Society / Building</value>

@@ -21,6 +21,7 @@ namespace MME.Mobile.ViewModels
     {
         readonly IMemberService _memberService = new MemberService();
         readonly ICommonService _commonService = new CommonService();
+        readonly ILanguageService _languageService = new LanguageService();
 
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         SnackbarOptions snackbarOptions = new SnackbarOptions
@@ -57,6 +58,28 @@ namespace MME.Mobile.ViewModels
                 await GetProfile();
                 await MasterData();
             });
+        }
+
+        private List<LanguageResponseModel> _languages;
+        public List<LanguageResponseModel> Languages
+        {
+            get { return _languages; }
+            set
+            {
+                _languages = value;
+                OnPropertyChanged(nameof(Languages));
+            }
+        }
+
+        private LanguageResponseModel _language;
+        public LanguageResponseModel Language
+        {
+            get { return _language; }
+            set
+            {
+                _language = value;
+                OnPropertyChanged(nameof(Language));
+            }
         }
 
         private List<OccupationResponseModel> _occupations;
@@ -303,6 +326,7 @@ namespace MME.Mobile.ViewModels
             Occupations = await _commonService.GetOccupations();
             Religions = await _commonService.GetReligions();
             Castes = await _commonService.GetCastes();
+            Languages = await _languageService.GetLanguages();
             SetDropdownSelections();
         }
 
@@ -317,16 +341,19 @@ namespace MME.Mobile.ViewModels
 
                 Occupation = Occupations.Where(o => o.occupationid == Profile.OccupationId).FirstOrDefault();
             }
+
             if (Religions != null && Religions.Count > 0 && Profile != null && Convert.ToInt16(Profile.ReligionId) > 0)
             {
 
                 Religion = Religions.Where(o => o.religionid == Profile.ReligionId).FirstOrDefault();
             }
+
             if (Castes != null && Castes.Count > 0 && Profile != null && Convert.ToInt16(Profile.CasteId) > 0)
             {
 
                 Caste = Castes.Where(o => o.casteid == Profile.CasteId).FirstOrDefault();
             }
+
             if (!string.IsNullOrEmpty(Profile.Gender) && Genders != null && Genders.Count > 0)
             {
                 Gender = Genders.Where(g => g.Value == Profile.Gender).FirstOrDefault();
@@ -335,6 +362,11 @@ namespace MME.Mobile.ViewModels
             if (!string.IsNullOrEmpty(Profile.MaritalStatus) && MartialStatues != null && MartialStatues.Count > 0)
             {
                 MartialStatus = MartialStatues.Where(g => g.Value == Profile.MaritalStatus).FirstOrDefault();
+            }
+
+            if (Profile.LanguageId > 0 && Languages != null && Languages.Count > 0)
+            {
+                Language = Languages.Where(g => g.languageid == Profile.LanguageId).FirstOrDefault();
             }
         }
 

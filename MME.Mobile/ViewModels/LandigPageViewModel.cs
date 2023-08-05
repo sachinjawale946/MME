@@ -5,6 +5,7 @@ using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
 using MME.Model.Response;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -69,7 +70,12 @@ namespace MME.Mobile.ViewModels
 
         public async void GetLanguages()
         {
-             Languages = await _languageService.GetLanguages();
+             // Languages = await _languageService.GetLanguages();
+             Languages = new List<LanguageResponseModel>
+             { 
+                 new LanguageResponseModel { languagecode = "en", language = Resx.AppResources.English, languageid = 1},
+                 new LanguageResponseModel { languagecode = "hi", language = Resx.AppResources.Hindi, languageid = 2},
+             };
         }
 
         public void SetLangaugeCode(string LanguageCode)

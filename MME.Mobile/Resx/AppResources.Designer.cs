@@ -160,6 +160,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event Details.
         /// </summary>
         internal static string EventDetails {
@@ -201,6 +210,15 @@ namespace MME.Mobile.Resx {
         internal static string Gender {
             get {
                 return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to हिंदी.
+        /// </summary>
+        internal static string Hindi {
+            get {
+                return ResourceManager.GetString("Hindi", resourceCulture);
             }
         }
         
