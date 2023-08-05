@@ -11,6 +11,7 @@ namespace MME.Mobile
             InitializeComponent();
             Routing.RegisterRoute("Login", typeof(Login));
             Routing.RegisterRoute("EventsPage", typeof(EventsPage));
+            Routing.RegisterRoute("EventDetailsPage", typeof(EventDetailsPage));
             Routing.RegisterRoute("MembersPage", typeof(MembersPage));
             Routing.RegisterRoute("ProfilePage", typeof(ProfilePage));
             Routing.RegisterRoute("PaymentPage", typeof(PaymentPage));

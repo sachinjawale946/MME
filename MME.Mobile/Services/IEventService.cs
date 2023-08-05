@@ -7,5 +7,6 @@ namespace MME.Mobile.Services
     {
         Task<List<EventResponseModel>> Search(EventRequestModel model);
         Task<EventFeedbackResponseModel> SaveFeedback(EventFeedbackResponseModel model);
+        Task<EventResponseModel> GetEventById(Guid EventId);
     }
 }

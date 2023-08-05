@@ -4,29 +4,49 @@ using System.Diagnostics;
 using FirebaseAdmin;
 using FirebaseAdmin.Messaging;
 using Google.Apis.Auth.OAuth2;
+using MME.Data;
 
 namespace MME.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        readonly MMEAppDBContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MMEAppDBContext context, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            IReadOnlyList<string> list = new List<string>
-            {
-                "c0PKHeTXTduKpoaRf3yC1z:APA91bFqpond7qLHo293mx5zQZKe5slRGtfs40Naf1Jnku1dh45jOLmaOtQGZSvfp5ZXNvskPNv-ekU09rOYJKcyvySuNV2wdx0rT3yyZYRFpBUuxNsO5VGvVYa16CJDTksBOjt5D2DD",
-            };
+            //IReadOnlyList<string> list = new List<string>
+            //{
+            //   _context.Users.Where(u => u.FCMToken != null && u.FCMToken != string.Empty).FirstOrDefault().FCMToken
+            //};
+            //var defaultApp = FirebaseApp.Create(new AppOptions()
+            //{
+            //    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
+            //});
+            //var message = new MulticastMessage()
+            //{
+            //    Notification = new Notification
+            //    {
+            //        Title = "Message Title",
+            //        Body = "Message Body",
+            //    },
+            //    //Topic = "news",
+            //    Tokens = list,
+            //};
+            //var messaging = FirebaseMessaging.DefaultInstance;
+            //var result = messaging.SendMulticastAsync(message).Result;
+
             var defaultApp = FirebaseApp.Create(new AppOptions()
             {
                 Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
             });
-            var message = new MulticastMessage()
+            var message = new Message()
             {
                 Notification = new Notification
                 {
@@ -34,10 +54,11 @@ namespace MME.Web.Controllers
                     Body = "Message Body",
                 },
                 //Topic = "news",
-                Tokens = list,
+                Token = _context.Users.Where(u => u.FCMToken != null && u.FCMToken != string.Empty).FirstOrDefault().FCMToken,
             };
             var messaging = FirebaseMessaging.DefaultInstance;
-            var result = messaging.SendMulticastAsync(message).Result;
+            var result = messaging.SendAsync(message).Result;
+
             return View();
         }
 

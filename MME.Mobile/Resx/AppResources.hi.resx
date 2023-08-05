@@ -135,6 +135,9 @@
   <data name="Continue" xml:space="preserve">
     <value>आगे बढिये</value>
   </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>इव्हेंट बनानेवाले : </value>
+  </data>
   <data name="DashBoard" xml:space="preserve">
     <value>डैशबोर्ड</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>ईमेल</value>
+  </data>
+  <data name="EventDetails" xml:space="preserve">
+    <value>इव्हेंट विवरण</value>
   </data>
   <data name="Events" xml:space="preserve">
     <value>इव्हेंट्स</value>
@@ -194,6 +200,12 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>नाम</value>
+  </data>
+  <data name="NoEventsFound" xml:space="preserve">
+    <value>कोई इव्हेंट नही मिली !</value>
+  </data>
+  <data name="NoMembersFound" xml:space="preserve">
+    <value>कोई मेंबर्स नही मिले !</value>
   </data>
   <data name="Occupation" xml:space="preserve">
     <value>नौकरी / पेशा</value>

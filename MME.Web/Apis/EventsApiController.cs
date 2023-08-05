@@ -73,6 +73,17 @@ namespace MME.Web.Apis
             }
         }
 
+        [HttpGet, Route("~/api/v1/events-details/{UserId}/{EventId}")]
+        public EventResponseModel EventDetails(Guid UserId, Guid EventId)
+        {
+            var eventdetails = _context.Events.Where(c => c.IsActive && c.EventId == EventId).Include("User").FirstOrDefault();
+            if(eventdetails != null)
+            {
+               return returnReponseItem(eventdetails, UserId);
+            }
+            return new EventResponseModel();
+        }
+
         private EventResponseModel returnReponseItem(MME.Model.Shared.EventModel item, Guid userid)
         {
             // var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["eventpicthumbs"].ToString());
@@ -94,21 +105,24 @@ namespace MME.Web.Apis
             var EventFeedbacks = _context.EventFeedbacks.Where(e => e.EventId == item.EventId);
             if (EventFeedbacks.Any())
             {
-                var EventFeedback = _context.EventFeedbacks.Where(e => e.UserId == userid && e.EventId == item.EventId).FirstOrDefault();
-                if (EventFeedback != null)
+                if (userid != Guid.Empty)
                 {
-                    response.EventFeedback = new EventFeedbackResponseModel
+                    var EventFeedback = _context.EventFeedbacks.Where(e => e.UserId == userid && e.EventId == item.EventId).FirstOrDefault();
+                    if (EventFeedback != null)
                     {
-                        disliked = EventFeedback.DisLiked,
-                        donation = EventFeedback.Donation,
-                        eventid = EventFeedback.EventId,
-                        feedback = EventFeedback.Feedback,
-                        id = EventFeedback.Id,
-                        liked = EventFeedback.Liked,
-                        reportabuse = EventFeedback.ReportAbuse,
-                        suggestion = EventFeedback.Suggestion,
-                        userid = EventFeedback.UserId,
-                    };
+                        response.EventFeedback = new EventFeedbackResponseModel
+                        {
+                            disliked = EventFeedback.DisLiked,
+                            donation = EventFeedback.Donation,
+                            eventid = EventFeedback.EventId,
+                            feedback = EventFeedback.Feedback,
+                            id = EventFeedback.Id,
+                            liked = EventFeedback.Liked,
+                            reportabuse = EventFeedback.ReportAbuse,
+                            suggestion = EventFeedback.Suggestion,
+                            userid = EventFeedback.UserId,
+                        };
+                    }
                 }
 
                 // counts 

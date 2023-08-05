@@ -72,4 +72,13 @@ public partial class EventsPage : ContentPage
             Animate(likeButton);
         }
     }
+
+    private void BannerImage_Clicked(object sender, EventArgs e)
+    {
+        var imageButton = sender as ImageButton;
+        if(imageButton != null)
+        {
+            viewModel.Navigate(Guid.Parse(imageButton.CommandParameter.ToString()));
+        }
+    }
 }

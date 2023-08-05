@@ -115,6 +115,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created By :.
+        /// </summary>
+        internal static string CreatedBy {
+            get {
+                return ResourceManager.GetString("CreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dashboard.
         /// </summary>
         internal static string DashBoard {
@@ -147,6 +156,15 @@ namespace MME.Mobile.Resx {
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Event Details.
+        /// </summary>
+        internal static string EventDetails {
+            get {
+                return ResourceManager.GetString("EventDetails", resourceCulture);
             }
         }
         
@@ -291,6 +309,24 @@ namespace MME.Mobile.Resx {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No events to display !.
+        /// </summary>
+        internal static string NoEventsFound {
+            get {
+                return ResourceManager.GetString("NoEventsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No members to display !.
+        /// </summary>
+        internal static string NoMembersFound {
+            get {
+                return ResourceManager.GetString("NoMembersFound", resourceCulture);
             }
         }
         

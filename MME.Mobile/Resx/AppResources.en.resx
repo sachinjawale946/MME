@@ -135,6 +135,9 @@
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Created By :</value>
+  </data>
   <data name="DashBoard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EventDetails" xml:space="preserve">
+    <value>Event Details</value>
   </data>
   <data name="Events" xml:space="preserve">
     <value>Events</value>
@@ -194,6 +200,12 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NoEventsFound" xml:space="preserve">
+    <value>No events to display !</value>
+  </data>
+  <data name="NoMembersFound" xml:space="preserve">
+    <value>No members to display !</value>
   </data>
   <data name="Occupation" xml:space="preserve">
     <value>Job / Profession</value>

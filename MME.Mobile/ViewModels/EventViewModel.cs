@@ -52,7 +52,7 @@ namespace MME.Mobile.ViewModels
 
         private void SearchMore()
         {
-           // Search();
+            // Search();
         }
 
         private async Task Search()
@@ -209,6 +209,11 @@ namespace MME.Mobile.ViewModels
                 Events.Where(e => e.eventid == eventid).FirstOrDefault().suggestions = response.suggestions;
                 Events.Where(e => e.eventid == eventid).FirstOrDefault().feedbacks = response.feedbacks;
             }
+        }
+
+        public async void Navigate(Guid eventid)
+        {
+            await Shell.Current.GoToAsync($"EventDetailsPage?Event={eventid}");
         }
     }
 }

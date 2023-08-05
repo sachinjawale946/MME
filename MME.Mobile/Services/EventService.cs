@@ -6,6 +6,7 @@ using MME.Model.Request;
 using MME.Model.Response;
 using Newtonsoft.Json;
 using System.Text;
+using static Android.Graphics.ColorSpace;
 
 namespace MME.Mobile.Services
 {
@@ -57,7 +58,7 @@ namespace MME.Mobile.Services
                 return await Task.FromResult(new List<EventResponseModel>());
             }
         }
-    
+
         public async Task<EventFeedbackResponseModel> SaveFeedback(EventFeedbackResponseModel model)
         {
             try
@@ -88,6 +89,35 @@ namespace MME.Mobile.Services
                 return await Task.FromResult(new EventFeedbackResponseModel());
             }
         }
-    
+
+        public async Task<EventResponseModel> GetEventById(Guid EventId)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
+                Uri uri = new Uri(string.Format(Api_Lookup.eventDetailsApi, Settings.userid, EventId));
+                HttpResponseMessage response = client.GetAsync(uri).GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<EventResponseModel>(response.Content.ReadAsStringAsync().Result);
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    var _message = Resx.AppResources.Validation_Message_Session_Expired;
+                    var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                return await Task.FromResult(new EventResponseModel());
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
+                var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
+                return await Task.FromResult(new EventResponseModel());
+            }
+        }
     }
 }

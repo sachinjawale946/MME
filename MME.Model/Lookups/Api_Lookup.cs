@@ -18,6 +18,7 @@ namespace MME.Model.Lookups
         public const string memberProfileApi = BaseApi + "/api/v1/members-getprofile/{0}";
         public const string memberProfileFCMApi = BaseApi + "/api/v1/members-add-fcmtoken";
         public const string eventSearchApi = BaseApi + "/api/v1/events-search";
+        public const string eventDetailsApi = BaseApi + "/api/v1/events-details/{0}/{1}";
         public const string eventFeedbackApi = BaseApi + "/api/v1/save-event-feedback";
         public const string statesApi = BaseApi + "/api/v1/getstates";
         public const string pincodesByStateApi = BaseApi + "/api/v1/getpincodes-bystate/{0}";
