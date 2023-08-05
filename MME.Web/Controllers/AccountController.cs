@@ -30,7 +30,7 @@ namespace MME.Web.Controllers
         [HttpPost, Route("/account/login")]
         public IActionResult Login(AuthenticationRequestModel model)
         {
-            var user = _context.Users.Where(x => x.Username == model.username).FirstOrDefault();
+            var user = _context.Users.Where(x => x.Username == model.username.Trim()).FirstOrDefault();
 
             if (user == null)
             {
@@ -39,7 +39,7 @@ namespace MME.Web.Controllers
             }
             else
             {
-                var isAuthenticated = PasswordHelper.VerifyPassword(model.password, user.Password, user.PasswordSalt);
+                var isAuthenticated = PasswordHelper.VerifyPassword(model.password.Trim(), user.Password, user.PasswordSalt);
                 if (isAuthenticated)
                 {
                     if (!user.IsActive)

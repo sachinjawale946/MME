@@ -124,7 +124,7 @@ namespace MME.Web.Apis
                     {
                         profilepic = (string.IsNullOrEmpty(profile.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic)),
                         Area = profile.Area,
-                        BirthDate = profile.BirthDate,
+                        BirthDate = Convert.ToDateTime(profile.BirthDate),
                         CasteId = profile.CasteId,
                         City = profile.City,
                         Email = profile.Email,

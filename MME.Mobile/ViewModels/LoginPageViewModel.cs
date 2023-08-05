@@ -73,6 +73,8 @@ namespace MME.Mobile.ViewModels
             }
             var busy = new BusyPage();
             await MopupService.Instance.PushAsync(busy);
+            UserModel.username = UserModel.username.Trim();
+            UserModel.password = UserModel.password.Trim();
             var result = await _loginService.Login(UserModel);
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {

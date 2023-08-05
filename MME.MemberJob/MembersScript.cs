@@ -59,7 +59,7 @@ namespace MME.MemberJob
                         PincodeId = member.PincodeId,
                         StateId = member.StateId,
                         BirthDate = null,
-
+                        IsActive = true,
                     });
                     start++;
                 }
