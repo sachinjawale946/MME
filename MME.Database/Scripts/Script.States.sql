@@ -25,6 +25,11 @@ INSERT INTO tblRoles
 (Role, Description, DisplayOrder, IsActive)
 VALUES
 ('Member','Access To Events View, Members',3,1)
+
+INSERT INTO tblRoles
+(Role, Description, DisplayOrder, IsActive)
+VALUES
+('Guest','Access To Events View, Members',3,1)
 -- ROLES
 
 -- STATES
@@ -69,6 +74,10 @@ INSERT INTO tblPinCodes
 (PinCode,State,DisplayOrder,IsActive)
 VALUES
 ('400612',2,6,1)
+INSERT INTO tblPinCodes
+(PinCode,State,DisplayOrder,IsActive)
+VALUES
+('400615',1,7,1)
 -- PINCODES
 
 -- CASTES

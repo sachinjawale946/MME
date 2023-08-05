@@ -290,7 +290,6 @@ namespace MME.Mobile.ViewModels
             };
             MartialStatues = new List<DropdownModel>
             {
-                new DropdownModel{ Text = "Single", Value="Single" },
                 new DropdownModel{ Text = "Married", Value="Married" },
                 new DropdownModel{ Text = "Unmarried", Value="Unmarried" },
                 new DropdownModel{ Text = "Divorced", Value="Divorced" },
