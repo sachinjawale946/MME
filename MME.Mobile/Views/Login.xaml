@@ -52,7 +52,7 @@
             <Label VerticalOptions="End" Grid.Row="2" Margin="12,0,0,0" Text="{x:Static resource:AppResources.Password}" FontAttributes="Bold" Style="{StaticResource ControlLabel}"></Label>
 
             <inputLayout:SfTextInputLayout ContainerType="Outlined"
-                                           Margin="10,0,10,0" Grid.Row="3" HeightRequest="70">
+                                           Margin="10,0,10,0" Grid.Row="3" HeightRequest="70" EnablePasswordVisibilityToggle="true">
                 <Entry IsPassword="True" x:Name="PasswordEntry" Grid.Row="3" Margin="10,0,10,0"  Completed="PasswordEntry_Completed" 
                    VerticalOptions="Center" HeightRequest="40" VerticalTextAlignment="Center" Text="{Binding UserModel.password, Mode=TwoWay}" MaxLength="10" />
             </inputLayout:SfTextInputLayout>

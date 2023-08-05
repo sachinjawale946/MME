@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -37,6 +38,7 @@ namespace MME.Web.Apis
             if (!string.IsNullOrEmpty(model.eventname))
             {
                 var events = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now && (c.Event.ToLower().Contains(model.eventname.ToLower())))
+                        .Include("User")
                         .OrderByDescending(c => c.CreatedDate).ThenBy(c => c.Event)
                         .Skip((model.page - 1) * model.pagesize)
                         .Take(model.pagesize).ToList();
@@ -54,6 +56,7 @@ namespace MME.Web.Apis
             else
             {
                 var events = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now)
+                       .Include("User")
                        .OrderByDescending(c => c.CreatedDate).ThenBy(c => c.Event)
                        .Skip((model.page - 1) * model.pagesize)
                        .Take(model.pagesize).ToList();
@@ -78,6 +81,7 @@ namespace MME.Web.Apis
 
             var response = new EventResponseModel
             {
+                createdby = (item.User == null) ? string.Empty : item.User.FirstName + " " + item.User.LastName,
                 eventid = item.EventId,
                 event_type_id = item.EventTypeId,
                 description = item.Description,

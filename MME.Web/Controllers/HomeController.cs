@@ -22,6 +22,10 @@ namespace MME.Web.Controllers
             {
                 "c0PKHeTXTduKpoaRf3yC1z:APA91bFqpond7qLHo293mx5zQZKe5slRGtfs40Naf1Jnku1dh45jOLmaOtQGZSvfp5ZXNvskPNv-ekU09rOYJKcyvySuNV2wdx0rT3yyZYRFpBUuxNsO5VGvVYa16CJDTksBOjt5D2DD",
             };
+            var defaultApp = FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
+            });
             var message = new MulticastMessage()
             {
                 Notification = new Notification
@@ -32,10 +36,6 @@ namespace MME.Web.Controllers
                 //Topic = "news",
                 Tokens = list,
             };
-            var defaultApp = FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
-            });
             var messaging = FirebaseMessaging.DefaultInstance;
             var result = messaging.SendMulticastAsync(message).Result;
             return View();

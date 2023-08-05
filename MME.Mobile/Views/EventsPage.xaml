@@ -29,11 +29,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <SearchBar x:Name="searchBar" Grid.Row="0" Placeholder="{x:Static resource:AppResources.SearchEvents}"
-                   SearchCommand="{Binding SearchCommand}" 
+                   SearchCommand="{Binding SearchCommand}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray"/>
         <ScrollView Grid.Row="1">
             <CollectionView x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreEventCommand}"
-                  ItemsSource="{Binding Events}" Margin="10" VerticalScrollBarVisibility="Always">
+                  ItemsSource="{Binding Events}" Margin="10" VerticalScrollBarVisibility="Always" EmptyView="No events to display">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout x:Name="EventStackPanel" Margin="0,0,0,0" x:DataType="model:EventResponseModel">
@@ -44,14 +44,26 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.RowSpan="0" Aspect="AspectFit" Margin="10,10,10,10" 
+                                    <Grid BackgroundColor="{StaticResource AppPrimaryBackground}" Padding="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="Created By : " TextColor="#FFF" Style="{StaticResource FormControlLabel}" Margin="5,0,0,0"/>
+                                        <Label Text="{Binding createdby}" TextColor="#FFF" Style="{StaticResource FormControlLabel}" Grid.Column="1" Margin="0,0,10,0"/>
+
+                                    </Grid>
+
+                                    <Image Grid.Row="1" Aspect="AspectFit" Margin="10,10,10,10" 
                                            Source="{Binding bannerurl}" HeightRequest="150" HorizontalOptions="CenterAndExpand"/>
 
-                                    <Label Margin="10,0,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="1" Text="{Binding header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                    <Label Margin="10,0,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="2" Text="{Binding header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
                                     
-                                    <Grid Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" >
                                         <Grid.ColumnDefinitions>
                                             <!--<ColumnDefinition Width="*"/>-->
                                             <ColumnDefinition Width="*"/>

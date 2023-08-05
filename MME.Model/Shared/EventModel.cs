@@ -37,11 +37,13 @@ namespace MME.Model.Shared
         [Required]
         public DateTime ActivationDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        [ForeignKey("User")]
         public Guid CreatedBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public Guid? LastUpdatedBy { get; set; }
         public bool IsActive { get; set; }
         public virtual EventTypeModel? EventType { get; set; }
+        public virtual UserModel? User { get; set; }
 
         [NotMapped]
         public List<EventTypeModel>? EventTypes { get; set; }
