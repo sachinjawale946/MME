@@ -65,6 +65,33 @@ namespace MME.MemberJob
                 }
                 _context.SaveChanges();
             }
+            else
+            {
+                var start = 15;
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 200; j++)
+                    {
+                        _context.Users.Add(new MME.Model.Shared.UserModel
+                        {
+                            Username = "Test" + start.ToString("000000"),
+                            PasswordSalt = PasswordSalt,
+                            Password = PasswordHash,
+                            FirstName = "Test",
+                            MiddleName = string.Empty,
+                            LastName = "Member",
+                            RoleId = 3,
+                            Mobile = start.ToString("00000000000"),
+                            Gender = "Male",
+                            MaritalStatus = "Married",
+                            BirthDate = DateTime.Now.AddYears(-20),
+                            IsActive = true,
+                        });
+                        start++;
+                    }
+                    _context.SaveChanges();
+                }
+            }
         }
 
         string HashPasword(string password, out byte[] salt)
