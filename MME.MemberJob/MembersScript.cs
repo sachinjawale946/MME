@@ -79,7 +79,7 @@ namespace MME.MemberJob
                             Password = PasswordHash,
                             FirstName = "Test",
                             MiddleName = string.Empty,
-                            LastName = "Member",
+                            LastName = start.ToString("000000"),
                             RoleId = 3,
                             Mobile = start.ToString("00000000000"),
                             Gender = "Male",
