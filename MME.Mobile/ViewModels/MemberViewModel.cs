@@ -69,10 +69,10 @@ namespace MME.Mobile.ViewModels
         {
             if (Members == null || Members.Count == 0) return;
             if (Members.Count >= TotalMembers) return;
-            await Task.Run(async () =>
-            {
-                await Search(false, true);
-            });
+            //await Task.Run(async () =>
+            //{
+            await Search(false, true);
+            //});
         }
 
         private async Task Search(bool showloader = true, bool morecommand = false)
@@ -89,7 +89,7 @@ namespace MME.Mobile.ViewModels
             }
             else
             {
-                if(morecommand)
+                if (morecommand)
                 {
                     SearchModel.page = SearchModel.page + 1;
                 }
@@ -99,7 +99,7 @@ namespace MME.Mobile.ViewModels
                 }
             }
             var result = await _memberService.Search(SearchModel);
-            if (result != null && result.Members != null && result.Members.Count > 0)
+            if (result != null && result.Members != null)
             {
                 TotalMembers = result.MembersCount;
                 for (int i = 0; i < result.Members.Count; i++)
@@ -118,14 +118,14 @@ namespace MME.Mobile.ViewModels
                         Members.Add(result.Members[i]);
                 }
             }
-            else
-            {
-                // reset search
-                TotalMembers= 0;
-                Members.Clear();
-                SearchModel.page = 0;
-                SearchModel.membername = string.Empty;
-            }
+            //else
+            //{
+            //    // reset search
+            //    TotalMembers= 0;
+            //    Members.Clear();
+            //    SearchModel.page = 0;
+            //    SearchModel.membername = string.Empty;
+            //}
             if (showloader)
                 await MopupService.Instance.PopAsync(true);
         }

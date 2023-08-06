@@ -315,8 +315,8 @@
                                                 ItemsSource="{Binding Castes}" />
                                 </inputLayout:SfTextInputLayout>
 
-                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,10,10,0" Style="{StaticResource FormControlLabel}" Text="{x:Static resource:AppResources.SubCaste}"/>
-                                <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
+                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,0,10,0" Style="{StaticResource FormControlLabel}" Text="{x:Static resource:AppResources.Language}"/>
+                                <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="2" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                     <editors:SfComboBox HeightRequest="60" Margin="10,0"
                                                 PlaceholderColor="#adb2bb" 
                                                 MaxDropDownHeight="400"

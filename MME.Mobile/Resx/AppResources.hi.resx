@@ -177,6 +177,9 @@
   <data name="LandmarkNearBy" xml:space="preserve">
     <value>सीमाचिह्न / आस-पास</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>कुलनाम</value>
   </data>

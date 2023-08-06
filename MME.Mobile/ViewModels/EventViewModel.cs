@@ -67,10 +67,10 @@ namespace MME.Mobile.ViewModels
         {
             if (Events == null || Events.Count == 0) return;
             if (Events.Count >= TotalEvents) return;
-            await Task.Run(async () =>
-            {
-                await Search(false, true);
-            });
+            //await Task.Run(async () =>
+            //{
+            await Search(false, true);
+            //});
         }
 
         private async Task Search(bool showloader = true, bool morecommand = false)
@@ -97,7 +97,7 @@ namespace MME.Mobile.ViewModels
                 }
             }
             var result = await _eventService.Search(SearchModel);
-            if (result != null && result.Events != null && result.Events.Count > 0)
+            if (result != null && result.Events != null)
             {
                 TotalEvents = result.EventsCount;
                 for (int i = 0; i < result.Events.Count; i++)
@@ -106,14 +106,14 @@ namespace MME.Mobile.ViewModels
                         Events.Add(result.Events[i]);
                 }
             }
-            else
-            {
-                // reset search
-                TotalEvents = 0;
-                Events.Clear();
-                SearchModel.page = 0;
-                SearchModel.eventname = string.Empty;
-            }
+            //else
+            //{
+            //    // reset search
+            //    TotalEvents = 0;
+            //    Events.Clear();
+            //    SearchModel.page = 0;
+            //    SearchModel.eventname = string.Empty;
+            //}
             if (showloader)
                 await MopupService.Instance.PopAsync(true);
         }
