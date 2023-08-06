@@ -71,11 +71,11 @@ namespace MME.Mobile.ViewModels
 
         private void ProfilePictureHandler(byte[] Picture)
         {
-            if (Picture == null && Picture.Length > 0)
+            if (Picture != null && Picture.Length > 0)
             {
                 ProfileImage = Picture;
                 _showprofileimage = true;
-                _showprofileimage = false;
+                shownoimage = false;
             }
         }
 
