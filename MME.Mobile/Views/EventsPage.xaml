@@ -29,10 +29,10 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <SearchBar x:Name="searchBar" Grid.Row="0" Placeholder="{x:Static resource:AppResources.SearchEvents}"
-                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommand="{Binding SearchCommand}" TextChanged="searchBar_TextChanged"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray"/>
-        <ScrollView Grid.Row="1">
-            <CollectionView x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreEventCommand}"
+        <!--<ScrollView Grid.Row="1">-->
+        <CollectionView Grid.Row="1" x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreEventCommand}"
                   ItemsSource="{Binding Events}" Margin="10" VerticalScrollBarVisibility="Always" EmptyView="{x:Static resource:AppResources.NoEventsFound}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -194,6 +194,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>
+        <!--</ScrollView>-->
     </Grid>
 </ContentPage>

@@ -19,6 +19,19 @@ public partial class EventsPage : ContentPage
         base.OnAppearing();
     }
 
+    private void searchResults_RemainingItemsThresholdReached(object sender, EventArgs e)
+    {
+
+    }
+
+    private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (viewModel != null && string.IsNullOrEmpty(searchBar.Text))
+        {
+            viewModel.NewSearch(searchBar.Text.Trim());
+        }
+    }
+
     private double _scale = 0;
 
     private void like_Clicked(object sender, EventArgs e)

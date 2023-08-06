@@ -50,38 +50,79 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private void SearchMore()
+
+        private int _totalEvents;
+        public int TotalEvents
         {
-            // Search();
+            get { return _totalEvents; }
+            set
+            {
+                _totalEvents = value;
+                OnPropertyChanged(nameof(TotalEvents));
+            }
         }
 
-        private async Task Search()
+
+        private async void SearchMore()
         {
-            var busy = new BusyPage();
-            await MopupService.Instance.PushAsync(busy);
-            if (Events == null) Events = new ObservableCollection<EventResponseModel>();
-            if (SearchModel == null) SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
-            var results = await _eventService.Search(SearchModel);
-            if (results != null && results.Count > 0)
+            if (Events == null || Events.Count == 0) return;
+            if (Events.Count >= TotalEvents) return;
+            await Task.Run(async () =>
             {
-                Events = new ObservableCollection<EventResponseModel>(results);
+                await Search(false, true);
+            });
+        }
+
+        private async Task Search(bool showloader = true, bool morecommand = false)
+        {
+            if (showloader)
+            {
+                var busy = new BusyPage();
+                await MopupService.Instance.PushAsync(busy);
+            }
+            if (Events == null) Events = new ObservableCollection<EventResponseModel>();
+            if (SearchModel == null)
+            {
+                SearchModel = new EventRequestModel() { eventname = string.Empty, page = 1 };
+            }
+            else
+            {
+                if (morecommand)
+                {
+                    SearchModel.page = SearchModel.page + 1;
+                }
+                else
+                {
+                    SearchModel.page = 1;
+                }
+            }
+            var result = await _eventService.Search(SearchModel);
+            if (result != null && result.Events != null && result.Events.Count > 0)
+            {
+                TotalEvents = result.EventsCount;
+                for (int i = 0; i < result.Events.Count; i++)
+                {
+                    if (!Events.Contains(result.Events[i]))
+                        Events.Add(result.Events[i]);
+                }
             }
             else
             {
                 // reset search
+                TotalEvents = 0;
                 Events.Clear();
                 SearchModel.page = 0;
                 SearchModel.eventname = string.Empty;
             }
-            await MopupService.Instance.PopAsync(true);
+            if (showloader)
+                await MopupService.Instance.PopAsync(true);
         }
 
-        private async void NewSearch(string SearchFilter = "")
+        public async void NewSearch(string SearchFilter = "")
         {
+            TotalEvents = 0;
             Events = new ObservableCollection<EventResponseModel>();
-            if (SearchModel == null) SearchModel = new EventRequestModel();
-            SearchModel.page = 0;
-            SearchModel.eventname = SearchFilter;
+            SearchModel = new EventRequestModel() { eventname = SearchFilter, page = 1 };
             await Search();
         }
 

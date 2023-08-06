@@ -170,9 +170,7 @@ namespace MME.Web.Apis
                 return new MemberResponseWrapperModel
                 {
                     MembersCount = _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
-                            || c.LastName.ToLower().Contains(model.membername.ToLower())))
-                        .Include("Occupation")
-                        .OrderBy(c => c.FirstName).ThenBy(c => c.LastName).Count(),
+                            || c.LastName.ToLower().Contains(model.membername.ToLower()))).Count(),
 
                     Members = _context.Users.Where(c => c.IsActive && (c.FirstName.ToLower().Contains(model.membername.ToLower())
                             || c.LastName.ToLower().Contains(model.membername.ToLower())))

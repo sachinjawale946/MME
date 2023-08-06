@@ -27,7 +27,7 @@ namespace MME.Mobile.Services
             CharacterSpacing = 0.1
         };
 
-        public async Task<List<EventResponseModel>> Search(EventRequestModel model)
+        public async Task<EventResponseWrappeModel> Search(EventRequestModel model)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace MME.Mobile.Services
                 HttpResponseMessage response = client.PostAsync(uri, data).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<List<EventResponseModel>>(response.Content.ReadAsStringAsync().Result);
+                    return JsonConvert.DeserializeObject<EventResponseWrappeModel>(response.Content.ReadAsStringAsync().Result);
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
@@ -48,14 +48,14 @@ namespace MME.Mobile.Services
                     var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                     await snackbar.Show(cancellationTokenSource.Token);
                 }
-                return await Task.FromResult(new List<EventResponseModel>());
+                return await Task.FromResult(new EventResponseWrappeModel { Events = new List<EventResponseModel>() });
             }
             catch (Exception ex)
             {
                 var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
-                return await Task.FromResult(new List<EventResponseModel>());
+                return await Task.FromResult(new EventResponseWrappeModel { Events = new List<EventResponseModel>() });
             }
         }
 

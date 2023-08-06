@@ -24,7 +24,8 @@
         </Grid.RowDefinitions>
         <SearchBar x:Name="searchBar" Grid.Row="0" Placeholder="{x:Static resource:AppResources.SearchMembers}"
                    SearchCommand="{Binding SearchCommand}" 
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray" TextChanged="searchBar_TextChanged"/>
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray" 
+                   TextChanged="searchBar_TextChanged"/>
         <!--<ScrollView Grid.Row="1">-->
         <CollectionView Grid.Row="1" x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreMembersCommand}"
                   ItemsSource="{Binding Members}" Margin="10" VerticalScrollBarVisibility="Always" EmptyView="{x:Static resource:AppResources.NoMembersFound}">
@@ -57,13 +58,13 @@
                                 <Label Style="{StaticResource MembersListControlLabel}" Grid.Column="3" Text="{Binding fullname}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Margin="10,0" Grid.Row="1" Grid.Column="1" Text="{x:Static resource:AppResources.Profession}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="1" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
-                                <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="1" Grid.Column="3" Text="{Binding occupation}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="1" Grid.Column="3" Text="{Binding occupation}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Margin="10,0" Grid.Row="2" Grid.Column="1" Text="{x:Static resource:AppResources.Gender}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="2" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="2" Grid.Column="3" Text="{Binding gender}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
                                 <Label Style="{StaticResource MembersListControlLabel}" Margin="10,0" Grid.Row="3" Grid.Column="1" Text="{x:Static resource:AppResources.Address}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
                                 <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="3" Grid.Column="2" Text=":" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
-                                <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="3" Grid.Column="3" Text="{Binding fulladdress}" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                                <Label Style="{StaticResource MembersListControlLabel}" Grid.Row="3" Grid.Column="3" Text="{Binding fulladdress}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
                             </Grid>
                         </Frame>
                     </StackLayout>

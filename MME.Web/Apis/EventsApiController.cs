@@ -29,7 +29,7 @@ namespace MME.Web.Apis
         }
 
         [HttpPost, Route("~/api/v1/events-search")]
-        public List<EventResponseModel> Search(EventRequestModel model)
+        public EventResponseWrappeModel Search(EventRequestModel model)
         {
             var EventResponses = new List<EventResponseModel>();
             if (model.page == 0) model.page = 1;
@@ -37,6 +37,8 @@ namespace MME.Web.Apis
 
             if (!string.IsNullOrEmpty(model.eventname))
             {
+                var eventsCount = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now && (c.Event.ToLower().Contains(model.eventname.ToLower()))).Count();
+
                 var events = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now && (c.Event.ToLower().Contains(model.eventname.ToLower())))
                         .Include("User")
                         .OrderByDescending(c => c.CreatedDate).ThenBy(c => c.Event)
@@ -51,10 +53,12 @@ namespace MME.Web.Apis
                     }
                 }
 
-                return EventResponses;
+                return new EventResponseWrappeModel { Events = EventResponses, EventsCount = eventsCount };
             }
             else
             {
+                var eventsCount = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now).Count();
+
                 var events = _context.Events.Where(c => c.IsActive && c.ActivationDate <= DateTime.Now)
                        .Include("User")
                        .OrderByDescending(c => c.CreatedDate).ThenBy(c => c.Event)
@@ -69,7 +73,7 @@ namespace MME.Web.Apis
                     }
                 }
 
-                return EventResponses;
+                return new EventResponseWrappeModel { Events = EventResponses, EventsCount = eventsCount };
             }
         }
 
@@ -77,9 +81,9 @@ namespace MME.Web.Apis
         public EventResponseModel EventDetails(Guid UserId, Guid EventId)
         {
             var eventdetails = _context.Events.Where(c => c.IsActive && c.EventId == EventId).Include("User").FirstOrDefault();
-            if(eventdetails != null)
+            if (eventdetails != null)
             {
-               return returnReponseItem(eventdetails, UserId);
+                return returnReponseItem(eventdetails, UserId);
             }
             return new EventResponseModel();
         }

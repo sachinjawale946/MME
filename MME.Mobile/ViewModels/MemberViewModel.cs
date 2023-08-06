@@ -69,7 +69,10 @@ namespace MME.Mobile.ViewModels
         {
             if (Members == null || Members.Count == 0) return;
             if (Members.Count >= TotalMembers) return;
-            await Search(false, true);
+            await Task.Run(async () =>
+            {
+                await Search(false, true);
+            });
         }
 
         private async Task Search(bool showloader = true, bool morecommand = false)
