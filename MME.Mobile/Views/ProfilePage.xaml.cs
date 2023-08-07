@@ -170,19 +170,16 @@ public partial class ProfilePage : ContentPage
             viewModel.Profile.shownoimage = false;
             viewModel.Profile.showprofileimage = true;
             var addPictureResult = await viewModel.AddProfiePicture(fileInfo.Extension);
-            if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Success)
+            if (!string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Success)
             {
-                if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Error)
-                {
-                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
-                    await snackbar.Show(cancellationTokenSource.Token);
-                }
-                else
-                {
-                    EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
-                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Profile_Picture_Add, null, string.Empty, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
-                    await snackbar.Show(cancellationTokenSource.Token);
-                }
+                EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Profile_Picture_Add, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
+                await snackbar.Show(cancellationTokenSource.Token);
+            }
+            else
+            {
+                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                await snackbar.Show(cancellationTokenSource.Token);
             }
             await MopupService.Instance.PopAsync(true);
         }
@@ -198,18 +195,18 @@ public partial class ProfilePage : ContentPage
     {
         if (viewModel.Profile.profilepic != null && viewModel.Profile.profilepic.Length > 0)
         {
-            viewModel.Profile.profilepic = null;
-            viewModel.Profile.shownoimage = true;
-            viewModel.Profile.showprofileimage = false;
             var result = await viewModel.DeleteProfiePicture();
             if (string.IsNullOrEmpty(result) || result == Api_Result_Lookup.Error)
             {
-                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
                 await snackbar.Show(cancellationTokenSource.Token);
             }
             else
             {
-                EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                viewModel.Profile.profilepic = null;
+                viewModel.Profile.shownoimage = true;
+                viewModel.Profile.showprofileimage = false;
+                EventAggregator.Instance.SendMessage(new byte[0]);
                 var snackbar = Snackbar.Make(Resx.AppResources.Message_Profile_Picture_Delete, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
                 await snackbar.Show(cancellationTokenSource.Token);
             }

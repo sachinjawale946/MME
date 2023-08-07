@@ -26,6 +26,7 @@ namespace MME.Mobile
             Settings.lastname = string.Empty;
             Settings.mobile = string.Empty;
             Settings.accesstoken = string.Empty;
+            Settings.gender = string.Empty;
             Settings.fcmtoken = string.Empty;
             App.Current.MainPage = new NavigationPage(new LandigPage());
         }
