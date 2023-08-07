@@ -13,12 +13,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using System.IdentityModel.Tokens.Jwt;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSession(options => options.Cookie.HttpOnly = true);
 builder.Services.AddSession(options => options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest);
 builder.Services.AddSession(options => options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict);
+
+var defaultApp = FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
+});
 
 // Authentication with JWT
 builder.Services.AddAuthentication(x =>

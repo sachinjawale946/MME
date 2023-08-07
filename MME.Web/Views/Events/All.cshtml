@@ -127,19 +127,40 @@
                 },
                 {
                     "render": function (data, type, data, meta) {
-                        // console.log(data);
-                        return '<a style="text-decoration:none;" href="/events/edit/' + data.eventId + '"><i class="fa fa-edit"></i>&nbsp;Edit</a>';
-                    }
-                },
-            ]
+                            // console.log(data);
+                            var buttons = '<a style="text-decoration:none;" href="/events/edit/' + data.eventId + '"><i class="fa fa-edit"></i>&nbsp;Edit</a>';
+                            var onlick =  "'" + data.eventId + "'";
+                            console.log(onlick);
+                        buttons = buttons + '<a style="text-decoration:none;margin-left:10px" onclick="SentNotification(' + onlick + ')" href="#"><i class="fa fa-message"></i></i>&nbsp;Notify</a>'
+                            return buttons;
+                        }
+                    },
+                ]
+            });
+
+    jQuery.fn.dataTable.ext.errMode = 'none';
+
+    jQuery('#tblEvents').on('error.dt', function (e, settings, techNote, message) {
+        // console.log('An error has been reported by DataTables: ', message);
+    }).DataTable();
         });
 
-        jQuery.fn.dataTable.ext.errMode = 'none';
 
-        jQuery('#tblEvents').on('error.dt', function (e, settings, techNote, message) {
-            // console.log('An error has been reported by DataTables: ', message);
-        }).DataTable();
-    });
+    function SentNotification(eventid, eventype) {
+        // alert(eventid);
+        jQuery.ajax(
+            {
+                url: '/Events/SendNotification/' + eventid + "/Create",
+                success: function (result) {
+                    if (result == "success") {
+                        alert("Notification Sent Successfully");
+                    }
+                    else {
+                        alert("Some error occured while processing your request, please try again later.");
+                    }
+                }
+            });
+    }
 
 </script>
 

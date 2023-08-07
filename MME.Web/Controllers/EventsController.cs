@@ -1,14 +1,16 @@
-﻿using ImageMagick;
+﻿using FirebaseAdmin.Messaging;
+using ImageMagick;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MME.Data;
+using MME.Model.Lookups;
 using MME.Model.Shared;
 using System.Linq;
 
 namespace MME.Web.Controllers
 {
-    
+
     public class EventsController : BaseController
     {
         readonly MMEAppDBContext _context;
@@ -73,6 +75,7 @@ namespace MME.Web.Controllers
                 model.CreatedBy = GetUserId();
                 _context.Add(model);
                 _context.SaveChanges();
+                SendEventNotification(model.EventId, NotificationType_Lookup.Create);
                 TempData["SuccessMessage"] = "Event added successfully";
                 return RedirectToAction("all");
             }
@@ -136,7 +139,7 @@ namespace MME.Web.Controllers
 
                 if (!string.IsNullOrEmpty(model.Banner) && string.IsNullOrEmpty(model.BannerUrl))
                     model.Banner = string.Empty;
-                
+
                 if (fileUpload)
                     model.Banner = bannername;
                 model.IsActive = true;
@@ -194,5 +197,86 @@ namespace MME.Web.Controllers
 
             return events.Skip(skip).Take(length).OrderByDescending(m => m.CreatedDate).ToList();
         }
+
+        [HttpGet("/Events/SendNotification/{EventId}/{NotificationType}/{NotificationTitle?}")]
+        public IActionResult SendNotification(Guid EventId, string NotificationType, string NotificationTitle = "")
+        {
+            return Json(SendEventNotification(EventId, NotificationType, NotificationTitle));
+        }
+
+        private string SendEventNotification(Guid EventId, string NotificationType, string NotificationTitle = "")
+        {
+            if (EventId != Guid.Empty)
+            {
+                var Title = string.Empty;
+                
+                if (NotificationType == NotificationType_Lookup.Create)
+                {
+                    Title = (string.IsNullOrEmpty(NotificationTitle)) ? "New Event Added" : NotificationTitle;
+                }
+                else if (NotificationType == NotificationType_Lookup.Reminder)
+                {
+                    Title = (string.IsNullOrEmpty(NotificationTitle)) ? "Event Reminder" : NotificationTitle;
+                }
+                else if (NotificationType == NotificationType_Lookup.Cancelled)
+                {
+                    Title = (string.IsNullOrEmpty(NotificationTitle)) ? "Event Cancelled" : NotificationTitle;
+                }
+                else if (NotificationType == NotificationType_Lookup.Postponed)
+                {
+                    Title = (string.IsNullOrEmpty(NotificationTitle)) ? "Event Postponed" : NotificationTitle;
+                }
+                else if (NotificationType == NotificationType_Lookup.Rescheduled)
+                {
+                    Title = (string.IsNullOrEmpty(NotificationTitle)) ? "Event Rescheduled" : NotificationTitle;
+                }
+
+                var profilesFolderPath = _iconfiguration["alleventimages"].ToString();
+                var defaulteventimage = _iconfiguration["defaulteventimage"].ToString();
+                var eventDetails = _context.Events.Where(e => e.IsActive == true & e.EventId == EventId).FirstOrDefault();
+                if (eventDetails != null)
+                {
+                    IReadOnlyList<string> tokens = new List<string>
+                    {
+                       _context.Users.Where(u => u.IsActive && !string.IsNullOrEmpty(u.FCMToken)).FirstOrDefault().FCMToken
+                    };
+                    if (tokens != null && tokens.Count > 0)
+                    {
+                        var message = new MulticastMessage()
+                        {
+                            Notification = new Notification
+                            {
+                                Title = eventDetails.Event,
+                                Body = eventDetails.Event,
+                                ImageUrl = (string.IsNullOrEmpty(eventDetails.Banner)) ? defaulteventimage : profilesFolderPath + eventDetails.Banner,
+                            },
+                            Android = new AndroidConfig()
+                            {
+                                Notification = new AndroidNotification()
+                                {
+                                    Sound = "default",
+                                    Priority = NotificationPriority.MAX
+                                }
+                            },
+                            Apns = new ApnsConfig()
+                            {
+                                Aps = new Aps()
+                                {
+                                    Sound = "default"
+                                }
+                            },
+                            Tokens = tokens,
+                        };
+                        var messaging = FirebaseMessaging.DefaultInstance;
+                        var result = messaging.SendMulticastAsync(message).Result;
+                        return Api_Result_Lookup.Success;
+                    }
+                    return Api_Result_Lookup.Error;
+                }
+                return Api_Result_Lookup.Error;
+            }
+            return Api_Result_Lookup.Error;
+        }
+
     }
 }

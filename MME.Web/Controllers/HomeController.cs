@@ -21,44 +21,6 @@ namespace MME.Web.Controllers
 
         public IActionResult Index()
         {
-            //IReadOnlyList<string> list = new List<string>
-            //{
-            //   _context.Users.Where(u => u.FCMToken != null && u.FCMToken != string.Empty).FirstOrDefault().FCMToken
-            //};
-            //var defaultApp = FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
-            //});
-            //var message = new MulticastMessage()
-            //{
-            //    Notification = new Notification
-            //    {
-            //        Title = "Message Title",
-            //        Body = "Message Body",
-            //    },
-            //    //Topic = "news",
-            //    Tokens = list,
-            //};
-            //var messaging = FirebaseMessaging.DefaultInstance;
-            //var result = messaging.SendMulticastAsync(message).Result;
-
-            //var defaultApp = FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "my-community.json")),
-            //});
-            //var message = new Message()
-            //{
-            //    Notification = new Notification
-            //    {
-            //        Title = "Message Title",
-            //        Body = "Message Body",
-            //    },
-            //    //Topic = "news",
-            //    Token = _context.Users.Where(u => u.FCMToken != null && u.FCMToken != string.Empty).FirstOrDefault().FCMToken,
-            //};
-            //var messaging = FirebaseMessaging.DefaultInstance;
-            //var result = messaging.SendAsync(message).Result;
-
             return View();
         }
 
