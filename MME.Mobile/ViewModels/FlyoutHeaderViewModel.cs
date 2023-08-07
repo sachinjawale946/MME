@@ -45,6 +45,7 @@ namespace MME.Mobile.ViewModels
 
         public async void ShowProfilePic()
         {
+
             Gender = await SecureStorage.Default.GetAsync(SecureStorage_Lookup.gender);
             if (ProfileImage == null || ProfileImage.Length > 0)
             {
