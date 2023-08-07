@@ -33,18 +33,18 @@ namespace MME.Mobile.Services
             CharacterSpacing = 0.1
         };
 
-        public async Task<byte[]?> GetProfileImage(Guid UserId)
+        public async Task<string> GetProfileImage(Guid UserId, string Gender)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
-                Uri uri = new Uri(string.Format(Api_Lookup.memberGetProfilePicApi, UserId));
+                Uri uri = new Uri(string.Format(Api_Lookup.memberGetProfilePicApi, UserId, Gender));
                 HttpResponseMessage response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<byte[]>(response.Content.ReadAsStringAsync().Result);
+                    return JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().Result);
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
@@ -52,14 +52,14 @@ namespace MME.Mobile.Services
                     var snackbar = Snackbar.Make(_message, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                     await snackbar.Show(cancellationTokenSource.Token);
                 }
-                return await Task.FromResult(new byte[] { });
+                return await Task.FromResult(string.Empty);
             }
             catch (Exception ex)
             {
                 var errorMessage = Resx.AppResources.Validation_Message_Api_Error;
                 var snackbar = Snackbar.Make(errorMessage, null, string.Empty, TimeSpan.FromSeconds(5), snackbarOptions);
                 await snackbar.Show(cancellationTokenSource.Token);
-                return await Task.FromResult(new byte[] { });
+                return await Task.FromResult(string.Empty);
             }
         }
 

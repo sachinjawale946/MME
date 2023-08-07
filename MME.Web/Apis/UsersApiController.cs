@@ -44,17 +44,26 @@ namespace MME.Web.Apis
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
-        [HttpGet, Route("~/api/v1/members-getprofilepicture/{userid}")]
-        public byte[] ProfilePicture(Guid userid)
+        [HttpGet, Route("~/api/v1/members-getprofilepicture/{userid}/{Gender}")]
+        public string ProfilePicture(Guid userid, string Gender)
         {
-            if (userid != Guid.Empty)
+            var profilesFolderPath = _iconfiguration["allprofileimages"].ToString();
+            var defaultBoyImage = _iconfiguration["defaultboyimage"].ToString();
+            var defaultGirlImage = _iconfiguration["defaultgirlimage"].ToString();
+            if (userid != Guid.Empty && !string.IsNullOrEmpty(Gender))
             {
-                var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
                 var profile = _context.Users.Where(u => u.UserId == userid).FirstOrDefault();
                 if (profile != null && !string.IsNullOrEmpty(profile.ProfilePic))
-                    return System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic));
+                    return profilesFolderPath + profile.ProfilePic;
+                else
+                {
+                    if (Gender == "Male")
+                        return defaultBoyImage;
+                    else
+                        return defaultGirlImage;
+                }
             }
-            return new byte[] { };
+            return defaultBoyImage;
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
@@ -82,8 +91,6 @@ namespace MME.Web.Apis
         {
             if (model != null && model.userid != Guid.Empty && model.picture != null && model.picture.Length > 0 && !string.IsNullOrEmpty(model.pictureextenstion))
             {
-                var thumbwidth = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
-                var thumbheight = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
                 var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
                 var profilesThumbesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepicthumbs"].ToString());
                 var profile = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
@@ -92,14 +99,6 @@ namespace MME.Web.Apis
                     var ProfilePic = Guid.NewGuid() + model.pictureextenstion;
                     // main profile pic
                     System.IO.File.WriteAllBytes(Path.Combine(profilesFolderPath, ProfilePic), model.picture);
-                    // thumb profile pic
-                    using (MagickImage image = new MagickImage(Path.Combine(profilesFolderPath, ProfilePic)))
-                    {
-                        {
-                            image.Thumbnail(new MagickGeometry(thumbwidth, thumbheight));
-                            image.Write(Path.Combine(profilesThumbesFolderPath, ProfilePic));
-                        }
-                    }
                     profile.ProfilePic = ProfilePic;
                     _context.Users.Update(profile);
                     _context.SaveChanges();

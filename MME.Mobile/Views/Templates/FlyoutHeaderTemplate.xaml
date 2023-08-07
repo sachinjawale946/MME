@@ -17,10 +17,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Image IsVisible="{Binding shownoimage}" Aspect="Fill" Margin="10,10,10,0" 
-               Source="{Binding Gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
-        <Image IsVisible="{Binding showprofileimage}" Aspect="Fill" Margin="10,10,10,0" 
-               Source="{Binding ProfileImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" HeightRequest="250"/>
+        <Image Aspect="Fill" Margin="10,10,10,0" 
+               Source="{Binding ProfileImage, Mode=OneWay}" HeightRequest="250"/>
         <BoxView Grid.Row="1" HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="0,20,0,0" Color="LightGray"/>
         <StackLayout Grid.Row="2" BackgroundColor="{StaticResource AppBorderColor}" HeightRequest="40">
             <Label Margin="20,0" TextColor="#FFF" FontAttributes="Bold" x:Name="LabelWelcome" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" />

@@ -11,5 +11,6 @@ namespace MME.Model.Request
         public Guid userid { get; set; }
         public byte[]? picture { get; set; }
         public string? pictureextenstion { get; set; }
+        public string? gender { get; set; }
     }
 }

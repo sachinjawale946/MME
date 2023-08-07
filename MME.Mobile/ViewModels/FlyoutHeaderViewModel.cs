@@ -1,55 +1,22 @@
-﻿using MME.Mobile.Helpers;
+﻿using Bertuzzi.MAUI.EventAggregator;
 using MME.Mobile.Services;
-using MME.Model.Request;
-using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MME.Mobile.Helpers;
-using static System.Net.Mime.MediaTypeNames;
-using Bertuzzi.MAUI.EventAggregator;
 using MME.Model.Lookups;
 
 namespace MME.Mobile.ViewModels
 {
     internal class FlyoutHeaderViewModel : ViewModelBase
     {
-        IMemberService _memberService = new MemberService();
+        readonly IMemberService _memberService = new MemberService();
 
         public FlyoutHeaderViewModel()
         {
             ShowProfilePic();
-            EventAggregator.Instance.RegisterHandler<byte[]>(ProfilePictureHandler);
+            EventAggregator.Instance.RegisterHandler<string>(ProfilePictureHandler);
 
         }
 
-        private bool _showprofileimage;
-        public bool showprofileimage
-        {
-            get { return _showprofileimage; }
-            set
-            {
-                _showprofileimage = value;
-                OnPropertyChanged(nameof(showprofileimage));
-            }
-        }
-
-        private bool _shownoimage;
-        public bool shownoimage
-        {
-            get { return _shownoimage; }
-            set
-            {
-                _shownoimage = value;
-                OnPropertyChanged(nameof(shownoimage));
-            }
-        }
-
-
-        private byte[] _profileImage;
-        public byte[] ProfileImage
+        private string _profileImage;
+        public string ProfileImage
         {
             get { return _profileImage; }
             set
@@ -70,20 +37,9 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private void ProfilePictureHandler(byte[]? Picture)
+        private void ProfilePictureHandler(string Picture)
         {
-            if (Picture != null && Picture.Length > 0)
-            {
-                ProfileImage = Picture;
-                _showprofileimage = true;
-                shownoimage = false;
-            }
-            else
-            {
-                ProfileImage = null;
-                _showprofileimage = false;
-                shownoimage = true;
-            }
+            ProfileImage = Picture;
         }
 
 
@@ -92,17 +48,7 @@ namespace MME.Mobile.ViewModels
             Gender = await SecureStorage.Default.GetAsync(SecureStorage_Lookup.gender);
             if (ProfileImage == null || ProfileImage.Length > 0)
             {
-                ProfileImage = await _memberService.GetProfileImage(Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()));
-                if (ProfileImage == null || ProfileImage.Length > 0)
-                {
-                    showprofileimage = true;
-                    shownoimage = false;
-                }
-                else
-                {
-                    showprofileimage = false;
-                    shownoimage = true;
-                }
+                ProfileImage = await _memberService.GetProfileImage(Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()), SecureStorage.Default.GetAsync(SecureStorage_Lookup.gender).Result.ToString());
             }
         }
     }
