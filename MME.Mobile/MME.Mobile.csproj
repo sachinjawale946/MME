@@ -84,6 +84,8 @@
 	  <None Remove="Resources\Images\paymenticon.png" />
 	  <None Remove="Resources\Images\profileicon.png" />
 	  <None Remove="Resources\Images\remove.png" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\selfie.png" />
 	  <None Remove="Resources\Images\spam.png" />
 	  <None Remove="Resources\Raw\bubblebouncing.json" />
 	  <None Remove="Resources\Raw\bubblesanimation.json" />

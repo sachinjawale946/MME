@@ -637,6 +637,15 @@ namespace MME.Mobile.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your profile picture is added successfully.
+        /// </summary>
+        internal static string Validation_Message_Profile_Picture_Add {
+            get {
+                return ResourceManager.GetString("Validation_Message_Profile_Picture_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No profile picture found to delete.
         /// </summary>
         internal static string Validation_Message_Profile_Picture_Delete {

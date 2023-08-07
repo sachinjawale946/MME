@@ -91,8 +91,62 @@ public partial class ProfilePage : ContentPage
         ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
         CharacterSpacing = 0.1,
     };
+    SnackbarOptions successSnackbarOptions = new SnackbarOptions
+    {
 
-    private async void AddImageButton_Clicked(object sender, EventArgs e)
+        BackgroundColor = Colors.Green,
+        TextColor = Colors.White,
+        ActionButtonTextColor = Colors.Yellow,
+        CornerRadius = new CornerRadius(5),
+        Font = Microsoft.Maui.Font.SystemFontOfSize(12),
+        ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
+        CharacterSpacing = 0.1,
+    };
+
+    private async void PicImageButton_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var options = new PickMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 100 };
+            var result = await CrossMedia.Current.PickPhotoAsync(options);
+            if (result is null) return;
+
+            var fileInfo = new FileInfo(result?.Path);
+            var fileLength = fileInfo.Length;
+            var busy = new BusyPage();
+            await MopupService.Instance.PushAsync(busy);
+            await new TaskFactory().StartNew(() =>
+            {
+                Thread.Sleep(1000);
+            });
+            viewModel.Profile.profilepic = read(result.Path);
+            viewModel.Profile.shownoimage = false;
+            viewModel.Profile.showprofileimage = true;
+            var addPictureResult = await viewModel.AddProfiePicture(fileInfo.Extension);
+            if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Success)
+            {
+                if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Error)
+                {
+                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                else
+                {
+                    EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Profile_Picture_Add, null, string.Empty, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+            }
+            await MopupService.Instance.PopAsync(true);
+        }
+        catch (Exception ex)
+        {
+            var snackbar = Snackbar.Make(ex.Message, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+            await snackbar.Show(cancellationTokenSource.Token);
+        }
+    }
+
+        private async void AddImageButton_Clicked(object sender, EventArgs e)
     {
 
         var cameraPermission = await CheckCameraPermission();
@@ -100,7 +154,7 @@ public partial class ProfilePage : ContentPage
 
         try
         {
-            var options = new StoreCameraMediaOptions { CompressionQuality = 0 };
+            var options = new StoreCameraMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 100 };
             var result = await CrossMedia.Current.TakePhotoAsync(options);
             if (result is null) return;
 
@@ -118,7 +172,17 @@ public partial class ProfilePage : ContentPage
             var addPictureResult = await viewModel.AddProfiePicture(fileInfo.Extension);
             if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Success)
             {
-                EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                if (string.IsNullOrEmpty(addPictureResult) || addPictureResult == Api_Result_Lookup.Error)
+                {
+                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
+                else
+                {
+                    EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Profile_Picture_Add, null, string.Empty, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
+                    await snackbar.Show(cancellationTokenSource.Token);
+                }
             }
             await MopupService.Instance.PopAsync(true);
         }
@@ -140,12 +204,13 @@ public partial class ProfilePage : ContentPage
             var result = await viewModel.DeleteProfiePicture();
             if (string.IsNullOrEmpty(result) || result == Api_Result_Lookup.Error)
             {
-                var snackbar = Snackbar.Make(Resx.AppResources.Message_Profile_Picture_Delete, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
                 await snackbar.Show(cancellationTokenSource.Token);
             }
             else
             {
-                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions);
+                EventAggregator.Instance.SendMessage(viewModel.Profile.profilepic);
+                var snackbar = Snackbar.Make(Resx.AppResources.Message_Profile_Picture_Delete, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), successSnackbarOptions, lblMiddleName);
                 await snackbar.Show(cancellationTokenSource.Token);
             }
         }

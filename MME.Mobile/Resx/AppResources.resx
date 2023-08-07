@@ -309,6 +309,9 @@
   <data name="Validation_Message_Login_Fields" xml:space="preserve">
     <value>Username and Password both are manadatory fields</value>
   </data>
+  <data name="Validation_Message_Profile_Picture_Add" xml:space="preserve">
+    <value>Your profile picture is added successfully</value>
+  </data>
   <data name="Validation_Message_Profile_Picture_Delete" xml:space="preserve">
     <value>No profile picture found to delete</value>
   </data>

@@ -15,7 +15,7 @@ namespace MME.Mobile.ViewModels
 {
     internal class FlyoutHeaderViewModel : ViewModelBase
     {
-        IMemberService _memberService = new  MemberService();
+        IMemberService _memberService = new MemberService();
 
         public FlyoutHeaderViewModel()
         {
@@ -69,13 +69,19 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        private void ProfilePictureHandler(byte[] Picture)
+        private void ProfilePictureHandler(byte[]? Picture)
         {
             if (Picture != null && Picture.Length > 0)
             {
                 ProfileImage = Picture;
                 _showprofileimage = true;
                 shownoimage = false;
+            }
+            else
+            {
+                ProfileImage = null;
+                _showprofileimage = false;
+                shownoimage = true;
             }
         }
 

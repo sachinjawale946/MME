@@ -34,18 +34,7 @@ namespace MME.Mobile.ViewModels
             ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
             CharacterSpacing = 0.1,
         };
-        SnackbarOptions successSnackbarOptions = new SnackbarOptions
-        {
-
-            BackgroundColor = Colors.Green,
-            TextColor = Colors.White,
-            ActionButtonTextColor = Colors.Yellow,
-            CornerRadius = new CornerRadius(5),
-            Font = Microsoft.Maui.Font.SystemFontOfSize(12),
-            ActionButtonFont = Microsoft.Maui.Font.SystemFontOfSize(12),
-            CharacterSpacing = 0.1,
-        };
-
+       
         public ProfileViewModel()
         {
             MaxBirthDate = DateTime.Now.AddYears(-1);
@@ -295,16 +284,7 @@ namespace MME.Mobile.ViewModels
                     pictureextenstion = fileextenstion,
                     userid = Settings.userid
                 });
-                if (string.IsNullOrEmpty(result) || result == Api_Result_Lookup.Error)
-                {
-                    var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions);
-                    await snackbar.Show(cancellationTokenSource.Token);
-                }
-                else
-                {
-                    var snackbar = Snackbar.Make("Your profile picture is added successfully", null, string.Empty, TimeSpan.FromSeconds(8), successSnackbarOptions);
-                    await snackbar.Show(cancellationTokenSource.Token);
-                }
+                
             }
             return result;
         }

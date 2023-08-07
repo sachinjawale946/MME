@@ -309,6 +309,9 @@
   <data name="Validation_Message_Login_Fields" xml:space="preserve">
     <value>उपयोगकर्ता नाम और पासवर्ड दोनों अनिवार्य हैं</value>
   </data>
+  <data name="Validation_Message_Profile_Picture_Add" xml:space="preserve">
+    <value>आपका प्रोफ़ाइल चित्र सफलतापूर्वक जोड़ दिया गया है !</value>
+  </data>
   <data name="Validation_Message_Profile_Picture_Delete" xml:space="preserve">
     <value>हटाने के लिए कोई प्रोफ़ाइल चित्र नहीं मिला</value>
   </data>

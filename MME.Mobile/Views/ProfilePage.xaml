@@ -52,8 +52,10 @@
                             <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding Profile.showprofileimage}" Aspect="AspectFit" Margin="10,10,10,20" 
                Source="{Binding Profile.profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
                             <ImageButton x:Name="RemoveImageButton" Clicked="RemoveImageButton_Clicked" Source="remove.png" IsVisible="{Binding showprofileimage}" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" HeightRequest="40" Margin="0,0,0,0"/>
-                            <ImageButton x:Name="AddImageButton" Clicked="AddImageButton_Clicked" Source="add.png" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" HeightRequest="45" Margin="0,0,0,0"/>
-
+                            <StackLayout Orientation="Horizontal" Margin="0,0,0,0" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand">
+                                <ImageButton x:Name="PickImageButton" Clicked="PicImageButton_Clicked" Source="search.png" HeightRequest="45" />
+                                <ImageButton x:Name="AddImageButton" Clicked="AddImageButton_Clicked" Source="selfie.png" HeightRequest="45" Margin="10,0,0,0"/>
+                            </StackLayout>
                             <Label Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" Margin="15,0,10,0" Style="{StaticResource FormControlLabel}" Text="{x:Static resource:AppResources.FirstName}" />
                             <inputLayout:SfTextInputLayout ContainerType="Outlined" Grid.Row="4" Grid.Column="1" BackgroundColor="Transparent" Margin="10,0,10,0"  HeightRequest="60" VerticalOptions="Center">
                                 <Entry Completed="txtFirstName_Completed" VerticalOptions="Center" HeightRequest="40" Grid.Row="2" Margin="10,0,10,0"  
