@@ -58,10 +58,29 @@ namespace MME.Web.Apis
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
+        [HttpPost, Route("~/api/v1/members-removeprofilepicture")]
+        public string RemoveProfilePicture(ProfilePictureRequestModel model)
+        {
+            if (model != null && model.userid != Guid.Empty)
+            {
+                var user = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
+                if (user != null)
+                {
+                    user.ProfilePic = null;
+                    _context.Users.Update(user);
+                    _context.SaveChanges();
+                    return Api_Result_Lookup.Success;
+                }
+                return Api_Result_Lookup.Error;
+            }
+            return Api_Result_Lookup.Error;
+        }
+
+        [Authorize(Policy = "MMEJwtScheme")]
         [HttpPost, Route("~/api/v1/members-saveprofilepicture")]
         public string AddProfilePicture(ProfilePictureRequestModel model)
         {
-            if (model != null && model.userid != Guid.Empty && model.picture != null && model.picture.Length > 0)
+            if (model != null && model.userid != Guid.Empty && model.picture != null && model.picture.Length > 0 && !string.IsNullOrEmpty(model.pictureextenstion))
             {
                 var thumbwidth = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());
                 var thumbheight = Convert.ToInt16(_iconfiguration["thumbsize"].ToString());

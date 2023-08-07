@@ -137,8 +137,17 @@ public partial class ProfilePage : ContentPage
             viewModel.Profile.profilepic = null;
             viewModel.Profile.shownoimage = true;
             viewModel.Profile.showprofileimage = false;
-            var snackbar = Snackbar.Make(Resx.AppResources.Message_Profile_Picture_Delete, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
-            await snackbar.Show(cancellationTokenSource.Token);
+            var result = await viewModel.DeleteProfiePicture();
+            if (string.IsNullOrEmpty(result) || result == Api_Result_Lookup.Error)
+            {
+                var snackbar = Snackbar.Make(Resx.AppResources.Message_Profile_Picture_Delete, null, Resx.AppResources.Ok, TimeSpan.FromSeconds(8), snackbarOptions, lblMiddleName);
+                await snackbar.Show(cancellationTokenSource.Token);
+            }
+            else
+            {
+                var snackbar = Snackbar.Make(Resx.AppResources.Validation_Message_Api_Error, null, string.Empty, TimeSpan.FromSeconds(8), snackbarOptions);
+                await snackbar.Show(cancellationTokenSource.Token);
+            }
         }
         else
         {

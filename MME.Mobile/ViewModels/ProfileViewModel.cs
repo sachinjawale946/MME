@@ -309,6 +309,19 @@ namespace MME.Mobile.ViewModels
             return result;
         }
 
+        public async Task<string> DeleteProfiePicture()
+        {
+            var result = string.Empty;
+            if (Profile != null && Profile.profilepic != null && Profile.profilepic.Length > 0)
+            {
+                result = await _memberService.DeleteProfileImage(new ProfilePictureRequestModel
+                {
+                    userid = Settings.userid
+                });
+            }
+            return result;
+        }
+
         private async Task MasterData()
         {
             Genders = new List<DropdownModel>

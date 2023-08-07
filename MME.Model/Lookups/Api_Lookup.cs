@@ -15,6 +15,7 @@ namespace MME.Model.Lookups
         public const string memberSearchApi = BaseApi + "/api/v1/members-search";
         public const string memberGetProfilePicApi = BaseApi + "/api/v1/members-getprofilepicture/{0}";
         public const string memberSaveProfilePicApi = BaseApi + "/api/v1/members-saveprofilepicture";
+        public const string memberDeleteProfilePicApi = BaseApi + "/api/v1/members-removeprofilepicture";
         public const string memberProfileApi = BaseApi + "/api/v1/members-getprofile/{0}";
         public const string memberProfileFCMApi = BaseApi + "/api/v1/members-add-fcmtoken";
         public const string eventSearchApi = BaseApi + "/api/v1/events-search";

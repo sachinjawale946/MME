@@ -247,7 +247,7 @@ namespace MME.Web.Controllers
                             Notification = new Notification
                             {
                                 Title = eventDetails.Event,
-                                Body = eventDetails.Event,
+                                // Body = eventDetails.Event,
                                 ImageUrl = (string.IsNullOrEmpty(eventDetails.Banner)) ? defaulteventimage : profilesFolderPath + eventDetails.Banner,
                             },
                             Android = new AndroidConfig()
