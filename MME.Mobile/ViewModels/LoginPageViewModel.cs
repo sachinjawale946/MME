@@ -15,6 +15,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Alerts;
 using Mopups.Services;
 using Plugin.Firebase.CloudMessaging;
+using AndroidX.ConstraintLayout.Core.Parser;
 
 namespace MME.Mobile.ViewModels
 {
@@ -78,7 +79,7 @@ namespace MME.Mobile.ViewModels
             var result = await _loginService.Login(UserModel);
             if (result != null && !string.IsNullOrEmpty(result.message) && result.message == Api_Result_Lookup.Success)
             {
-                if (string.IsNullOrEmpty(Settings.fcmtoken))
+                if (string.IsNullOrEmpty(await SecureStorage.Default.GetAsync(SecureStorage_Lookup.fcmtoken)))
                 {
                     string fcmToken = await GetFCMToken();
                     if (!string.IsNullOrEmpty(fcmToken))
@@ -95,18 +96,17 @@ namespace MME.Mobile.ViewModels
                             await snackbar.Show(cancellationTokenSource.Token);
                             return;
                         }
-                        Settings.fcmtoken = fcmToken;
+                        await SecureStorage.Default.SetAsync(SecureStorage_Lookup.fcmtoken, fcmToken);
                     }
                 }
-
-                Settings.username = result.username;
-                Settings.roleid = result.roleid;
-                Settings.userid = result.userid;
-                Settings.firstname = result.firstname;
-                Settings.lastname = result.lastname;
-                Settings.mobile = result.mobile;
-                Settings.accesstoken = result.accesstoken;
-                Settings.gender = result.gender;
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.username, result.username);
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.roleid, result.roleid.ToString());
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.userid, result.userid.ToString());
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.firstname, result.firstname);
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.lastname, result.lastname);
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.mobile, result.mobile);
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.accesstoken, result.accesstoken);
+                await SecureStorage.Default.SetAsync(SecureStorage_Lookup.gender, result.gender);
                 App.Current.MainPage = new AppShell();
                 await Shell.Current.GoToAsync($"//{nameof(Dashboard)}");
                 await MopupService.Instance.PopAsync(true);

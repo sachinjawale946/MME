@@ -26,7 +26,7 @@ namespace MME.Mobile.Services
             try
             {
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 string url = string.Format(Api_Lookup.pincodesByStateApi, State);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;
@@ -56,7 +56,7 @@ namespace MME.Mobile.Services
             try
             {
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 string url = string.Format(Api_Lookup.statesApi);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;
@@ -86,7 +86,7 @@ namespace MME.Mobile.Services
             try
             {
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 string url = string.Format(Api_Lookup.occupationsApi);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;
@@ -116,7 +116,7 @@ namespace MME.Mobile.Services
             try
             {
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 string url = string.Format(Api_Lookup.religionsApi);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;
@@ -146,7 +146,7 @@ namespace MME.Mobile.Services
             try
             {
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 string url = string.Format(Api_Lookup.castesApi);
                 client.BaseAddress = new Uri(url);
                 var response = client.GetAsync(url).Result;

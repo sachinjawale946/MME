@@ -1,6 +1,7 @@
 ﻿using MME.Mobile.Views;
 using MME.Mobile.Helpers;
 using AndroidX.ConstraintLayout.Core.Parser;
+using MME.Model.Lookups;
 
 namespace MME.Mobile
 {
@@ -17,17 +18,17 @@ namespace MME.Mobile
             Routing.RegisterRoute("PaymentPage", typeof(PaymentPage));
         }
 
-        private void OnMenuItemClicked(object sender, EventArgs e)
+        private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            Settings.username = string.Empty;
-            Settings.roleid = 0;
-            Settings.userid = Guid.Empty;
-            Settings.firstname = string.Empty;
-            Settings.lastname = string.Empty;
-            Settings.mobile = string.Empty;
-            Settings.accesstoken = string.Empty;
-            Settings.gender = string.Empty;
-            Settings.fcmtoken = string.Empty;
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.username, "");
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.roleid, "0");
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.userid, Guid.Empty.ToString());
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.firstname, string.Empty);
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.lastname, string.Empty);
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.mobile, string.Empty);
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.accesstoken, string.Empty);
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.gender, string.Empty);
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.fcmtoken, string.Empty);
             App.Current.MainPage = new NavigationPage(new LandigPage());
         }
     }

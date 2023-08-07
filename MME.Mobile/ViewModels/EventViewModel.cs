@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls.Shapes;
 using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
+using MME.Model.Lookups;
 using MME.Model.Request;
 using MME.Model.Response;
 using Mopups.Services;
@@ -139,7 +140,7 @@ namespace MME.Mobile.ViewModels
                         {
                             liked = true,
                             eventid = like.eventid,
-                            userid = Settings.userid,
+                            userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()),
                         };
                         // save feedback
                         var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == like.eventid).FirstOrDefault().EventFeedback);
@@ -176,7 +177,7 @@ namespace MME.Mobile.ViewModels
                         {
                             disliked = true,
                             eventid = dislike.eventid,
-                            userid = Settings.userid,
+                            userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()),
                         };
                         // save feedback
                         var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == dislike.eventid).FirstOrDefault().EventFeedback);
@@ -213,7 +214,7 @@ namespace MME.Mobile.ViewModels
                         {
                             reportabuse = true,
                             eventid = spam.eventid,
-                            userid = Settings.userid,
+                            userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()),
                         };
                         // save feedback
                         var response = await _eventService.SaveFeedback(Events.Where(e => e.eventid == spam.eventid).FirstOrDefault().EventFeedback);

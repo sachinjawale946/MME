@@ -282,7 +282,7 @@ namespace MME.Mobile.ViewModels
                 {
                     picture = Profile.profilepic,
                     pictureextenstion = fileextenstion,
-                    userid = Settings.userid
+                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString())
                 });
                 
             }
@@ -296,7 +296,7 @@ namespace MME.Mobile.ViewModels
             {
                 result = await _memberService.DeleteProfileImage(new ProfilePictureRequestModel
                 {
-                    userid = Settings.userid
+                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString())
                 });
             }
             return result;
@@ -367,7 +367,7 @@ namespace MME.Mobile.ViewModels
         {
             var busy = new BusyPage();
             await MopupService.Instance.PushAsync(busy);
-            Profile = await _memberService.GetProfile(Settings.userid);
+            Profile = await _memberService.GetProfile(Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()));
             if (Profile != null)
             {
                 if (Profile.profilepic != null && Profile.profilepic.Length > 0)

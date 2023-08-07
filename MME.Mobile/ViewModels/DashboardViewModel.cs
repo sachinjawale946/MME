@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using MME.Mobile.Helpers;
 using MME.Mobile.Views;
+using MME.Model.Lookups;
 using MME.Model.Request;
 using Mopups.Services;
 using System;
@@ -34,7 +35,7 @@ namespace MME.Mobile.ViewModels
 
         private void SetProperties()
         {
-            Username = Settings.firstname + " " + Settings.lastname;
+            Username = SecureStorage.Default.GetAsync(SecureStorage_Lookup.firstname).Result + " " + SecureStorage.Default.GetAsync(SecureStorage_Lookup.lastname).Result;
         }
 
         private async void OnNavigate(string page)

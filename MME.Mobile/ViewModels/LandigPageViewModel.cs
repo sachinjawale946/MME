@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Views;
 using MME.Mobile.Helpers;
 using MME.Mobile.Services;
 using MME.Mobile.Views;
+using MME.Model.Lookups;
 using MME.Model.Response;
 using SkiaSharp;
 using System;
@@ -78,13 +79,13 @@ namespace MME.Mobile.ViewModels
              };
         }
 
-        public void SetLangaugeCode(string LanguageCode)
+        public async void SetLangaugeCode(string LanguageCode)
         {
             if (string.IsNullOrEmpty(LanguageCode)) LanguageCode = "en";
             CultureInfo language = new CultureInfo(LanguageCode);
             Thread.CurrentThread.CurrentUICulture = language;
             Resx.AppResources.Culture = language;
-            Settings.language = LanguageCode;
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.language, LanguageCode);
         }
 
         private async void OnNavigate()

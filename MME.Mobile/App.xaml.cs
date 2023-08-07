@@ -1,6 +1,7 @@
 ﻿using MME.Mobile.Views;
 using MME.Mobile.Helpers;
 using System.Globalization;
+using MME.Model.Lookups;
 
 namespace MME.Mobile
 {
@@ -16,8 +17,8 @@ namespace MME.Mobile
 
         protected override void OnStart()
         {
-            SetLangaugeCode(Settings.language);
-            if (string.IsNullOrEmpty(Settings.username))
+            SetLangaugeCode(SecureStorage.Default.GetAsync(SecureStorage_Lookup.language).Result);
+            if (string.IsNullOrEmpty(SecureStorage.Default.GetAsync(SecureStorage_Lookup.username).Result))
             {
                 MainPage = new NavigationPage(new LandigPage());
             }
@@ -28,13 +29,14 @@ namespace MME.Mobile
             }
         }
 
-        private void SetLangaugeCode(string LanguageCode)
+        private async void SetLangaugeCode(string LanguageCode)
         {
             if (string.IsNullOrEmpty(LanguageCode)) LanguageCode = "en";
             CultureInfo language = new CultureInfo(LanguageCode);
             Thread.CurrentThread.CurrentUICulture = language;
             Resx.AppResources.Culture = language;
-            Settings.language = LanguageCode;
+            await SecureStorage.Default.SetAsync(SecureStorage_Lookup.language, LanguageCode);
+
         }
     }
 }

@@ -32,8 +32,8 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                model.userid = Settings.userid;
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                model.userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString());
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.eventSearchApi);
                 var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
@@ -64,7 +64,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.eventFeedbackApi);
                 var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
@@ -95,9 +95,9 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
-                Uri uri = new Uri(string.Format(Api_Lookup.eventDetailsApi, Settings.userid, EventId));
+                Uri uri = new Uri(string.Format(Api_Lookup.eventDetailsApi,SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString(), EventId));
                 HttpResponseMessage response = client.GetAsync(uri).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {

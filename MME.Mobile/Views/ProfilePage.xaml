@@ -57,7 +57,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <ImageButton x:Name="RemoveImageButton" Clicked="RemoveImageButton_Clicked" Source="remove.png" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" HeightRequest="40" Margin="0,0,0,0"/>
+                                <ImageButton x:Name="RemoveImageButton" Clicked="RemoveImageButton_Clicked" Source="remove.png" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" HeightRequest="45" Margin="0,0,0,0"/>
                                 <ImageButton x:Name="PickImageButton" Grid.Column="1" Clicked="PicImageButton_Clicked" Source="search.png" HeightRequest="45" />
                                 <ImageButton x:Name="AddImageButton" Grid.Column="2" Clicked="AddImageButton_Clicked" Source="selfie.png" HeightRequest="45" Margin="0,0,0,0"/>
                             </Grid>

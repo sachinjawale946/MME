@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using MME.Mobile.Helpers;
 using static System.Net.Mime.MediaTypeNames;
 using Bertuzzi.MAUI.EventAggregator;
+using MME.Model.Lookups;
 
 namespace MME.Mobile.ViewModels
 {
@@ -88,10 +89,10 @@ namespace MME.Mobile.ViewModels
 
         public async void ShowProfilePic()
         {
-            Gender = Settings.gender;
+            Gender = await SecureStorage.Default.GetAsync(SecureStorage_Lookup.gender);
             if (ProfileImage == null || ProfileImage.Length > 0)
             {
-                ProfileImage = await _memberService.GetProfileImage(Settings.userid);
+                ProfileImage = await _memberService.GetProfileImage(Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()));
                 if (ProfileImage == null || ProfileImage.Length > 0)
                 {
                     showprofileimage = true;

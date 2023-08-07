@@ -38,7 +38,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(string.Format(Api_Lookup.memberGetProfilePicApi, UserId));
                 HttpResponseMessage response = client.GetAsync(uri).Result;
@@ -68,7 +68,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.memberSaveProfilePicApi);
                 var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
@@ -99,7 +99,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken));
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.memberDeleteProfilePicApi);
                 var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
@@ -161,7 +161,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(Api_Lookup.memberSearchApi);
                 var data = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(model), Encoding.UTF8, _MediaType);
@@ -192,7 +192,7 @@ namespace MME.Mobile.Services
             try
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Settings.accesstoken);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", SecureStorage.Default.GetAsync(SecureStorage_Lookup.accesstoken).Result.ToString());
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(_HeaderType));
                 Uri uri = new Uri(string.Format(Api_Lookup.memberProfileApi, UserId));
                 HttpResponseMessage response = client.GetAsync(uri).Result;
