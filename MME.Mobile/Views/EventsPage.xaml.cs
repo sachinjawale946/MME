@@ -9,13 +9,18 @@ public partial class EventsPage : ContentPage
     public EventsPage()
     {
         InitializeComponent();
+        viewModel = new EventViewModel();
+        this.BindingContext = viewModel;
     }
 
     protected override void OnAppearing()
     {
-        this.searchBar.Text = string.Empty;
-        viewModel = new EventViewModel();
-        this.BindingContext = viewModel;
+        if (viewModel == null)
+        {
+            this.searchBar.Text = string.Empty;
+            viewModel = new EventViewModel();
+            this.BindingContext = viewModel;
+        }
         base.OnAppearing();
     }
 
