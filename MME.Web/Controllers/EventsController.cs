@@ -209,7 +209,7 @@ namespace MME.Web.Controllers
             if (EventId != Guid.Empty)
             {
                 var Title = string.Empty;
-                
+
                 if (NotificationType == NotificationType_Lookup.Create)
                 {
                     Title = (string.IsNullOrEmpty(NotificationTitle)) ? "New Event Added" : NotificationTitle;
@@ -236,10 +236,8 @@ namespace MME.Web.Controllers
                 var eventDetails = _context.Events.Where(e => e.IsActive == true & e.EventId == EventId).FirstOrDefault();
                 if (eventDetails != null)
                 {
-                    IReadOnlyList<string> tokens = new List<string>
-                    {
-                       _context.Users.Where(u => u.IsActive && !string.IsNullOrEmpty(u.FCMToken)).FirstOrDefault().FCMToken
-                    };
+                    IReadOnlyList<string> tokens = _context.Users.Where(u => u.IsActive && !string.IsNullOrEmpty(u.FCMToken)).Select(f => f.FCMToken).ToList();
+
                     if (tokens != null && tokens.Count > 0)
                     {
                         var message = new MulticastMessage()
