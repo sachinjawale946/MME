@@ -40,7 +40,7 @@ namespace MME.Mobile.ViewModels
             MaxBirthDate = DateTime.Now.AddYears(-1);
             if (Profile == null)
             {
-                Profile = new ProfileResponseModel { shownoimage = true };
+                Profile = new ProfileResponseModel();
             }
             Task.Run(async () =>
             {
@@ -273,16 +273,17 @@ namespace MME.Mobile.ViewModels
             }
         }
 
-        public async Task<string> AddProfiePicture(string fileextenstion)
+        public async Task<string> AddProfiePicture(byte[] profilepic, string fileextenstion)
         {
             var result = string.Empty;
             if (Profile != null && Profile.profilepic != null && Profile.profilepic.Length > 0 && !string.IsNullOrEmpty(fileextenstion))
             {
                 result = await _memberService.SaveProfileImage(new ProfilePictureRequestModel
                 {
-                    picture = Profile.profilepic,
+                    picture = profilepic,
                     pictureextenstion = fileextenstion,
-                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString())
+                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()),
+                    gender = Profile.Gender,
                 });
                 
             }
@@ -296,7 +297,8 @@ namespace MME.Mobile.ViewModels
             {
                 result = await _memberService.DeleteProfileImage(new ProfilePictureRequestModel
                 {
-                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString())
+                    userid = Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()),
+                    gender = Profile.Gender,
                 });
             }
             return result;
@@ -370,28 +372,12 @@ namespace MME.Mobile.ViewModels
             Profile = await _memberService.GetProfile(Guid.Parse(SecureStorage.Default.GetAsync(SecureStorage_Lookup.userid).Result.ToString()));
             if (Profile != null)
             {
-                if (Profile.profilepic != null && Profile.profilepic.Length > 0)
-                {
-                    Profile.showprofileimage = true;
-                    Profile.shownoimage = false;
-                }
-                else
-                {
-                    Profile.showprofileimage = false;
-                    Profile.shownoimage = true;
-                }
-
                 if(Profile.BirthDate == null || !Profile.BirthDate.HasValue || Profile.BirthDate == DateTime.MinValue)
                 {
                     Profile.BirthDate = null;
                 }
 
                 SetDropdownSelections();
-            }
-            else
-            {
-                Profile.showprofileimage = false;
-                Profile.shownoimage = true;
             }
             await MopupService.Instance.PopAsync(true);
         }

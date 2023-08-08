@@ -70,6 +70,10 @@ namespace MME.Web.Apis
         [HttpPost, Route("~/api/v1/members-removeprofilepicture")]
         public string RemoveProfilePicture(ProfilePictureRequestModel model)
         {
+            var profilesFolderPath = _iconfiguration["allprofileimages"].ToString();
+            var defaultBoyImage = _iconfiguration["defaultboyimage"].ToString();
+            var defaultGirlImage = _iconfiguration["defaultgirlimage"].ToString();
+
             if (model != null && model.userid != Guid.Empty)
             {
                 var user = _context.Users.Where(u => u.UserId == model.userid).FirstOrDefault();
@@ -78,17 +82,31 @@ namespace MME.Web.Apis
                     user.ProfilePic = null;
                     _context.Users.Update(user);
                     _context.SaveChanges();
-                    return Api_Result_Lookup.Success;
+                    if (!string.IsNullOrEmpty(user.Gender))
+                    {
+                        if(user.Gender == "Male")
+                        {
+                            return defaultBoyImage;
+                        }
+                        else
+                        {
+                            return defaultGirlImage;
+                        }
+                    }
+                    return defaultBoyImage;
                 }
-                return Api_Result_Lookup.Error;
+                return defaultBoyImage;
             }
-            return Api_Result_Lookup.Error;
+            return defaultBoyImage;
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
         [HttpPost, Route("~/api/v1/members-saveprofilepicture")]
         public string AddProfilePicture(ProfilePictureRequestModel model)
         {
+            var profilepicurl = _iconfiguration["allprofileimages"].ToString();
+            var defaultBoyImage = _iconfiguration["defaultboyimage"].ToString();
+            var defaultGirlImage = _iconfiguration["defaultgirlimage"].ToString();
             if (model != null && model.userid != Guid.Empty && model.picture != null && model.picture.Length > 0 && !string.IsNullOrEmpty(model.pictureextenstion))
             {
                 var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
@@ -102,11 +120,11 @@ namespace MME.Web.Apis
                     profile.ProfilePic = ProfilePic;
                     _context.Users.Update(profile);
                     _context.SaveChanges();
-                    return Api_Result_Lookup.Success;
+                    return profilepicurl + ProfilePic;
                 }
-                return Api_Result_Lookup.Error;
+                return defaultBoyImage;
             }
-            return Api_Result_Lookup.Error;
+            return defaultBoyImage;
         }
 
         [Authorize(Policy = "MMEJwtScheme")]
@@ -134,13 +152,32 @@ namespace MME.Web.Apis
         {
             if (userid != Guid.Empty)
             {
-                var profilesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot" + _iconfiguration["profilepics"].ToString());
+                var profilesFolderPath = _iconfiguration["allprofileimages"].ToString();
+                var defaultBoyImage = _iconfiguration["defaultboyimage"].ToString();
+                var defaultGirlImage = _iconfiguration["defaultgirlimage"].ToString();
                 var profile = _context.Users.Where(u => u.UserId.ToString().ToLower() == userid.ToString().ToLower()).FirstOrDefault();
                 if (profile != null)
                 {
+                    string profilepicurl = string.Empty;
+                    if(!string.IsNullOrEmpty(profile.ProfilePic))
+                    {
+                        profilepicurl = profilesFolderPath + profile.ProfilePic;
+                    }
+                    else if(!string.IsNullOrEmpty(profile.Gender))
+                    {
+                        if(profile.Gender == "Male")
+                        {
+                            profilepicurl = defaultBoyImage;
+                        }
+                        else
+                        {
+                            profilepicurl = defaultGirlImage;
+                        }
+                    }
+
                     return new ProfileResponseModel
                     {
-                        profilepic = (string.IsNullOrEmpty(profile.ProfilePic)) ? null : System.IO.File.ReadAllBytes(Path.Combine(profilesFolderPath, profile.ProfilePic)),
+                        profilepic = profilepicurl,
                         Area = profile.Area,
                         BirthDate = Convert.ToDateTime(profile.BirthDate),
                         CasteId = profile.CasteId,

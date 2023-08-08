@@ -18,7 +18,10 @@ namespace MME.Mobile.ViewModels
         private string _profileImage;
         public string ProfileImage
         {
-            get { return _profileImage; }
+            get 
+            { 
+                return _profileImage; 
+            }
             set
             {
                 _profileImage = value;
@@ -39,7 +42,8 @@ namespace MME.Mobile.ViewModels
 
         private void ProfilePictureHandler(string Picture)
         {
-            ProfileImage = Picture;
+            // ProfileImage = Picture;
+            ShowProfilePic();
         }
 
 

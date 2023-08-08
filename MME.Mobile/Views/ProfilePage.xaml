@@ -47,10 +47,9 @@
                                 <RowDefinition Height="10"/>
                             </Grid.RowDefinitions>
 
-                            <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding Profile.shownoimage}" Aspect="AspectFit" Margin="10,10,10,20" 
-               Source="{Binding Profile.Gender, Mode=OneWay, Converter={StaticResource ImageByGenderConverter}}"/>
                             <Image HorizontalOptions="CenterAndExpand" IsVisible="{Binding Profile.showprofileimage}" Aspect="AspectFit" Margin="10,10,10,20" 
-               Source="{Binding Profile.profilepic, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+               Source="{Binding Profile.profilepic, Mode=OneWay}"/>
+                            
                             <Grid VerticalOptions="EndAndExpand" Grid.Row="0" Margin="0,-10,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

@@ -20,38 +20,9 @@ namespace MME.Model.Response
         public string? Email { get; set; }
         public string Gender { get; set; }
         public string? MaritalStatus { get; set; }
-        
 
-        private bool _shownoimage;
-        public bool shownoimage
-        {
-            get
-            {
-                return _shownoimage;
-            }
-            set
-            {
-                _shownoimage = value;
-                OnPropertyChanged(nameof(shownoimage));
-            }
-        }
-
-        private bool _showprofileimage;
-        public bool showprofileimage
-        {
-            get
-            {
-                return _showprofileimage;
-            }
-            set
-            {
-                _showprofileimage = value;
-                OnPropertyChanged(nameof(showprofileimage));
-            }
-        }
-
-        private byte[] _profilepic;
-        public byte[] profilepic
+        private string _profilepic;
+        public string profilepic
         {
             get
             {
