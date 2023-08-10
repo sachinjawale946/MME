@@ -27,7 +27,7 @@
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" Margin="10" BackgroundColor="LightGray" 
                    TextChanged="searchBar_TextChanged"/>
         <!--<ScrollView Grid.Row="1">-->
-        <CollectionView Grid.Row="1" x:Name="searchResults" RemainingItemsThreshold="0" RemainingItemsThresholdReachedCommand="{Binding LoadMoreMembersCommand}"
+        <CollectionView Grid.Row="1" x:Name="searchResults" RemainingItemsThreshold="2" RemainingItemsThresholdReachedCommand="{Binding LoadMoreMembersCommand}"
                   ItemsSource="{Binding Members}" Margin="10" VerticalScrollBarVisibility="Always" EmptyView="{x:Static resource:AppResources.NoMembersFound}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

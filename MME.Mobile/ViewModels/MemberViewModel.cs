@@ -67,16 +67,16 @@ namespace MME.Mobile.ViewModels
 
         private async void SearchMore()
         {
+            if (isBusy) return;
             if (Members == null || Members.Count == 0) return;
             if (Members.Count >= TotalMembers) return;
-            //await Task.Run(async () =>
-            //{
             await Search(false, true);
-            //});
         }
 
+        private bool isBusy = false;
         private async Task Search(bool showloader = true, bool morecommand = false)
         {
+            isBusy = true;
             if (showloader)
             {
                 var busy = new BusyPage();
@@ -118,20 +118,14 @@ namespace MME.Mobile.ViewModels
                         Members.Add(result.Members[i]);
                 }
             }
-            //else
-            //{
-            //    // reset search
-            //    TotalMembers= 0;
-            //    Members.Clear();
-            //    SearchModel.page = 0;
-            //    SearchModel.membername = string.Empty;
-            //}
             if (showloader)
                 await MopupService.Instance.PopAsync(true);
+            isBusy = false;
         }
 
         public async void NewSearch(string SearchFilter = "")
         {
+            if (isBusy) return;
             TotalMembers = 0;
             Members = new ObservableCollection<MemberResponseModel>();
             SearchModel = new MemberRequestModel() { membername = SearchFilter, page = 1 };
