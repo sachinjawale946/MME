@@ -58,12 +58,12 @@
 
                                     </Grid>
 
-                                    <ImageButton x:Name="BannerImage" CommandParameter="{Binding eventid}" Clicked="BannerImage_Clicked" Grid.Row="1" Aspect="Fill" Margin="0,0,0,10" 
+                                    <ImageButton x:Name="BannerImage" CommandParameter="{Binding eventid}" Clicked="BannerImage_Clicked" Grid.Row="1" Aspect="Fill" Margin="0,0,0,0" 
                                            Source="{Binding bannerurl}" MinimumWidthRequest="400" HeightRequest="150" HorizontalOptions="CenterAndExpand"/>
 
-                                    <Label Margin="10,0,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="2" Text="{Binding header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                    <Label Margin="10,5,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="2" Text="{Binding header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="TailTruncation" MaxLines="2"/>
                                     
-                                    <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" >
+                                    <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray">
                                         <Grid.ColumnDefinitions>
                                             <!--<ColumnDefinition Width="*"/>-->
                                             <ColumnDefinition Width="*"/>

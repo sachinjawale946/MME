@@ -6,6 +6,8 @@
 }
 
 <link href="~/lib/bootstrap/dist/css/datepicker.css" rel="stylesheet" />
+<link href="~/lib/jquery-te/jquery-te-1.4.0.css" rel="stylesheet" />
+
 
 <div class="container-fluid">
 
@@ -46,7 +48,7 @@
                 @Html.LabelFor(m => m.Description,new { @class="form-label" })
             </div>
             <div class="col-md-10">
-                @Html.TextAreaFor(m => m.Description,new { @class="form-control", placeholder="Event Description", autocomplete="off", style="height:100px;"})
+                @Html.TextAreaFor(m => m.Description,new { id="eventdescriptionbox", @class="form-control", placeholder="Event Description", autocomplete="off", style="height:100px;"})
                 <div style="margin-top:8px;">
                     @Html.ValidationMessageFor(m => m.Description,string.Empty,new{@class="required"})
                 </div>
@@ -129,6 +131,7 @@
 </div>
 
 <script src="~/lib/bootstrap/dist/js/bootstrap-datepicker.js"></script>
+<script src="~/lib/jquery-te/jquery-te-1.4.0.min.js"></script>
 
 <script>
 
@@ -151,6 +154,7 @@
     };
 
     jQuery(document).ready(function ($) {
+        $("#eventdescriptionbox").jqte();
         // date controls
         var date = new Date();
         date.setDate(date.getDate());

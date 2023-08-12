@@ -41,8 +41,8 @@
                 <Label Margin="10,10,10,5" Style="{StaticResource PageSubHeader}" Grid.Row="1" Text="{Binding Event.header}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                LineBreakMode="WordWrap" MaxLines="3"/>
 
-                <Label Margin="10,10,10,5" Style="{StaticResource FormControlLabel}" FontSize="12" Grid.Row="2" Text="{Binding Event.description}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-               LineBreakMode="WordWrap" MaxLines="10"/>
+                <Label TextType="Html" Margin="10,10,10,5" Style="{StaticResource FormControlLabel}" FontSize="12" Grid.Row="2" 
+                       Text="{Binding Event.description}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
                 <Grid Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
                     <Grid.ColumnDefinitions>

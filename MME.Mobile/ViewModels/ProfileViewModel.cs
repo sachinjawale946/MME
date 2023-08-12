@@ -41,6 +41,7 @@ namespace MME.Mobile.ViewModels
             if (Profile == null)
             {
                 Profile = new ProfileResponseModel();
+                Profile.profilepic = "boy";
             }
             Task.Run(async () =>
             {
