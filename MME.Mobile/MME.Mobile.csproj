@@ -120,6 +120,7 @@
     <PackageReference Include="Plugin.Firebase" Version="2.0.5" />
     <PackageReference Include="Plugin.FirebaseCrashlytics" Version="4.1.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0-preview2" />
+    <PackageReference Include="Sentry.Maui" Version="3.35.0" />
   </ItemGroup>
 
 	<ItemGroup>

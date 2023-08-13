@@ -28,6 +28,23 @@ namespace MME.Mobile
                 .ConfigureSyncfusionCore()
                 .RegisterFirebaseServices()
                 .ConfigureMopups()
+                // Add this section anywhere on the builder:
+                .UseSentry(options => {
+                    // The DSN is the only required setting.
+                    options.Dsn = "https://475696a2d7451c8685a246000a2201ca@o4505696180436992.ingest.sentry.io/4505696186269696";
+
+                    // Use debug mode if you want to see what the SDK is doing.
+                    // Debug messages are written to stdout with Console.Writeline,
+                    // and are viewable in your IDE's debug console or with 'adb logcat', etc.
+                    // This option is not recommended when deploying your application.
+                    // options.Debug = true;
+
+                    // Set TracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+                    // We recommend adjusting this value in production.
+                    // options.TracesSampleRate = 1.0;
+
+                    // Other Sentry options can be set here.
+                })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("JosefinSans-Regular.ttf", "OpenSansRegular");
