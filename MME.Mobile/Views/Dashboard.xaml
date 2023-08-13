@@ -5,6 +5,7 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Shell.BackgroundColor="{StaticResource AppPrimaryBackground}"
              xmlns:resource="clr-namespace:MME.Mobile.Resx"
+             xmlns:skialottie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              Title="{x:Static resource:AppResources.DashBoard}" Shell.NavBarIsVisible="True">
 
     <ContentPage.Behaviors>
@@ -79,5 +80,10 @@
             </Frame>
             
         </Grid>
+        <!--<skialottie:SKLottieView Grid.Row="2" Margin="20"
+                Source="backgroundanimation.json"
+                RepeatCount="-1"
+                SemanticProperties.Description="background animation"
+                HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand"/>-->
     </Grid>
 </ContentPage>

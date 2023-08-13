@@ -34,11 +34,11 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
-	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -87,6 +87,7 @@
 	  <None Remove="Resources\Images\search.png" />
 	  <None Remove="Resources\Images\selfie.png" />
 	  <None Remove="Resources\Images\spam.png" />
+	  <None Remove="Resources\Raw\backgroundanimation.json" />
 	  <None Remove="Resources\Raw\bubblebouncing.json" />
 	  <None Remove="Resources\Raw\bubblesanimation.json" />
 	  <None Remove="Resources\Raw\busyanimation.json" />
