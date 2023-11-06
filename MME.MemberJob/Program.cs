@@ -16,7 +16,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
         // services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=LT146;Initial Catalog=MME;MultipleActiveResultSets=true;User ID=sa;Password=pass$123;TrustServerCertificate=true"));
-        services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Initial Catalog=sachinjawale946_SampleDB;MultipleActiveResultSets=true;User ID=sachinjawale946_SampleDB;Password=Sachin@123;TrustServerCertificate=true"));
+        services.AddDbContext<MMEAppDBContext>(options => options.UseSqlServer("Server=P3NWPLSK12SQL-v08.shr.prod.phx3.secureserver.net;Initial Catalog=dbMMEv1;MultipleActiveResultSets=true;User ID=scsadmin;Password=Thane@400615;TrustServerCertificate=true"));
     })
     .Build();
 

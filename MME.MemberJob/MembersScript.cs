@@ -30,15 +30,13 @@ namespace MME.MemberJob
             Byte[] PasswordSalt;
             var PasswordHash = HashPasword("123", out PasswordSalt);
             var user = _context.Users.FirstOrDefault();
-            //if (user == null)
-            //{
-            List<string> _errormessages = new List<string>();
-            var dtMembers = ReadExcelFile("F:\\Sachin_Work\\MyCommunity\\Sample.xlsx", out _errormessages);
-            var members = ConvertToList<UserModel>(dtMembers);
-            var start = 1;
-            foreach (var member in members)
+            if (user == null)
             {
-                if (start >= 15)
+                List<string> _errormessages = new List<string>();
+                var dtMembers = ReadExcelFile("F:\\Sachin_Work\\MyCommunity\\Sample.xlsx", out _errormessages);
+                var members = ConvertToList<UserModel>(dtMembers);
+                var start = 1;
+                foreach (var member in members)
                 {
                     _context.Users.Add(new MME.Model.Shared.UserModel
                     {
@@ -63,38 +61,37 @@ namespace MME.MemberJob
                         BirthDate = null,
                         IsActive = true,
                     });
+                    start++;
                 }
-                start++;
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
-            //}
-            //else
-            //{
-            //    var start = 16;
-            //    for (int i = 0; i < 20; i++)
-            //    {
-            //        for (int j = 0; j < 200; j++)
-            //        {
-            //            _context.Users.Add(new MME.Model.Shared.UserModel
-            //            {
-            //                Username = "Test" + start.ToString("000000"),
-            //                PasswordSalt = PasswordSalt,
-            //                Password = PasswordHash,
-            //                FirstName = "Test",
-            //                MiddleName = string.Empty,
-            //                LastName = start.ToString("000000"),
-            //                RoleId = 3,
-            //                Mobile = start.ToString("00000000000"),
-            //                Gender = "Male",
-            //                MaritalStatus = "Married",
-            //                BirthDate = DateTime.Now.AddYears(-20),
-            //                IsActive = true,
-            //            });
-            //            start++;
-            //        }
-            //        _context.SaveChanges();
-            //    }
-            //}
+            else
+            {
+                var start = 14016;
+                for (int i = 0; i < 20; i++)
+                {
+                    for (int j = 0; j < 500; j++)
+                    {
+                        _context.Users.Add(new MME.Model.Shared.UserModel
+                        {
+                            Username = "Test" + start.ToString("000000"),
+                            PasswordSalt = PasswordSalt,
+                            Password = PasswordHash,
+                            FirstName = "Test",
+                            MiddleName = string.Empty,
+                            LastName = start.ToString("000000"),
+                            RoleId = 3,
+                            Mobile = start.ToString("00000000000"),
+                            Gender = "Male",
+                            MaritalStatus = "Married",
+                            BirthDate = DateTime.Now.AddYears(-20),
+                            IsActive = true,
+                        });
+                        start++;
+                    }
+                    _context.SaveChanges();
+                }
+            }
         }
 
         string HashPasword(string password, out byte[] salt)

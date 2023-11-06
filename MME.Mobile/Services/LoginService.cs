@@ -45,7 +45,6 @@ namespace MME.Mobile.Services
                     return JsonConvert.DeserializeObject<AuthenticationResponseModel>(response.Content.ReadAsStringAsync().Result);
                 }
                 return await Task.FromResult(new AuthenticationResponseModel());
-
             }
             catch (Exception ex)
             {

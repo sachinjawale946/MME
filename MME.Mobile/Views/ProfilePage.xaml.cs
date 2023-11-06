@@ -107,7 +107,7 @@ public partial class ProfilePage : ContentPage
     {
         try
         {
-            var options = new PickMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 40 };
+            var options = new PickMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 100 };
             var result = await CrossMedia.Current.PickPhotoAsync(options);
             if (result is null) return;
 
@@ -143,7 +143,7 @@ public partial class ProfilePage : ContentPage
 
         try
         {
-            var options = new StoreCameraMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 40 };
+            var options = new StoreCameraMediaOptions { PhotoSize = PhotoSize.Large, CompressionQuality = 100 };
             var result = await CrossMedia.Current.TakePhotoAsync(options);
             if (result is null) return;
 

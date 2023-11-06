@@ -277,7 +277,7 @@ namespace MME.Mobile.ViewModels
         public async Task<string> AddProfiePicture(byte[] profilepic, string fileextenstion)
         {
             var result = string.Empty;
-            if (Profile != null && Profile.profilepic != null && Profile.profilepic.Length > 0 && !string.IsNullOrEmpty(fileextenstion))
+            if (Profile != null && profilepic != null && profilepic.Length > 0 && !string.IsNullOrEmpty(fileextenstion))
             {
                 result = await _memberService.SaveProfileImage(new ProfilePictureRequestModel
                 {
