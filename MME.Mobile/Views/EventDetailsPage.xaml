@@ -86,7 +86,7 @@
                 <ImageButton Opacity="{Binding Event.EventFeedback.liked, Mode=OneWay, Converter={StaticResource FeedbackConverter}}" 
                                                          Aspect="AspectFill" WidthRequest="35" HeightRequest="35"  Source="like.png" x:Name="like" Clicked="like_Clicked"
                                                          HorizontalOptions="Start"  CommandParameter="{Binding Event.eventid}"/>
-                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding likes}" VerticalOptions="Center" Margin="5,0"/>
+                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding Event.likes}" VerticalOptions="Center" Margin="5,0"/>
             </Grid>
             <Grid Margin="0,0,0,0" HeightRequest="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -106,7 +106,7 @@
                 <ImageButton Opacity="{Binding Event.EventFeedback.reportabuse, Mode=OneWay, Converter={StaticResource FeedbackConverter}}"
                                                          Aspect="AspectFill" WidthRequest="35" HeightRequest="35"  Source="spam.png" x:Name="spam" Clicked="spam_Clicked"
                                                          HorizontalOptions="Start" CommandParameter="{Binding Event.eventid}"/>
-                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding spams}" VerticalOptions="Center" Margin="5,0"/>
+                <Label Grid.Column="1" Style="{StaticResource IconLabel}" Text="{Binding Event.spams}" VerticalOptions="Center" Margin="5,0"/>
             </Grid>
         </Grid>
     </Grid>
